@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "NotesWebApp",
+    "Projects": [
+      {
+        "Path": "NotesTracker.API\\NotesTracker.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  }
+]

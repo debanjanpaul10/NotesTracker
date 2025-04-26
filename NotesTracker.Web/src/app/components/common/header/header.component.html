@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="d-flex w-100 container-fluid">
+    <div class="navbar-nav mr-auto">
+      <a routerLink="/" class="navbar-brand">{{
+        HeaderConstants.Headings.Title
+      }}</a>
+    </div>
+
+    <div class="navbar-nav ml-auto">
+      <button class="btn btn-outline-light ml-2" (click)="toggleTheme()">
+        {{ isDarkMode ? "☀️" : "🌙" }}
+      </button>
+    </div>
+  </div>
+</nav>

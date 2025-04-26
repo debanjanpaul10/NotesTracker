@@ -1,3 +1,17 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { HomeComponent } from './components/home/home.component';
+import { NoteComponent } from './components/note/note.component';
+import { AddNoteComponent } from './components/addnote/addnote.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'notes/:noteId', component: NoteComponent },
+  { path: 'addnote', component: AddNoteComponent },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class NotesRoutingModule {}

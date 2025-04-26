@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="loader" *ngIf="loading">
+    <p>Loading notes ...</p>
+  </div>
+
+  <div *ngIf="!loading">
+    <div class="mt-2" *ngFor="let note of notesList">
+      <div class="card mt-2">
+        <div
+          class="card-header d-flex justify-content-between align-items-center mb-2"
+        >
+          <h1 class="mb-0">{{ note.noteTitle }}</h1>
+          <div class="button-group">
+            <button
+              class="btn btn-warning mr-2"
+              (click)="navigateToEditNote(note.noteId)"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            &nbsp;
+            <button
+              class="btn btn-danger"
+              (click)="deleteNoteById(note.noteId)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+        <h6 class="card-title mb-4 p-2">
+          Modified on {{ note.lastModifiedDate | date : "MMM dd, yyyy" }}
+        </h6>
+        <p class="p-2" style="font-size: x-large">
+          {{ note.noteDescription }}
+        </p>
+      </div>
+    </div>
+    <div class="mt-4 text-center">
+      <button class="btn btn-primary mb-3" routerLink="/addnote">
+        Add New Note
+      </button>
+    </div>
+  </div>
+</div>

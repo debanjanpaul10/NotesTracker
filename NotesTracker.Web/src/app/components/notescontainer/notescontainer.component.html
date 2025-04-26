@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="loader" *ngIf="loading">
+    <p>Loading notes ...</p>
+  </div>
+
+  <div *ngIf="!loading">
+    <div class="mt-2" *ngFor="let note of notesList">
+      <div class="card mt-2">
+        <h1 class="card-header mb-2">{{ note.noteTitle }}</h1>
+        <h4 class="card-title mb-4 p-2">
+          Modified on {{ note.lastModifiedDate | date : "MMM dd, yyyy" }}
+        </h4>
+        <p class="p-2" style="font-size: x-large">
+          {{ note.noteDescription }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

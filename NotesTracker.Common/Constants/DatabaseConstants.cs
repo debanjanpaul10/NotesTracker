@@ -36,6 +36,8 @@ namespace NotesTracker.Shared.Constants
 
 		#endregion
 
+		#region Notes
+
 		/// <summary>
 		/// The notes table constant
 		/// </summary>
@@ -75,6 +77,42 @@ namespace NotesTracker.Shared.Constants
 		/// The is active column name constant
 		/// </summary>
 		public const string IsActiveColumnNameConstant = "IsActive";
+
+		#endregion
+
+		#region Users
+
+		/// <summary>
+		/// The users table constant.
+		/// </summary>
+		public const string UsersTableConstant = "Users";
+
+		/// <summary>
+		/// The primary key notes constant
+		/// </summary>
+		public const string PrimaryKeyUsersConstant = "PK_Users";
+
+		/// <summary>
+		/// The user id column name constant.
+		/// </summary>
+		public const string UserIdColumnNameConstant = "UserId";
+
+		/// <summary>
+		/// The user email column name constant.
+		/// </summary>
+		public const string UserEmailColumnNameConstant = "UserEmail";
+
+		/// <summary>
+		/// The user name column name constant.
+		/// </summary>
+		public const string UserNameColumnNameConstant = "UserName";
+
+		/// <summary>
+		/// The user password column name constant.
+		/// </summary>
+		public const string UserPasswordColumnNameConstant = "UserPassword";
+
+		#endregion
 
 	}
 }

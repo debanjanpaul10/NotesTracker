@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Notes } from '../../models/notes.model';
 import { NotesService } from '../../services/notes.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-notescontainer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './notescontainer.component.html',
   styleUrl: './notescontainer.component.scss',
 })

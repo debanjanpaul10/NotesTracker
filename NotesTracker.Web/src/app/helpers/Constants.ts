@@ -16,7 +16,41 @@ export const ExceptionMessages = {
 
 export const HomePageConstants = {
   Headings: {
-    WelcomeMessage: "Welcome to the Notes Tracking Application",
-    SubHeadingMessage: "Manage your notes efficiently and effectively"
-  }
-}
+    WelcomeMessage: 'Welcome to the Notes Tracking Application',
+    SubHeadingMessage: 'Manage your notes efficiently and effectively',
+  },
+  AppName: 'NotesTracker',
+};
+
+export const AddNotePageConstants = {
+  Headings: {
+    Header: 'Add a new Note',
+    TitleBarPlaceHolder: 'Add the Note Title',
+    DescriptionPlaceHolder: 'Add the Note Description',
+    SaveButton: 'Save Note',
+    CancelButton: 'Cancel',
+  },
+};
+
+export const HeaderPageConstants = {
+  Headings: {
+    Title: 'Notes Tracker',
+    Login: 'Login',
+    Logout: 'Logout',
+    AddNew: 'Add',
+  },
+  ThemeSettings: {
+    LightMode: {
+      Key: 'light-theme',
+      Name: 'Light Mode',
+    },
+    DarkMode: {
+      Key: 'dark-theme',
+      Name: 'Dark Mode',
+    },
+  },
+};
+
+export const CacheKeys = {
+  ThemeSettings: 'cachedTheme',
+};

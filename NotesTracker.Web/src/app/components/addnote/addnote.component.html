@@ -1,0 +1,54 @@
+<div class="container d-flex flex-column">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="text-center mainHeading">
+        {{ addNotesConstants.Header }}
+      </h1>
+    </div>
+    <form>
+      <div class="form-group row card mt-3">
+        <div class="col sm-12 mb-3 mb-sm-0">
+          <div class="row p-2">
+            <input
+              type="text"
+              class="form-control mt-0"
+              name="Title"
+              [(ngModel)]="newNote.NoteTitle"
+              (ngModelChange)="handleFormChange($event, 'NoteTitle')"
+              placeholder="{{ addNotesConstants.TitleBarPlaceHolder }}"
+            />
+          </div>
+        </div>
+
+        <div class="col sm-12 mb-3 mb-sm-0">
+          <div class="row p-2">
+            <textarea
+              type="textarea"
+              class="form-control mt-0"
+              name="Description"
+              rows="8"
+              [(ngModel)]="newNote.NoteDescription"
+              (ngModelChange)="handleFormChange($event, 'NoteDescription')"
+              placeholder="{{ addNotesConstants.DescriptionPlaceHolder }}"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-3">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="handleFormSubmit(newNote)"
+          [disabled]="loading"
+        >
+          {{ addNotesConstants.SaveButton }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" routerLink="/">
+          {{ addNotesConstants.CancelButton }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

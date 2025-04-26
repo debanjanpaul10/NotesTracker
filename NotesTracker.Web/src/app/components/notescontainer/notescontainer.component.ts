@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Notes } from '../../models/notes.model';
 import { NotesService } from '../../services/notes.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-notescontainer',
@@ -14,8 +14,9 @@ import { RouterLink } from '@angular/router';
 export class NotesContainerComponent implements OnInit {
   notesList: Notes[] = [];
   loading: boolean = false;
+  isDeleteOperationSuccess: boolean = false;
 
-  constructor(private notesService: NotesService) {}
+  constructor(private notesService: NotesService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllNotesAsync();
@@ -33,5 +34,26 @@ export class NotesContainerComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  deleteNoteById(noteId: number): void {
+    this.loading = true;
+    this.notesService.deleteNote(noteId).subscribe({
+      next: (response) => {
+        this.isDeleteOperationSuccess = response;
+        if (this.isDeleteOperationSuccess) {
+          this.getAllNotesAsync();
+        }
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.loading = false;
+      },
+    });
+  }
+
+  navigateToEditNote(noteId: number): void {
+    this.router.navigate(['/notes', noteId]);
   }
 }

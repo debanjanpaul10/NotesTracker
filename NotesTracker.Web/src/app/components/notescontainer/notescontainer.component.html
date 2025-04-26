@@ -11,11 +11,17 @@
         >
           <h1 class="mb-0">{{ note.noteTitle }}</h1>
           <div class="button-group">
-            <button class="btn btn-warning mr-2">
+            <button
+              class="btn btn-warning mr-2"
+              (click)="navigateToEditNote(note.noteId)"
+            >
               <i class="fas fa-edit"></i>
             </button>
             &nbsp;
-            <button class="btn btn-danger">
+            <button
+              class="btn btn-danger"
+              (click)="deleteNoteById(note.noteId)"
+            >
               <i class="fas fa-trash-alt"></i>
             </button>
           </div>

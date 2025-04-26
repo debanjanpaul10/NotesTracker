@@ -7,6 +7,7 @@
 
 namespace NotesTracker.API.Controllers
 {
+    using System.Globalization;
     using Microsoft.AspNetCore.Mvc;
     using NotesTracker.Business.Contracts;
     using NotesTracker.Shared.Constants;
@@ -131,7 +132,7 @@ namespace NotesTracker.API.Controllers
         /// <returns>The response dto.</returns>
         [HttpPost]
         [Route(RouteConstants.DeleteNote_ApiRoute)]
-        public async Task<ResponseDTO> DeleteNoteAsync(int noteId)
+        public async Task<ResponseDTO> DeleteNoteAsync([FromBody]int noteId)
         {
             try
             {

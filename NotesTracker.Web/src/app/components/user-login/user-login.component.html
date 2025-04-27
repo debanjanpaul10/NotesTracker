@@ -1,0 +1,57 @@
+<div class="loginForm">
+  <div class="container d-flex flex-column">
+    <div class="row">
+      <form>
+        <div class="form-group row mt-3">
+          <div class="col sm-12 mb-3 mb-sm-0">
+            <div class="row p-2">
+              <label for="UserEmail" class="form-label">Email</label>
+              <input
+                type="email"
+                name="UserEmail"
+                class="form-control mt-0"
+                placeholder="Enter your email address"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row mt-3">
+          <div class="col sm-12 mb-3 mb-sm-0">
+            <div class="row p-2">
+              <label for="UserPassword" class="form-label">Password</label>
+              <input
+                type="password"
+                name="UserPassword"
+                class="form-control mt-0"
+                placeholder="Enter your secured password"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-3">
+          <button
+            mat-fab
+            extended
+            color="primary"
+            class="save-btn"
+            aria-label="Login"
+          >
+            <span class="customFont">Login</span>
+          </button>
+          &nbsp;
+          <button
+            mat-fab
+            extended
+            color="warn"
+            (click)="closeDialog()"
+            class="cancel-btn"
+            aria-label="Cancel"
+          >
+            <span class="customFont">Cancel</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

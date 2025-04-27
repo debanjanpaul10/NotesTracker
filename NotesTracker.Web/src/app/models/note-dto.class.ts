@@ -1,12 +1,24 @@
+/**
+ * The Note DTO.
+ */
 export class NoteDTO {
-  public NoteTitle: string;
-  public NoteDescription: string;
+  /**
+   * The note title.
+   */
+  public noteTitle: string;
 
-  constructor(
-    noteTitle: string,
-    noteDescription: string
-  ) {
-    this.NoteTitle = noteTitle;
-    this.NoteDescription = noteDescription;
+  /**
+   * The note description.
+   */
+  public noteDescription: string;
+
+  /**
+   * Initializes a new instance of `NoteDTO`
+   * @param NoteTitle The note title.
+   * @param NoteDescription The note description.
+   */
+  constructor(NoteTitle: string, NoteDescription: string) {
+    this.noteTitle = NoteTitle;
+    this.noteDescription = NoteDescription;
   }
 }

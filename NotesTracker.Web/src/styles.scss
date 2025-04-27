@@ -37,14 +37,30 @@ $notesWeb-theme: mat.define-light-theme(
 @include mat.all-component-themes($notesWeb-theme);
 
 /* You can add global styles to this file, and also import other style files */
-
 html,
 body {
   height: 100%;
-}
-body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Dosis", "Helvetica Neue", sans-serif;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
+
+/* Ensure headings and other text elements also use the Dosis font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+input,
+textarea {
+  font-family: "Dosis", "Helvetica Neue", sans-serif;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
 }
 
 /* Importing Bootstrap SCSS file. */
@@ -101,12 +117,26 @@ body.dark-theme .form-control {
   border: 1px solid #555555;
 }
 
-body.dark-theme  .form-control-plaintext {
-	background-color: #333333;
-	color: #ffffff;
-	border: 1px solid #555555;
+body.dark-theme .form-control-plaintext {
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #555555;
 }
 
-body.dark-theme  .form-control::placeholder {
-	color: #bbbbbb;
+body.dark-theme .form-control::placeholder {
+  color: #bbbbbb;
+}
+
+body.dark-theme .form-label {
+  color: #bbbbbb;
+  background-color: #333333;
+}
+
+body.dark-theme .loginForm {
+  color: #bbbbbb;
+  background-color: #333333;
+}
+
+.customFont {
+  font-family: "Helvetica Neue", sans-serif;
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Notes } from '../../models/notes.model';
 import { CommonModule } from '@angular/common';
 import { HomePageConstants } from '../../helpers/Constants';
 import { NotesContainerComponent } from '../notescontainer/notescontainer.component';
 
+/**
+ * The Home component.
+ */
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -11,8 +13,16 @@ import { NotesContainerComponent } from '../notescontainer/notescontainer.compon
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
-  notes: Notes[] = [];
+class HomeComponent {
+  /**
+   * The home page title constant.
+   */
   homePageTitle: string = HomePageConstants.Headings.WelcomeMessage;
+
+  /**
+   * The home page subtitle constant.
+   */
   homePageSubTitle: string = HomePageConstants.Headings.SubHeadingMessage;
 }
+
+export { HomeComponent };

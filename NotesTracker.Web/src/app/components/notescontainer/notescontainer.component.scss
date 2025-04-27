@@ -1,0 +1,21 @@
+.custom-yellow-btn {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+  &:hover {
+    background-color: #e0a800 !important;
+  }
+}
+.custom-red-btn {
+  background-color: #dc3545;
+  color: #ffffff !important;
+  &:hover {
+    background-color: #c82333 !important;
+  }
+}
+.add-note-btn {
+  background-color: #0d6efd;
+  color: #ffffff;
+  &:hover {
+    background-color: #0b5ed7;
+  }
+}

@@ -1,9 +1,20 @@
+.login-dialog {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+mat-form-field {
+  margin-bottom: 16px;
+}
+
 .save-btn {
   background-color: #0d6efd;
   color: #ffffff;
   &:hover {
     background-color: #0b5ed7;
   }
+  margin-bottom: 20px;
 }
 .cancel-btn {
   background-color: #dc3545;
@@ -11,4 +22,5 @@
   &:hover {
     background-color: #c82333 !important;
   }
+  margin-bottom: 20px;
 }

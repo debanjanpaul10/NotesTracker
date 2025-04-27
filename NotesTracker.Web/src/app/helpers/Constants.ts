@@ -1,17 +1,27 @@
 export const ApiBaseUrl: string = 'https://localhost:41619';
 export const ApiUrls = {
-  BaseRoute: 'api/Notes/',
-  GetAllNotes_ApiRoute: 'GetAllNotes',
-  GetNoteById_ApiRoute: 'GetNoteById',
-  AddNewNote_ApiRoute: 'AddNewNote',
-  UpdateNote_ApiRoute: 'UpdateNote',
-  DeleteNote_ApiRoute: 'DeleteNote',
+  Notes: {
+    BaseRoute: 'api/Notes/',
+    GetAllNotes_ApiRoute: 'GetAllNotes',
+    GetNoteById_ApiRoute: 'GetNoteById',
+    AddNewNote_ApiRoute: 'AddNewNote',
+    UpdateNote_ApiRoute: 'UpdateNote',
+    DeleteNote_ApiRoute: 'DeleteNote',
+  },
+  Users: {
+    BaseRoute: 'api/Users/',
+    GetUser_ApiRoute: 'GetUser',
+    AddNewUser_ApiRoute: 'AddNewUser',
+    DeleteUser_ApiRoute: 'DeleteUser',
+  },
 };
 
 export const ExceptionMessages = {
   AllNoteFetchFailedMessage: 'Failed to fetch all the notes',
   NoteFetchFailedMessage: 'Failed to fetch the note',
   AddingNoteFailedMessage: 'Failed to add a new note',
+  UserFetchFailedMessage: 'Failed to fetch the user data.',
+  AddNewUserFailedMessage: 'Failed to add new user data.',
 };
 
 export const HomePageConstants = {
@@ -53,4 +63,19 @@ export const HeaderPageConstants = {
 
 export const CacheKeys = {
   ThemeSettings: 'cachedTheme',
+};
+
+export const NotesContainerConstants = {
+  Headings: {
+    AddButtonText: 'Add New Note',
+  },
+  RouteLinks: {
+    Notes: '/notes',
+  },
+  LoadingText: 'Loading notes ...',
+};
+
+export const NotesPageConstants = {
+  Headings: {},
+  NoteId: 'noteId',
 };

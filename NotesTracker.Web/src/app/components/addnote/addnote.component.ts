@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 
+/**
+ * The Add Note Component.
+ */
 @Component({
   selector: 'app-addnote',
   standalone: true,
@@ -14,17 +17,40 @@ import { RouterLink } from '@angular/router';
   templateUrl: './addnote.component.html',
   styleUrl: './addnote.component.scss',
 })
-export class AddNoteComponent {
-  newNote: NoteDTO = new NoteDTO('', '');
-  loading: boolean = false;
-  isNoteSaved: boolean = false;
-  addNotesConstants: any = AddNotePageConstants.Headings;
+class AddNoteComponent {
+  /**
+   * The new note dto.
+   */
+  public newNote: NoteDTO = new NoteDTO('', '');
 
+  /**
+   * The is loading boolean flag.
+   */
+  public loading: boolean = false;
+
+  /**
+   * The is note saved boolean flag.
+   */
+  public isNoteSaved: boolean = false;
+
+  /**
+   * The add notes constants.
+   */
+  public addNotesConstants: any = AddNotePageConstants.Headings;
+
+  /**
+   * Initializes a new instance of `AddNoteComponent`
+   * @param notesService The notes service.
+   */
   constructor(private notesService: NotesService) {}
 
-  addNewNoteAsync(newNote: NoteDTO): void {
+  /**
+   * Adds a new note asynchronously.
+   * @param newNote The new note.
+   */
+  public addNewNote(newNote: NoteDTO): void {
     this.loading = true;
-    this.notesService.addNewNote(newNote).subscribe({
+    this.notesService.addNewNoteAsync(newNote).subscribe({
       next: (noteSaveStatus) => {
         this.isNoteSaved = noteSaveStatus;
         this.loading = false;
@@ -36,16 +62,27 @@ export class AddNoteComponent {
     });
   }
 
-  handleFormChange(event: Event, field: keyof NoteDTO): void {
+  /**
+   * Handles the form change event.
+   * @param event The event.
+   * @param field The field name.
+   */
+  public handleFormChange(event: Event, field: keyof NoteDTO): void {
     const inputElement = event.target as HTMLInputElement;
     this.newNote[field] = inputElement.value;
   }
 
-  handleFormSubmit(newNote: NoteDTO): void {
-    if (newNote.NoteTitle !== '' && newNote.NoteDescription !== '') {
-      this.addNewNoteAsync(newNote);
+  /**
+   * Handles the form submit event.
+   * @param newNote The new note dto.
+   */
+  public handleFormSubmit(newNote: NoteDTO): void {
+    if (newNote.noteTitle !== '' && newNote.noteDescription !== '') {
+      this.addNewNote(newNote);
     } else {
       alert('Some Fields are missing!');
     }
   }
 }
+
+export { AddNoteComponent };

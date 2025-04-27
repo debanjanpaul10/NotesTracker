@@ -5,6 +5,7 @@ import { CacheKeys, HeaderPageConstants } from '../../../helpers/Constants';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UserLoginComponent } from '../../user-login/user-login.component';
+import { UserRegisterComponent } from '../../user-register/user-register.component';
 
 /**
  * The Header Component.
@@ -20,7 +21,7 @@ class HeaderComponent implements OnInit {
   /**
    * The header constants.
    */
-  public HeaderConstants: any = HeaderPageConstants;
+  public HeaderConstants = HeaderPageConstants;
 
   /**
    * The is dark mode boolean flag.
@@ -30,7 +31,7 @@ class HeaderComponent implements OnInit {
   /**
    * The theme settings constants.
    */
-  public ThemeSettingsKeys: any = HeaderPageConstants.ThemeSettings;
+  public ThemeSettingsKeys = HeaderPageConstants.ThemeSettings;
 
   constructor(private dialog: MatDialog) {}
 
@@ -55,8 +56,21 @@ class HeaderComponent implements OnInit {
     localStorage.setItem(CacheKeys.ThemeSettings, theme);
   }
 
+  /**
+   * Handles the login dialog open event.
+   */
   public openLoginDialog(): void {
     this.dialog.open(UserLoginComponent, {
+      width: '400px',
+      disableClose: true,
+    });
+  }
+
+  /**
+   * Handles the register dialog open event.
+   */
+  public openRegisterDialog(): void {
+    this.dialog.open(UserRegisterComponent, {
       width: '400px',
       disableClose: true,
     });

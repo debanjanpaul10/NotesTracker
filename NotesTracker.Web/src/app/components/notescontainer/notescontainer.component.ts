@@ -44,7 +44,7 @@ class NotesContainerComponent implements OnInit {
   /**
    * The notes container constants object.
    */
-  public notesContainerConstants: any = NotesContainerConstants;
+  public notesContainerConstants = NotesContainerConstants;
 
   /**
    * Initializes a new instance of `NotesContainerComponent`
@@ -75,7 +75,7 @@ class NotesContainerComponent implements OnInit {
       error: (err) => {
         console.error(err);
         this.loading = false;
-        this.toaster.showError(err)
+        this.toaster.showError(err);
       },
     });
   }
@@ -89,10 +89,10 @@ class NotesContainerComponent implements OnInit {
     this.notesService.deleteNoteAsync(noteId).subscribe({
       next: (response) => {
         this.isDeleteOperationSuccess = response;
-        if (this.isDeleteOperationSuccess) {
-          this.getAllNotes();
-        }
         this.loading = false;
+        if (this.isDeleteOperationSuccess) {
+          this.router.navigate(['/']);
+        }
       },
       error: (err) => {
         console.error(err);

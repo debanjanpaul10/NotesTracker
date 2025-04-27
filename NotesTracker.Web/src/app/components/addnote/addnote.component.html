@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-12">
       <h1 class="text-center mainHeading">
-        {{ addNotesConstants.Header }}
+        {{ AddNotesConstants.Header }}
       </h1>
     </div>
     <form>
@@ -14,8 +14,7 @@
               class="form-control mt-0"
               name="Title"
               [(ngModel)]="newNote.noteTitle"
-              (ngModelChange)="handleFormChange($event, 'noteTitle')"
-              placeholder="{{ addNotesConstants.TitleBarPlaceHolder }}"
+              placeholder="{{ AddNotesConstants.TitleBarPlaceHolder }}"
             />
           </div>
         </div>
@@ -28,8 +27,7 @@
               name="Description"
               rows="8"
               [(ngModel)]="newNote.noteDescription"
-              (ngModelChange)="handleFormChange($event, 'noteDescription')"
-              placeholder="{{ addNotesConstants.DescriptionPlaceHolder }}"
+              placeholder="{{ AddNotesConstants.DescriptionPlaceHolder }}"
             ></textarea>
           </div>
         </div>
@@ -39,13 +37,11 @@
         <button
           mat-fab
           extended
-          color="primary"
           (click)="handleFormSubmit(newNote)"
           [disabled]="loading"
-          class="save-btn"
           aria-label="Save"
         >
-          <span class="customFont">{{ addNotesConstants.SaveButton }}</span>
+          <span class="customFont">{{ AddNotesConstants.SaveButton }}</span>
         </button>
         &nbsp;
         <button
@@ -56,7 +52,7 @@
           class="cancel-btn"
           aria-label="Cancel"
         >
-          <span class="customFont">{{ addNotesConstants.CancelButton }}</span>
+          <span class="customFont">{{ AddNotesConstants.CancelButton }}</span>
         </button>
       </div>
     </form>

@@ -41,9 +41,9 @@ class UsersService {
       map((response: ResponseDTO) => {
         if (response.isSuccess && response.responseData !== null) {
           return response.responseData as User;
+        } else {
+          throw new Error(response.responseData);
         }
-
-        throw new Error(ExceptionMessages.UserFetchFailedMessage);
       })
     );
   }

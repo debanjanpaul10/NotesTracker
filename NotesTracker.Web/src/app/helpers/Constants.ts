@@ -47,7 +47,7 @@ export const HeaderPageConstants = {
     Title: 'Notes Tracker',
     Login: 'Login',
     Logout: 'Logout',
-    AddNew: 'Add',
+    Register: 'Register',
   },
   ThemeSettings: {
     LightMode: {
@@ -78,4 +78,42 @@ export const NotesContainerConstants = {
 export const NotesPageConstants = {
   Headings: {},
   NoteId: 'noteId',
+};
+
+export const UserLoginModalConstants = {
+  Headings: {
+    Email: {
+      Name: 'Email',
+      Placeholder: 'Please enter your email address.',
+    },
+    Password: {
+      Name: 'Password',
+      Placeholder: 'Please enter your secured password.',
+    },
+  },
+  Buttons: {
+    Login: 'Login',
+    Cancel: 'Cancel',
+  },
+};
+
+export const UserRegisterModalConstants = {
+  Headings: {
+    Email: {
+      Name: 'Email',
+      Placeholder: 'Please enter your email address.',
+    },
+    Password: {
+      Name: 'Password',
+      Placeholder: 'Please enter your secured password.',
+    },
+    UserName: {
+      Name: 'User Name',
+      Placeholder: 'Please enter a nice username for you!',
+    },
+  },
+  Buttons: {
+    Register: 'Register',
+    Cancel: 'Cancel',
+  },
 };

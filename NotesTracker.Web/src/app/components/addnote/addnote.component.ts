@@ -5,7 +5,8 @@ import { NotesService } from '../../services/notes.service';
 import { AddNotePageConstants } from '../../helpers/Constants';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ToasterService } from '../../services/toaster.service';
 
 /**
  * The Add Note Component.
@@ -36,13 +37,17 @@ class AddNoteComponent {
   /**
    * The add notes constants.
    */
-  public addNotesConstants: any = AddNotePageConstants.Headings;
+  public AddNotesConstants = AddNotePageConstants.Headings;
 
   /**
    * Initializes a new instance of `AddNoteComponent`
    * @param notesService The notes service.
    */
-  constructor(private notesService: NotesService) {}
+  constructor(
+    private notesService: NotesService,
+    private router: Router,
+    private toaster: ToasterService
+  ) {}
 
   /**
    * Adds a new note asynchronously.
@@ -54,22 +59,16 @@ class AddNoteComponent {
       next: (noteSaveStatus) => {
         this.isNoteSaved = noteSaveStatus;
         this.loading = false;
+        if (this.isNoteSaved) {
+          this.router.navigate(['/']);
+        }
       },
       error: (error) => {
         console.error(error);
         this.loading = false;
+        this.toaster.showError(error);
       },
     });
-  }
-
-  /**
-   * Handles the form change event.
-   * @param event The event.
-   * @param field The field name.
-   */
-  public handleFormChange(event: Event, field: keyof NoteDTO): void {
-    const inputElement = event.target as HTMLInputElement;
-    this.newNote[field] = inputElement.value;
   }
 
   /**

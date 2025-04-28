@@ -39,8 +39,10 @@ namespace NotesTracker.Data.Services
 			{
 				return notes;
 			}
-
-			throw new Exception(ExceptionConstants.NotesNotFoundException);
+			else
+			{
+				return [];
+			}
 		}
 
 		/// <summary>

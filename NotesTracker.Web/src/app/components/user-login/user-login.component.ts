@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { UserLoginModalConstants } from '../../helpers/Constants';
+import {
+  CacheKeys,
+  ExceptionMessages,
+  SuccessMessages,
+  UserLoginModalConstants,
+} from '../../helpers/Constants';
 import { UserLoginDTO } from '../../models/user-login-dto.class';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../models/user.model';
 import { ToasterService } from '../../services/toaster.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service.service';
 
 /**
  * The User Login Component
@@ -45,12 +51,15 @@ class UserLoginComponent {
    * @param dialogRef The material dialog reference.
    * @param userService The users service.
    * @param toaster The toaster service.
+   * @param router The router service.
+   * @param authService The auth service.
    */
   constructor(
     public dialogRef: MatDialogRef<UserLoginComponent>,
     private userService: UsersService,
     private toaster: ToasterService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   /**
@@ -61,15 +70,14 @@ class UserLoginComponent {
   }
 
   /**
-   * User login.
+   * Logs in the current user.
    * @param loginUserData The user login data dto.
    */
   public loginUser(loginUserData: UserLoginDTO): void {
     this.isLoading = true;
     this.userService.getUserAsync(loginUserData).subscribe({
       next: (loggedInUser) => {
-        this.loginUserData = loggedInUser;
-        this.isLoading = false;
+        this.handleUserLoginSuccess(loggedInUser);
       },
       error: (error) => {
         console.error(error);
@@ -77,8 +85,6 @@ class UserLoginComponent {
         this.toaster.showError(error);
       },
     });
-
-    this.closeDialog();
   }
 
   /**
@@ -89,8 +95,30 @@ class UserLoginComponent {
     if (loginUserData.userEmail !== '' && loginUserData.userPassword !== '') {
       this.loginUser(loginUserData);
     } else {
-      alert('Some fields are missing');
+      alert(ExceptionMessages.DefaultValidationFailedMessage);
     }
+  }
+
+  /**
+   * Handle the success result of user login data.
+   * @param loggedInUser The logged in user data.
+   */
+  private handleUserLoginSuccess(loggedInUser: User): void {
+    this.loginUserData = loggedInUser;
+    this.isLoading = false;
+
+    localStorage.setItem(
+      CacheKeys.LoggedInUser,
+      JSON.stringify(this.loginUserData)
+    );
+
+    this.authService.setLoggedInState(true);
+
+    this.router.navigate(['/']).then(() => {
+      this.toaster.showSuccess(SuccessMessages.UserLoginSuccess);
+    });
+
+    this.closeDialog();
   }
 }
 

@@ -1,7 +1,7 @@
 export const ApiBaseUrl: string = 'https://localhost:41619';
 export const ApiUrls = {
   Notes: {
-    BaseRoute: 'api/Notes/',
+    BaseRoute: 'notesapi/Notes/',
     GetAllNotes_ApiRoute: 'GetAllNotes',
     GetNoteById_ApiRoute: 'GetNoteById',
     AddNewNote_ApiRoute: 'AddNewNote',
@@ -9,7 +9,7 @@ export const ApiUrls = {
     DeleteNote_ApiRoute: 'DeleteNote',
   },
   Users: {
-    BaseRoute: 'api/Users/',
+    BaseRoute: 'notesapi/Users/',
     GetUser_ApiRoute: 'GetUser',
     AddNewUser_ApiRoute: 'AddNewUser',
     DeleteUser_ApiRoute: 'DeleteUser',
@@ -22,6 +22,13 @@ export const ExceptionMessages = {
   AddingNoteFailedMessage: 'Failed to add a new note',
   UserFetchFailedMessage: 'Failed to fetch the user data.',
   AddNewUserFailedMessage: 'Failed to add new user data.',
+  DefaultValidationFailedMessage: 'Some fields are missing',
+};
+
+export const SuccessMessages = {
+  UserRegisteredSuccess: 'The user registration was successful',
+  UserLoginSuccess: 'The user has been logged in successfully',
+  UserLogoutSuccess: 'The user has been logged out successfully',
 };
 
 export const HomePageConstants = {
@@ -63,6 +70,7 @@ export const HeaderPageConstants = {
 
 export const CacheKeys = {
   ThemeSettings: 'cachedTheme',
+  LoggedInUser: 'loggedInUser',
 };
 
 export const NotesContainerConstants = {

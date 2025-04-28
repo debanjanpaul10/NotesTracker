@@ -11,13 +11,33 @@
         {{ isDarkMode ? "☀️" : "🌙" }}
       </button>
       &nbsp; &nbsp;
-      <button mat-fab extended class="ml-2 mt-1" (click)="openLoginDialog()">
-        {{ HeaderConstants.Headings.Login }}
-      </button>
-      &nbsp; &nbsp;
-      <button mat-fab extended class="ml-2 mt-1" (click)="openRegisterDialog()">
-        {{ HeaderConstants.Headings.Register }}
-      </button>
+
+      <div *ngIf="isUserLoggedIn === false">
+        <button mat-fab extended class="ml-2 mt-1" (click)="openLoginDialog()">
+          {{ HeaderConstants.Headings.Login }}
+        </button>
+        &nbsp; &nbsp;
+        <button
+          mat-fab
+          extended
+          class="ml-2 mt-1"
+          (click)="openRegisterDialog()"
+        >
+          {{ HeaderConstants.Headings.Register }}
+        </button>
+      </div>
+
+      <div *ngIf="isUserLoggedIn === true">
+        <button
+          mat-fab
+          extended
+          color="warn"
+          class="ml-2 mt-1"
+          (click)="handleUserLogout()"
+        >
+          {{ HeaderConstants.Headings.Logout }}
+        </button>
+      </div>
     </div>
   </div>
 </nav>

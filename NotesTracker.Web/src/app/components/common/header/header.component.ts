@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
-import { CacheKeys, HeaderPageConstants } from '../../../helpers/Constants';
+import { Router, RouterLink } from '@angular/router';
+import {
+  CacheKeys,
+  HeaderPageConstants,
+  SuccessMessages,
+} from '../../../helpers/Constants';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UserLoginComponent } from '../../user-login/user-login.component';
 import { UserRegisterComponent } from '../../user-register/user-register.component';
+import { AuthService } from '../../../services/auth-service.service';
+import { ToasterService } from '../../../services/toaster.service';
 
 /**
  * The Header Component.
@@ -33,7 +39,24 @@ class HeaderComponent implements OnInit {
    */
   public ThemeSettingsKeys = HeaderPageConstants.ThemeSettings;
 
-  constructor(private dialog: MatDialog) {}
+  /**
+   * The boolean flag to check if user is logged in or not.
+   */
+  public isUserLoggedIn: boolean = false;
+
+  /**
+   * Initializes a new instance of `HeaderComponent`
+   * @param dialog The Material dialog.
+   * @param router The Router service.
+   * @param authService The auth service.
+   * @param toaster The toaster service.
+   */
+  constructor(
+    private dialog: MatDialog,
+    private router: Router,
+    private authService: AuthService,
+    private toaster: ToasterService
+  ) {}
 
   ngOnInit(): void {
     const savedTheme =
@@ -41,6 +64,10 @@ class HeaderComponent implements OnInit {
       this.ThemeSettingsKeys.LightMode.Key;
     this.isDarkMode = savedTheme === this.ThemeSettingsKeys.DarkMode.Key;
     document.body.className = savedTheme;
+
+    this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
+      this.isUserLoggedIn = isLoggedIn;
+    });
   }
 
   /**
@@ -73,6 +100,18 @@ class HeaderComponent implements OnInit {
     this.dialog.open(UserRegisterComponent, {
       width: '400px',
       disableClose: true,
+    });
+  }
+
+  /**
+   * Handle user logout event.
+   */
+  public handleUserLogout(): void {
+    localStorage.removeItem(CacheKeys.LoggedInUser);
+    this.authService.setLoggedInState(false);
+
+    this.router.navigate(['/']).then(() => {
+      this.toaster.showSuccess(SuccessMessages.UserLogoutSuccess);
     });
   }
 }

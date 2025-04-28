@@ -15,7 +15,7 @@ namespace NotesTracker.Shared.Constants
 		/// <summary>
 		/// The notes API route prefix
 		/// </summary>
-		public const string ApiRoutePrefix = "api/[controller]";
+		public const string ApiRoutePrefix = "notesapi/[controller]";
 
 		#region NOTES
 

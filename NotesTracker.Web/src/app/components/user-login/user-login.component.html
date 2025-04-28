@@ -1,6 +1,9 @@
 <div class="loginForm">
   <div class="container d-flex flex-column">
-    <div class="row">
+    <div class="spinner-container" *ngIf="isLoading">
+      <app-spinner color="accent"></app-spinner>
+    </div>
+    <div class="row" *ngIf="!isLoading">
       <form>
         <div class="form-group row mt-3">
           <div class="col sm-12 mb-3 mb-sm-0">
@@ -18,7 +21,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="form-group row mt-3">
           <div class="col sm-12 mb-3 mb-sm-0">
             <div class="row p-2">

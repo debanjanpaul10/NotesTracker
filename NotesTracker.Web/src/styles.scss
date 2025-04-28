@@ -11,22 +11,6 @@
 /* Importing Bootstrap SCSS file. */
 @import "bootstrap/scss/bootstrap";
 
-// Define the light theme palette
-$light-primary: mat.define-palette(mat.$indigo-palette);
-$light-accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
-$light-warn: mat.define-palette(mat.$red-palette);
-
-$light-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $light-primary,
-      accent: $light-accent,
-      warn: $light-warn,
-    ),
-    typography: mat.define-typography-config(),
-    density: 0,
-  )
-);
 
 // Define the dark theme palette
 $dark-primary: mat.define-palette(mat.$blue-grey-palette);
@@ -46,7 +30,6 @@ $dark-theme: mat.define-dark-theme(
 );
 
 /* Include Material Themes */
-@include mat.all-component-themes($light-theme);
 @include mat.all-component-themes($dark-theme);
 
 /* CUSTOM CSS */

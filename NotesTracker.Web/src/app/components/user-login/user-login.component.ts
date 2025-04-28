@@ -14,6 +14,8 @@ import { ToasterService } from '../../services/toaster.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service.service';
+import { SpinnerComponent } from '../common/spinner/spinner.component';
+import { CommonModule } from '@angular/common';
 
 /**
  * The User Login Component
@@ -21,7 +23,7 @@ import { AuthService } from '../../services/auth-service.service';
 @Component({
   selector: 'app-user-login',
   standalone: true,
-  imports: [MatButtonModule, FormsModule],
+  imports: [MatButtonModule, FormsModule, SpinnerComponent, CommonModule],
   templateUrl: './user-login.component.html',
   styleUrl: './user-login.component.scss',
 })

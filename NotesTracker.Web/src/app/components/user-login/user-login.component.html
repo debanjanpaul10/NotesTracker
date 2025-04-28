@@ -1,0 +1,65 @@
+<div class="loginForm">
+  <div class="container d-flex flex-column">
+    <div class="spinner-container" *ngIf="isLoading">
+      <app-spinner color="accent"></app-spinner>
+    </div>
+    <div class="row" *ngIf="!isLoading">
+      <form>
+        <div class="form-group row mt-3">
+          <div class="col sm-12 mb-3 mb-sm-0">
+            <div class="row p-2">
+              <label for="userEmail" class="form-label">{{
+                HeadingConstants.Email.Name
+              }}</label>
+              <input
+                type="email"
+                name="userEmail"
+                class="form-control mt-0"
+                placeholder="{{ HeadingConstants.Email.Placeholder }}"
+                [(ngModel)]="loginUserData.userEmail"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row mt-3">
+          <div class="col sm-12 mb-3 mb-sm-0">
+            <div class="row p-2">
+              <label for="userPassword" class="form-label">{{
+                HeadingConstants.Password.Name
+              }}</label>
+              <input
+                type="password"
+                name="userPassword"
+                class="form-control mt-0"
+                placeholder="{{ HeadingConstants.Password.Placeholder }}"
+                [(ngModel)]="loginUserData.userPassword"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-3 mb-3">
+          <button
+            mat-fab
+            extended
+            aria-label="Login"
+            (click)="handleFormSubmit(loginUserData)"
+          >
+            <span class="customFont">{{ ButtonConstants.Login }}</span>
+          </button>
+          &nbsp;
+          <button
+            mat-fab
+            extended
+            color="warn"
+            (click)="closeDialog()"
+            aria-label="Cancel"
+          >
+            <span class="customFont">{{ ButtonConstants.Cancel }}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

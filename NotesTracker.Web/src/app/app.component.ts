@@ -3,6 +3,9 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/common/header/header.component';
 import { HomePageConstants } from './helpers/Constants';
 
+/**
+ * The Main app component.
+ */
 @Component({
   selector: 'app-root',
   standalone: true,

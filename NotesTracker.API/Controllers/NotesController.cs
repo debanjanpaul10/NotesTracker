@@ -7,7 +7,6 @@
 
 namespace NotesTracker.API.Controllers
 {
-    using System.Globalization;
     using Microsoft.AspNetCore.Mvc;
     using NotesTracker.Business.Contracts;
     using NotesTracker.Shared.Constants;
@@ -20,7 +19,7 @@ namespace NotesTracker.API.Controllers
     /// <param name="notesService">The notes service.</param>
     /// <param name="logger">The logger.</param>
     [ApiController]
-    [Route(RouteConstants.NotesApiRoutePrefix)]
+    [Route(RouteConstants.ApiRoutePrefix)]
     public class NotesController(INotesService notesService, ILogger<NotesController> logger) : BaseController
     {
         /// <summary>
@@ -132,7 +131,7 @@ namespace NotesTracker.API.Controllers
         /// <returns>The response dto.</returns>
         [HttpPost]
         [Route(RouteConstants.DeleteNote_ApiRoute)]
-        public async Task<ResponseDTO> DeleteNoteAsync([FromBody]int noteId)
+        public async Task<ResponseDTO> DeleteNoteAsync([FromBody] int noteId)
         {
             try
             {

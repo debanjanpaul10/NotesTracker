@@ -1,17 +1,34 @@
 export const ApiBaseUrl: string = 'https://localhost:41619';
 export const ApiUrls = {
-  BaseRoute: 'api/Notes/',
-  GetAllNotes_ApiRoute: 'GetAllNotes',
-  GetNoteById_ApiRoute: 'GetNoteById',
-  AddNewNote_ApiRoute: 'AddNewNote',
-  UpdateNote_ApiRoute: 'UpdateNote',
-  DeleteNote_ApiRoute: 'DeleteNote',
+  Notes: {
+    BaseRoute: 'notesapi/Notes/',
+    GetAllNotes_ApiRoute: 'GetAllNotes',
+    GetNoteById_ApiRoute: 'GetNoteById',
+    AddNewNote_ApiRoute: 'AddNewNote',
+    UpdateNote_ApiRoute: 'UpdateNote',
+    DeleteNote_ApiRoute: 'DeleteNote',
+  },
+  Users: {
+    BaseRoute: 'notesapi/Users/',
+    GetUser_ApiRoute: 'GetUser',
+    AddNewUser_ApiRoute: 'AddNewUser',
+    DeleteUser_ApiRoute: 'DeleteUser',
+  },
 };
 
 export const ExceptionMessages = {
   AllNoteFetchFailedMessage: 'Failed to fetch all the notes',
   NoteFetchFailedMessage: 'Failed to fetch the note',
   AddingNoteFailedMessage: 'Failed to add a new note',
+  UserFetchFailedMessage: 'Failed to fetch the user data.',
+  AddNewUserFailedMessage: 'Failed to add new user data.',
+  DefaultValidationFailedMessage: 'Some fields are missing',
+};
+
+export const SuccessMessages = {
+  UserRegisteredSuccess: 'The user registration was successful',
+  UserLoginSuccess: 'The user has been logged in successfully',
+  UserLogoutSuccess: 'The user has been logged out successfully',
 };
 
 export const HomePageConstants = {
@@ -37,7 +54,7 @@ export const HeaderPageConstants = {
     Title: 'Notes Tracker',
     Login: 'Login',
     Logout: 'Logout',
-    AddNew: 'Add',
+    Register: 'Register',
   },
   ThemeSettings: {
     LightMode: {
@@ -53,4 +70,58 @@ export const HeaderPageConstants = {
 
 export const CacheKeys = {
   ThemeSettings: 'cachedTheme',
+  LoggedInUser: 'loggedInUser',
+};
+
+export const NotesContainerConstants = {
+  Headings: {
+    AddButtonText: 'Add New Note',
+  },
+  RouteLinks: {
+    Notes: '/notes',
+  },
+  LoadingText: 'Loading notes ...',
+};
+
+export const NotesPageConstants = {
+  Headings: {},
+  NoteId: 'noteId',
+};
+
+export const UserLoginModalConstants = {
+  Headings: {
+    Email: {
+      Name: 'Email',
+      Placeholder: 'Please enter your email address.',
+    },
+    Password: {
+      Name: 'Password',
+      Placeholder: 'Please enter your secured password.',
+    },
+  },
+  Buttons: {
+    Login: 'Login',
+    Cancel: 'Cancel',
+  },
+};
+
+export const UserRegisterModalConstants = {
+  Headings: {
+    Email: {
+      Name: 'Email',
+      Placeholder: 'Please enter your email address.',
+    },
+    Password: {
+      Name: 'Password',
+      Placeholder: 'Please enter your secured password.',
+    },
+    UserName: {
+      Name: 'User Name',
+      Placeholder: 'Please enter a nice username for you!',
+    },
+  },
+  Buttons: {
+    Register: 'Register',
+    Cancel: 'Cancel',
+  },
 };

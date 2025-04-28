@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="loader" *ngIf="loading">
-    <p>Loading notes ...</p>
+  <div *ngIf="loading" class="mt-5">
+    <app-loader></app-loader>
   </div>
 
   <div *ngIf="!loading">
@@ -12,17 +12,19 @@
           <h1 class="mb-0">{{ note.noteTitle }}</h1>
           <div class="button-group">
             <button
-              class="btn btn-warning mr-2"
+              mat-fab
+              class="custom-yellow-btn mr-2"
               (click)="navigateToEditNote(note.noteId)"
             >
-              <i class="fas fa-edit"></i>
+              <mat-icon>edit</mat-icon>
             </button>
             &nbsp;
             <button
-              class="btn btn-danger"
+              mat-fab
+              class="custom-red-btn"
               (click)="deleteNoteById(note.noteId)"
             >
-              <i class="fas fa-trash-alt"></i>
+              <mat-icon>delete</mat-icon>
             </button>
           </div>
         </div>
@@ -35,8 +37,13 @@
       </div>
     </div>
     <div class="mt-4 text-center">
-      <button class="btn btn-primary mb-3" routerLink="/addnote">
-        Add New Note
+      <button
+        mat-fab
+        extended
+        class="mb-3"
+        routerLink="/addnote"
+      >
+        <span class="customFont">{{ notesContainerConstants.Headings.AddButtonText }}</span>
       </button>
     </div>
   </div>

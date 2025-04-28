@@ -43,6 +43,7 @@ namespace NotesTracker.API.Middleware
 		public static void ConfigureBusinessDependencies(this IServiceCollection services)
 		{
 			services.AddScoped<INotesService, NotesService>();
+			services.AddScoped<IUsersService, UsersService>();
 		}
 
 		/// <summary>
@@ -52,6 +53,7 @@ namespace NotesTracker.API.Middleware
 		public static void ConfigureDataDependencies(this IServiceCollection services)
 		{
 			services.AddScoped<INotesDataService, NotesDataService>();
+			services.AddScoped<IUsersDataService, UsersDataService>();
 		}
 	}
 }

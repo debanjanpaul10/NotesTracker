@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ApiBaseUrl, ApiUrls, ExceptionMessages } from '../helpers/Constants';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
@@ -7,29 +8,53 @@ import { ResponseDTO } from '../models/response-dto.class';
 import { NoteDTO } from '../models/note-dto.class';
 import { UpdateNoteDTO } from '../models/update-note-dto.class';
 
+/**
+ * The Notes Service class.
+ */
 @Injectable({
   providedIn: 'root',
 })
-export class NotesService {
-  private apiUrl: string = `${ApiBaseUrl}/${ApiUrls.BaseRoute}`;
+class NotesService {
+  /**
+   * The api url.
+   */
+  private apiUrl: string = `${ApiBaseUrl}/${ApiUrls.Notes.BaseRoute}`;
 
+  /**
+   * The notes routes.
+   */
+  private notesRoutes: any = ApiUrls.Notes;
+
+  /**
+   * Initializes a new instance of `NotesService`.
+   * @param http The http client.
+   */
   constructor(private http: HttpClient) {}
 
-  getAllNotes(): Observable<Notes[]> {
-    const getNotesUrl: string = `${this.apiUrl}${ApiUrls.GetAllNotes_ApiRoute}`;
+  /**
+   * Gets all the notes data asynchronously.
+   * @returns The api response
+   */
+  public getAllNotesAsync(): Observable<Notes[]> {
+    const getNotesUrl: string = `${this.apiUrl}${this.notesRoutes.GetAllNotes_ApiRoute}`;
     return this.http.get<ResponseDTO>(getNotesUrl).pipe(
       map((response: ResponseDTO) => {
         if (response.isSuccess && response.responseData !== null) {
           return response.responseData as Notes[];
+        } else {
+          throw new Error(response.responseData);
         }
-
-        throw new Error(ExceptionMessages.AllNoteFetchFailedMessage);
       })
     );
   }
 
-  getNoteById(noteId: number): Observable<Notes> {
-    const getNoteByIdUrl: string = `${this.apiUrl}${ApiUrls.GetNoteById_ApiRoute}?noteId=${noteId}`;
+  /**
+   * Gets the note data by id asynchronously.
+   * @param noteId The note id.
+   * @returns The api response.
+   */
+  public getNoteByIdAsync(noteId: number): Observable<Notes> {
+    const getNoteByIdUrl: string = `${this.apiUrl}${this.notesRoutes.GetNoteById_ApiRoute}?noteId=${noteId}`;
     return this.http.get<ResponseDTO>(getNoteByIdUrl).pipe(
       map((response: ResponseDTO) => {
         if (response.isSuccess && response.responseData !== null) {
@@ -41,8 +66,13 @@ export class NotesService {
     );
   }
 
-  addNewNote(newNote: NoteDTO): Observable<boolean> {
-    const addNewNoteUrl: string = `${this.apiUrl}${ApiUrls.AddNewNote_ApiRoute}`;
+  /**
+   * Adds a new note asynchronously.
+   * @param newNote The new note data.
+   * @returns The api response.
+   */
+  public addNewNoteAsync(newNote: NoteDTO): Observable<boolean> {
+    const addNewNoteUrl: string = `${this.apiUrl}${this.notesRoutes.AddNewNote_ApiRoute}`;
     return this.http.post<ResponseDTO>(addNewNoteUrl, newNote).pipe(
       map((response: ResponseDTO) => {
         if (response.isSuccess && response.responseData !== null) {
@@ -54,8 +84,15 @@ export class NotesService {
     );
   }
 
-  updateExistingNote(updatedNote: UpdateNoteDTO): Observable<Notes> {
-    const updateNoteUrl: string = `${this.apiUrl}${ApiUrls.UpdateNote_ApiRoute}`;
+  /**
+   * Updates an existing note data asynchronously.
+   * @param updatedNote The updated note data.
+   * @returns The api response.
+   */
+  public updateExistingNoteAsync(
+    updatedNote: UpdateNoteDTO
+  ): Observable<Notes> {
+    const updateNoteUrl: string = `${this.apiUrl}${this.notesRoutes.UpdateNote_ApiRoute}`;
     return this.http.post<ResponseDTO>(updateNoteUrl, updatedNote).pipe(
       map((response: ResponseDTO) => {
         if (response.isSuccess && response.responseData !== null) {
@@ -67,8 +104,13 @@ export class NotesService {
     );
   }
 
-  deleteNote(noteId: number): Observable<boolean> {
-    const deleteNoteUrl: string = `${this.apiUrl}${ApiUrls.DeleteNote_ApiRoute}`;
+  /**
+   * Deletes an existing note by id asynchronously.
+   * @param noteId The note id.
+   * @returns The api response.
+   */
+  public deleteNoteAsync(noteId: number): Observable<boolean> {
+    const deleteNoteUrl: string = `${this.apiUrl}${this.notesRoutes.DeleteNote_ApiRoute}`;
     return this.http.post<ResponseDTO>(deleteNoteUrl, noteId).pipe(
       map((response: ResponseDTO) => {
         if (response.isSuccess && response.responseData !== null) {
@@ -80,3 +122,5 @@ export class NotesService {
     );
   }
 }
+
+export { NotesService };

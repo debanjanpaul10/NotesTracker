@@ -7,9 +7,37 @@
     </div>
 
     <div class="navbar-nav ml-auto">
-      <button class="btn btn-outline-light ml-2" (click)="toggleTheme()">
+      <button mat-fab class="ml-2 theme-toggle-btn" (click)="toggleTheme()">
         {{ isDarkMode ? "☀️" : "🌙" }}
       </button>
+      &nbsp; &nbsp;
+
+      <div *ngIf="isUserLoggedIn === false">
+        <button mat-fab extended class="ml-2 mt-1" (click)="openLoginDialog()">
+          {{ HeaderConstants.Headings.Login }}
+        </button>
+        &nbsp; &nbsp;
+        <button
+          mat-fab
+          extended
+          class="ml-2 mt-1"
+          (click)="openRegisterDialog()"
+        >
+          {{ HeaderConstants.Headings.Register }}
+        </button>
+      </div>
+
+      <div *ngIf="isUserLoggedIn === true">
+        <button
+          mat-fab
+          extended
+          color="warn"
+          class="ml-2 mt-1"
+          (click)="handleUserLogout()"
+        >
+          {{ HeaderConstants.Headings.Logout }}
+        </button>
+      </div>
     </div>
   </div>
 </nav>

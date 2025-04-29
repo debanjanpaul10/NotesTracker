@@ -117,6 +117,7 @@ namespace NotesTracker.Data
 				entity.Property(e => e.CreatedDate).HasColumnName(CreatedDateColumnNameConstant).HasColumnType(DateTimeDataTypeConstant).IsRequired();
 				entity.Property(e => e.LastModifiedDate).HasColumnName(LastModifiedDateColumnNameConstant).HasColumnType(DateTimeDataTypeConstant).IsRequired();
 				entity.Property(e => e.IsActive).HasColumnName(IsActiveColumnNameConstant).HasColumnType(BitDataTypeConstant).IsRequired();
+				entity.Property(e => e.UserId).HasColumnName(UserIdColumnNameConstant).HasColumnType(IntegerDataTypeConstant).IsRequired();
 
 			});
 			modelBuilder.Entity<User>(entity => {

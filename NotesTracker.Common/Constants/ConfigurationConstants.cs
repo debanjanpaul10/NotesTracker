@@ -21,5 +21,10 @@ namespace NotesTracker.Shared.Constants
         /// The local appsettings file constant.
         /// </summary>
         public const string LocalAppsettingsFileConstant = "appsettings.development.json";
+
+        /// <summary>
+        /// The user id header constant.
+        /// </summary>
+        public const string UserIdHeaderConstant = "X-User-Id";
     }
 }

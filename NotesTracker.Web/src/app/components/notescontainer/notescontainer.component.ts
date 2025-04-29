@@ -3,7 +3,7 @@ import { Notes } from '../../models/notes.model';
 import { NotesService } from '../../services/notes.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { NotesContainerConstants } from '../../helpers/Constants';
+import { CacheKeys, NotesContainerConstants } from '../../helpers/Constants';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoaderComponent } from '../common/loader/loader.component';
@@ -59,7 +59,10 @@ class NotesContainerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllNotes();
+    const isUserLoggedIn = localStorage.getItem(CacheKeys.LoggedInUser);
+    if (isUserLoggedIn !== null && isUserLoggedIn !== '') {
+      this.getAllNotes();
+    }
   }
 
   /**
@@ -75,7 +78,7 @@ class NotesContainerComponent implements OnInit {
       error: (err) => {
         console.error(err);
         this.loading = false;
-        this.toaster.showError(err);
+        this.toaster.showError(err.error.title);
       },
     });
   }

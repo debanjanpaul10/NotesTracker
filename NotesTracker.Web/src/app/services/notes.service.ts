@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ApiBaseUrl, ApiUrls, ExceptionMessages } from '../helpers/Constants';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { Notes } from '../models/notes.model';
 import { ResponseDTO } from '../models/response-dto.class';
 import { NoteDTO } from '../models/note-dto.class';
 import { UpdateNoteDTO } from '../models/update-note-dto.class';
+import { ToasterService } from './toaster.service';
 
 /**
  * The Notes Service class.
@@ -29,7 +30,7 @@ class NotesService {
    * Initializes a new instance of `NotesService`.
    * @param http The http client.
    */
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toaster: ToasterService) {}
 
   /**
    * Gets all the notes data asynchronously.

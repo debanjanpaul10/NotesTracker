@@ -23,6 +23,7 @@ export const ExceptionMessages = {
   UserFetchFailedMessage: 'Failed to fetch the user data.',
   AddNewUserFailedMessage: 'Failed to add new user data.',
   DefaultValidationFailedMessage: 'Some fields are missing',
+  DefaultErrorMessage: 'Something went terribly wrong!',
 };
 
 export const SuccessMessages = {

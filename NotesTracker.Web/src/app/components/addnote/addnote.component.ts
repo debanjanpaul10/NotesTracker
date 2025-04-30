@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NoteDTO } from '../../models/dto/note-dto.class';
 import { NotesService } from '../../services/notes.service';
-import { AddNotePageConstants } from '../../helpers/Constants';
+import { AddNotePageConstants, AngularRoutes } from '../../helpers/Constants';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
@@ -59,7 +59,7 @@ class AddNoteComponent implements OnInit {
   ngOnInit(): void {
     this.auth0.isAuthenticated$.subscribe((isAuth: boolean) => {
       if (!isAuth) {
-        this.router.navigate(['/error']);
+        this.router.navigate([AngularRoutes.Error.Link]);
       }
     });
   }
@@ -88,7 +88,7 @@ class AddNoteComponent implements OnInit {
         this.isNoteSaved = noteSaveStatus;
         this.loading = false;
         if (this.isNoteSaved) {
-          this.router.navigate(['/']);
+          this.router.navigate([AngularRoutes.Home.Link]);
         }
       },
       error: (error) => {

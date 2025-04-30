@@ -77,13 +77,24 @@ button {
 
 /* Light Theme */
 body.light-theme {
-  background-color: #ffffff;
+  background-color: #f1efed;
   color: #000000;
 }
 
 body.light-theme .navbar {
   background-color: $dark-default-color !important;
   color: #ffffff;
+}
+
+body.light-theme .mwc-card {
+  background-color: #ffffff;
+  color: #555555;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .mwc-card a {
+  color: inherit;
+  font-weight: bold;
 }
 
 /* Dark Theme */
@@ -135,6 +146,16 @@ body.dark-theme .loginForm {
 body.dark-theme .registerForm {
   color: #bbbbbb;
   background-color: #333333;
+}
+
+body.dark-theme .mwc-card {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+body.dark-theme .mwc-card a {
+  color: inherit;
+  font-weight: bold;
 }
 
 .customFont {

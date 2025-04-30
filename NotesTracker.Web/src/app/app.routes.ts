@@ -10,10 +10,10 @@ import { AngularRoutes } from './helpers/Constants';
  * The configured routes.
  */
 export const routes: Routes = [
-  { path: AngularRoutes.Home, component: HomeComponent },
-  { path: AngularRoutes.Note, component: NoteComponent },
-  { path: AngularRoutes.AddNote, component: AddNoteComponent },
-  { path: AngularRoutes.Error, component: ErrorPageComponent },
+  { path: AngularRoutes.Home.Name, component: HomeComponent },
+  { path: AngularRoutes.Note.Name, component: NoteComponent },
+  { path: AngularRoutes.AddNote.Name, component: AddNoteComponent },
+  { path: AngularRoutes.Error.Name, component: ErrorPageComponent },
 ];
 
 /**

@@ -4,6 +4,7 @@ import { NotesService } from '../../services/notes.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import {
+  AngularRoutes,
   CacheKeys,
   ExceptionMessages,
   NotesContainerConstants,
@@ -12,7 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoaderComponent } from '../common/loader/loader.component';
 import { ToasterService } from '../../services/toaster.service';
-import { AuthService, User } from '@auth0/auth0-angular';
+import { AuthService } from '@auth0/auth0-angular';
+import { MadeWithComponent } from '../made-with/made-with.component';
 
 /**
  * The Notes Container component.
@@ -26,6 +28,7 @@ import { AuthService, User } from '@auth0/auth0-angular';
     MatButtonModule,
     MatIconModule,
     LoaderComponent,
+    MadeWithComponent,
   ],
   templateUrl: './notescontainer.component.html',
   styleUrl: './notescontainer.component.scss',
@@ -52,9 +55,14 @@ class NotesContainerComponent implements OnInit {
   public notesContainerConstants = NotesContainerConstants;
 
   /**
+   * The Angular routes constants
+   */
+  public angularRoutesConstants = AngularRoutes;
+
+  /**
    * The boolean flag to check user authenticated.
    */
-  private isUserAuthenticated: boolean = false;
+  public isUserAuthenticated: boolean = false;
 
   /**
    * Initializes a new instance of `NotesContainerComponent`

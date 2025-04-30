@@ -17,10 +17,22 @@ export const ApiUrls = {
 };
 
 export const AngularRoutes = {
-  Home: '',
-  Note: 'notes/:noteId',
-  AddNote: 'addnote',
-  Error: 'error',
+  Home: {
+    Name: '',
+    Link: '/',
+  },
+  Note: {
+    Name: 'notes/:noteId',
+    Link: '/notes/:noteId',
+  },
+  AddNote: {
+    Name: 'addnote',
+    Link: '/addnote',
+  },
+  Error: {
+    Name: 'error',
+    Link: '/error',
+  },
 };
 
 export const ExceptionMessages = {
@@ -135,4 +147,47 @@ export const UserRegisterModalConstants = {
 
 export const ErrorPageConstants = {
   PageNotFoundErrorMessage: 'Oops! The page could not be found!',
+};
+
+export const MadeWithComponentConstants = {
+  Items: {
+    DotNet: {
+      Heading: '.NET',
+      Description: `
+        <div>.NET is a free, cross-platform, open-source developer platform used for building various types of applications, including web apps, mobile apps, desktop apps, and more. It is maintained by Microsoft and the .NET Foundation on GitHub.</div>
+        <br />
+        <a href='https://dotnet.microsoft.com/en-us/'>
+          Official Page
+        </a>`,
+      Image: 'assets/dotnet-img.png',
+    },
+    Angular: {
+      Heading: 'Angular',
+      Description: `
+      <div>Angular is a TypeScript-based free and open-source single-page web application framework. It is developed by Google and by a community of individuals and corporations. Angular is a complete rewrite from the same team that built AngularJS.</div>
+      <br />
+      <a href='https://angular.dev/'>Official Page</a>`,
+      Image: 'assets/angular-img.png',
+    },
+    SQLServer: {
+      Heading: 'Microsoft SQL Server',
+      Description: `
+        <div>Get the flexibility you need to use integrated solutions and apps with your data—in the cloud, on-premises, or at the edge. </div>
+        <div>SQL Server 2022 is the most Azure-enabled release yet, with innovation across performance, security, and availability.</div>
+        <br />
+        <a href='https://www.microsoft.com/en-in/sql-server'>Official Page</a>`,
+      Image: 'assets/sqlserver-img.png',
+    },
+    Auth0: {
+      Heading: 'Auth0',
+      Description: `
+        <div>Auth0 is a flexible, drop-in solution to add authentication and authorization services to your applications. Your team and organization can avoid the cost, time, 
+        and risk that come with building your own solution to authenticate and authorize users.</div>
+        <br />
+        <a href='https://auth0.com/'>Official Page</a>`,
+      Image: 'assets/auth0-img.png',
+    },
+  },
+
+  SubTitle: 'Made with ❤️ and ',
 };

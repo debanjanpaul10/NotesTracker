@@ -36,15 +36,20 @@
         </p>
       </div>
     </div>
-    <div class="mt-4 text-center">
+
+    <div class="mt-4 text-center" *ngIf="isUserAuthenticated">
       <button
         mat-fab
         extended
         class="mb-3"
-        routerLink="/addnote"
+        routerLink="{{ angularRoutesConstants.AddNote.Link }}"
       >
-        <span class="customFont">{{ notesContainerConstants.Headings.AddButtonText }}</span>
+        <span class="customFont">{{
+          notesContainerConstants.Headings.AddButtonText
+        }}</span>
       </button>
     </div>
+
+    <app-made-with></app-made-with>
   </div>
 </div>

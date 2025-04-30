@@ -3,11 +3,18 @@ import { Notes } from '../../models/notes.model';
 import { NotesService } from '../../services/notes.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { CacheKeys, NotesContainerConstants } from '../../helpers/Constants';
+import {
+  AngularRoutes,
+  CacheKeys,
+  ExceptionMessages,
+  NotesContainerConstants,
+} from '../../helpers/Constants';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoaderComponent } from '../common/loader/loader.component';
 import { ToasterService } from '../../services/toaster.service';
+import { AuthService } from '@auth0/auth0-angular';
+import { MadeWithComponent } from '../made-with/made-with.component';
 
 /**
  * The Notes Container component.
@@ -21,6 +28,7 @@ import { ToasterService } from '../../services/toaster.service';
     MatButtonModule,
     MatIconModule,
     LoaderComponent,
+    MadeWithComponent,
   ],
   templateUrl: './notescontainer.component.html',
   styleUrl: './notescontainer.component.scss',
@@ -47,20 +55,35 @@ class NotesContainerComponent implements OnInit {
   public notesContainerConstants = NotesContainerConstants;
 
   /**
+   * The Angular routes constants
+   */
+  public angularRoutesConstants = AngularRoutes;
+
+  /**
+   * The boolean flag to check user authenticated.
+   */
+  public isUserAuthenticated: boolean = false;
+
+  /**
    * Initializes a new instance of `NotesContainerComponent`
    * @param notesService The notes service.
    * @param router The router.
    * @param toaster The toaster service.
+   * @param auth0 The auth service.
    */
   constructor(
     private notesService: NotesService,
     private router: Router,
-    private toaster: ToasterService
+    private toaster: ToasterService,
+    private auth0: AuthService
   ) {}
 
   ngOnInit(): void {
-    const isUserLoggedIn = localStorage.getItem(CacheKeys.LoggedInUser);
-    if (isUserLoggedIn !== null && isUserLoggedIn !== '') {
+    this.auth0.isAuthenticated$.subscribe((isAuth: boolean) => {
+      this.isUserAuthenticated = isAuth;
+    });
+
+    if (this.isUserAuthenticated) {
       this.getAllNotes();
     }
   }
@@ -78,7 +101,11 @@ class NotesContainerComponent implements OnInit {
       error: (err) => {
         console.error(err);
         this.loading = false;
-        this.toaster.showError(err.error.title);
+        if (err?.error?.title) {
+          this.toaster.showError(err.error.title);
+        } else {
+          this.toaster.showError(ExceptionMessages.DefaultErrorMessage);
+        }
       },
     });
   }

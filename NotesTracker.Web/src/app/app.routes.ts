@@ -3,14 +3,17 @@ import { NgModule } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
 import { NoteComponent } from './components/note/note.component';
 import { AddNoteComponent } from './components/addnote/addnote.component';
+import { ErrorPageComponent } from './components/common/error-page/error-page.component';
+import { AngularRoutes } from './helpers/Constants';
 
 /**
  * The configured routes.
  */
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'notes/:noteId', component: NoteComponent },
-  { path: 'addnote', component: AddNoteComponent },
+  { path: AngularRoutes.Home.Name, component: HomeComponent },
+  { path: AngularRoutes.Note.Name, component: NoteComponent },
+  { path: AngularRoutes.AddNote.Name, component: AddNoteComponent },
+  { path: AngularRoutes.Error.Name, component: ErrorPageComponent },
 ];
 
 /**

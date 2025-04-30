@@ -71,5 +71,10 @@ namespace NotesTracker.Shared.Constants
 		/// The user id not present exception constant.
 		/// </summary>
 		public const string UserIdNotPresentExceptionConstant = "User id is not present in the headers.";
+
+		/// <summary>
+		/// The invalid token exception constant.
+		/// </summary>
+		public const string InvalidTokenExceptionConstant = "Invalid token: Identity is not authenticated.";
 	}
 }

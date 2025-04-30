@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { NoteDTO } from '../../models/note-dto.class';
+import { Component, OnInit } from '@angular/core';
+import { NoteDTO } from '../../models/dto/note-dto.class';
 import { NotesService } from '../../services/notes.service';
-import { AddNotePageConstants } from '../../helpers/Constants';
+import { AddNotePageConstants, AngularRoutes } from '../../helpers/Constants';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
 import { ToasterService } from '../../services/toaster.service';
+import { UsersService } from '../../services/users.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 /**
  * The Add Note Component.
@@ -18,11 +20,11 @@ import { ToasterService } from '../../services/toaster.service';
   templateUrl: './addnote.component.html',
   styleUrl: './addnote.component.scss',
 })
-class AddNoteComponent {
+class AddNoteComponent implements OnInit {
   /**
    * The new note dto.
    */
-  public newNote: NoteDTO = new NoteDTO('', '');
+  public newNote: NoteDTO = new NoteDTO('', '', '');
 
   /**
    * The is loading boolean flag.
@@ -42,32 +44,23 @@ class AddNoteComponent {
   /**
    * Initializes a new instance of `AddNoteComponent`
    * @param notesService The notes service.
+   * @param router The router.
+   * @param toaster The toaster.
+   * @param userService The users service.
    */
   constructor(
     private notesService: NotesService,
     private router: Router,
-    private toaster: ToasterService
+    private toaster: ToasterService,
+    private userService: UsersService,
+    private auth0: AuthService
   ) {}
 
-  /**
-   * Adds a new note asynchronously.
-   * @param newNote The new note.
-   */
-  public addNewNote(newNote: NoteDTO): void {
-    this.loading = true;
-    this.notesService.addNewNoteAsync(newNote).subscribe({
-      next: (noteSaveStatus) => {
-        this.isNoteSaved = noteSaveStatus;
-        this.loading = false;
-        if (this.isNoteSaved) {
-          this.router.navigate(['/']);
-        }
-      },
-      error: (error) => {
-        console.error(error);
-        this.loading = false;
-        this.toaster.showError(error);
-      },
+  ngOnInit(): void {
+    this.auth0.isAuthenticated$.subscribe((isAuth: boolean) => {
+      if (!isAuth) {
+        this.router.navigate([AngularRoutes.Error.Link]);
+      }
     });
   }
 
@@ -77,10 +70,33 @@ class AddNoteComponent {
    */
   public handleFormSubmit(newNote: NoteDTO): void {
     if (newNote.noteTitle !== '' && newNote.noteDescription !== '') {
+      newNote.userName = this.userService.getUserAlias();
       this.addNewNote(newNote);
     } else {
       alert('Some Fields are missing!');
     }
+  }
+
+  /**
+   * Adds a new note asynchronously.
+   * @param newNote The new note.
+   */
+  private addNewNote(newNote: NoteDTO): void {
+    this.loading = true;
+    this.notesService.addNewNoteAsync(newNote).subscribe({
+      next: (noteSaveStatus) => {
+        this.isNoteSaved = noteSaveStatus;
+        this.loading = false;
+        if (this.isNoteSaved) {
+          this.router.navigate([AngularRoutes.Home.Link]);
+        }
+      },
+      error: (error) => {
+        console.error(error);
+        this.loading = false;
+        this.toaster.showError(error);
+      },
+    });
   }
 }
 

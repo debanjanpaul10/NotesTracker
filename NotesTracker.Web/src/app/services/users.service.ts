@@ -3,9 +3,9 @@ import { ApiBaseUrl, ApiUrls, ExceptionMessages } from '../helpers/Constants';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { User } from '../models/user.model';
-import { ResponseDTO } from '../models/response-dto.class';
-import { UserLoginDTO } from '../models/user-login-dto.class';
-import { UserRegisterDTO } from '../models/user-register-dto.class';
+import { ResponseDTO } from '../models/dto/response-dto.class';
+import { UserLoginDTO } from '../models/dto/user-login-dto.class';
+import { UserRegisterDTO } from '../models/dto/user-register-dto.class';
 
 /**
  * The Users Service class.
@@ -15,6 +15,11 @@ import { UserRegisterDTO } from '../models/user-register-dto.class';
 })
 class UsersService {
   /**
+   * The user alias.
+   */
+  private userAlias: string = '';
+
+  /**
    * The api url.
    */
   private apiUrl: string = `${ApiBaseUrl}/${ApiUrls.Users.BaseRoute}`;
@@ -23,6 +28,22 @@ class UsersService {
    * The users routes.
    */
   private usersRoutes: any = ApiUrls.Users;
+
+  /**
+   * Sets the user alias.
+   * @param alias The passed user alias.
+   */
+  public setUserAlias(alias: string): void {
+    this.userAlias = alias;
+  }
+
+  /**
+   * Gets the user alias.
+   * @returns The user alias.
+   */
+  public getUserAlias(): string {
+    return this.userAlias;
+  }
 
   /**
    * Initializes a new instance of `UsersService`.

@@ -1,0 +1,24 @@
+<div class="row text-center mt-5">
+  <div class="col-sm-12">
+    <p class="lead">{{ mwcConstants.SubTitle }}</p>
+  </div>
+</div>
+<div class="mwc-container mt-2 mb-3">
+  <mat-card
+    class="mwc-card"
+    appearance="outlined"
+    *ngFor="let data of mwcConstants.Items | keyvalue"
+  >
+    <mat-card-header>
+      <mat-card-title>{{ data.value.Heading }}</mat-card-title>
+    </mat-card-header>
+    <img
+      mat-card-image
+      [src]="data.value.Image"
+      alt="{{ data.value.Heading }}"
+    />
+    <mat-card-content class="mt-2">
+      <p [innerHTML]="data.value.Description"></p>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -3,27 +3,38 @@ import {
   HttpHandlerFn,
   HttpInterceptorFn,
 } from '@angular/common/http';
-import { CacheKeys } from '../helpers/Constants';
+import { AuthService } from '@auth0/auth0-angular';
+import { inject } from '@angular/core';
+import { switchMap } from 'rxjs';
+import { UsersService } from './users.service';
 
 /**
  * The Authentication Interceptor Service Function.
  */
-export const AuthInterceptor: HttpInterceptorFn = (
+const AuthInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
 ) => {
-  const loggedInUser = localStorage.getItem(CacheKeys.LoggedInUser);
+  const auth0 = inject(AuthService);
+  const usersService = inject(UsersService);
 
-  if (loggedInUser) {
-    const userId = JSON.parse(loggedInUser).userId;
+  return auth0.idTokenClaims$.pipe(
+    switchMap((claims) => {
+      if (claims && claims.__raw) {
+        const userName = claims['nickname'] || null;
+        if (userName) {
+          usersService.setUserAlias(userName);
+        }
+        const newReq = req.clone({
+          headers: req.headers.set('Authorization', `Bearer ${claims.__raw}`),
+        });
 
-    // Clone the request and set the X-User-Id header
-    const newReq = req.clone({
-      headers: req.headers.append('X-User-Id', userId.toString()),
-    });
+        return next(newReq);
+      }
 
-    return next(newReq);
-  }
-
-  return next(req);
+      return next(req);
+    })
+  );
 };
+
+export { AuthInterceptor };

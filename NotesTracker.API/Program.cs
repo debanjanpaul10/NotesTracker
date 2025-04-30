@@ -8,7 +8,7 @@
 namespace NotesTracker.API
 {
 	using Microsoft.OpenApi.Models;
-	using NotesTracker.API.Middleware;
+    using NotesTracker.API.Middleware;
     using static NotesTracker.Shared.Constants.ConfigurationConstants;
 
 	/// <summary>
@@ -23,13 +23,9 @@ namespace NotesTracker.API
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
-            builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile(path: LocalAppsettingsFileConstant, optional: true).AddEnvironmentVariables();
-                
-			builder.Services.ConfigureServices();
-			builder.ConfigureApplicationDependencies();
-			builder.Services.ConfigureBusinessDependencies();
-			builder.Services.ConfigureDataDependencies();
+			builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
+				.AddJsonFile(path: LocalAppsettingsFileConstant, optional: true).AddEnvironmentVariables();
+			builder.ConfigureApiServices();
 
 			var app = builder.Build();
 			app.ConfigureApplication();
@@ -96,11 +92,14 @@ namespace NotesTracker.API
 			app.UseExceptionHandler();
 			app.UseHttpsRedirection();
 			app.UseCors();
+			app.UseAuthentication();
 			app.UseAuthorization();
 			app.MapControllers();
 
 			app.Run();
 		}
+
+		
 	}
 
 }

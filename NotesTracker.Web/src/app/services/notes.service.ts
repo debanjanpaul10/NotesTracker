@@ -4,9 +4,9 @@ import { ApiBaseUrl, ApiUrls, ExceptionMessages } from '../helpers/Constants';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Notes } from '../models/notes.model';
-import { ResponseDTO } from '../models/response-dto.class';
-import { NoteDTO } from '../models/note-dto.class';
-import { UpdateNoteDTO } from '../models/update-note-dto.class';
+import { ResponseDTO } from '../models/dto/response-dto.class';
+import { NoteDTO } from '../models/dto/note-dto.class';
+import { UpdateNoteDTO } from '../models/dto/update-note-dto.class';
 import { ToasterService } from './toaster.service';
 
 /**

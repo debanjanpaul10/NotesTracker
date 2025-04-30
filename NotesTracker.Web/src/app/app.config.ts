@@ -1,5 +1,4 @@
 import {
-  APP_INITIALIZER,
   ApplicationConfig,
   importProvidersFrom,
 } from '@angular/core';
@@ -10,8 +9,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './services/auth.interceptor';
-import { AuthService, provideAuth0 } from '@auth0/auth0-angular';
-import { firstValueFrom } from 'rxjs';
+import { provideAuth0 } from '@auth0/auth0-angular';
 
 /**
  * The application configurations.

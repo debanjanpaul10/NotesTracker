@@ -16,6 +16,13 @@ export const ApiUrls = {
   },
 };
 
+export const AngularRoutes = {
+  Home: '',
+  Note: 'notes/:noteId',
+  AddNote: 'addnote',
+  Error: 'error',
+};
+
 export const ExceptionMessages = {
   AllNoteFetchFailedMessage: 'Failed to fetch all the notes',
   NoteFetchFailedMessage: 'Failed to fetch the note',
@@ -124,4 +131,8 @@ export const UserRegisterModalConstants = {
     Register: 'Register',
     Cancel: 'Cancel',
   },
+};
+
+export const ErrorPageConstants = {
+  PageNotFoundErrorMessage: 'Oops! The page could not be found!',
 };

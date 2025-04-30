@@ -51,15 +51,17 @@ class NotesContainerComponent implements OnInit {
    */
   public notesContainerConstants = NotesContainerConstants;
 
+  /**
+   * The boolean flag to check user authenticated.
+   */
   private isUserAuthenticated: boolean = false;
-
-  private loggedInUserData: User = new User();
 
   /**
    * Initializes a new instance of `NotesContainerComponent`
    * @param notesService The notes service.
    * @param router The router.
    * @param toaster The toaster service.
+   * @param auth0 The auth service.
    */
   constructor(
     private notesService: NotesService,
@@ -75,11 +77,7 @@ class NotesContainerComponent implements OnInit {
 
     if (this.isUserAuthenticated) {
       this.getAllNotes();
-    } else {
     }
-    this.auth0.user$.subscribe((userData: any) => {
-      this.loggedInUserData = userData;
-    });
   }
 
   /**

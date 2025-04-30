@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NoteDTO } from '../../models/dto/note-dto.class';
 import { NotesService } from '../../services/notes.service';
 import { AddNotePageConstants } from '../../helpers/Constants';
@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
 import { ToasterService } from '../../services/toaster.service';
 import { UsersService } from '../../services/users.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 /**
  * The Add Note Component.
@@ -19,7 +20,7 @@ import { UsersService } from '../../services/users.service';
   templateUrl: './addnote.component.html',
   styleUrl: './addnote.component.scss',
 })
-class AddNoteComponent {
+class AddNoteComponent implements OnInit {
   /**
    * The new note dto.
    */
@@ -51,8 +52,17 @@ class AddNoteComponent {
     private notesService: NotesService,
     private router: Router,
     private toaster: ToasterService,
-    private userService: UsersService
+    private userService: UsersService,
+    private auth0: AuthService
   ) {}
+
+  ngOnInit(): void {
+    this.auth0.isAuthenticated$.subscribe((isAuth: boolean) => {
+      if (!isAuth) {
+        this.router.navigate(['/error']);
+      }
+    });
+  }
 
   /**
    * Handles the form submit event.

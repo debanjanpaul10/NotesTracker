@@ -72,6 +72,7 @@ namespace NotesTracker.API
 
 			services.AddExceptionHandler<GlobalExceptionHandler>();
 			services.AddProblemDetails();
+			services.AddHttpContextAccessor();
 		}
 
 		/// <summary>

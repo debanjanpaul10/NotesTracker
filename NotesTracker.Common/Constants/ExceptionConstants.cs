@@ -66,5 +66,10 @@ namespace NotesTracker.Shared.Constants
 		/// The user deletion failed message constant.
 		/// </summary>
 		public const string UserDeletionFailedMessageConstant = "The user deletion operation failed!";
+
+		/// <summary>
+		/// The user id not present exception constant.
+		/// </summary>
+		public const string UserIdNotPresentExceptionConstant = "User id is not present in the headers.";
 	}
 }

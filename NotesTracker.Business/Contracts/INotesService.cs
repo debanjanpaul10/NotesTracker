@@ -19,8 +19,9 @@ namespace NotesTracker.Business.Contracts
 		/// Gets the note asynchronous.
 		/// </summary>
 		/// <param name="noteId">The note id.</param>
+		/// <param name="userId">The user id.</param>
 		/// <returns>The note entity</returns>
-		Task<Note> GetNoteAsync(int noteId);
+		Task<Note> GetNoteAsync(int noteId, int userId);
 
 		/// <summary>
 		/// Adds the new note asynchronous.
@@ -33,8 +34,9 @@ namespace NotesTracker.Business.Contracts
 		/// Deletes the note asynchronous.
 		/// </summary>
 		/// <param name="noteId">The note identifier.</param>
+		/// <param name="userId">The User Id.</param>
 		/// <returns>The boolean for success/failure</returns>
-		Task<bool> DeleteNoteAsync(int noteId);
+		Task<bool> DeleteNoteAsync(int noteId, int userId);
 
 		/// <summary>
 		/// Updates the note asynchronous.
@@ -46,7 +48,8 @@ namespace NotesTracker.Business.Contracts
 		/// <summary>
 		/// Gets all notes asynchronous.
 		/// </summary>
+		/// <param name="userId">The user Id.</param>
 		/// <returns>The list of note entity</returns>
-		Task<IEnumerable<Note>> GetAllNotesAsync();
+		Task<IEnumerable<Note>> GetAllNotesAsync(int userId);
 	}
 }

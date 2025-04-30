@@ -18,9 +18,10 @@ namespace NotesTracker.API.Controllers
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     /// <param name="notesService">The notes service.</param>
     /// <param name="logger">The logger.</param>
+    /// <param name="httpContextAccessor">The Http Context accessor.</param>
     [ApiController]
     [Route(RouteConstants.ApiRoutePrefix)]
-    public class NotesController(INotesService notesService, ILogger<NotesController> logger) : BaseController
+    public class NotesController(INotesService notesService, ILogger<NotesController> logger, IHttpContextAccessor httpContextAccessor) : BaseController(httpContextAccessor)
     {
         /// <summary>
         /// The notes service
@@ -42,7 +43,7 @@ namespace NotesTracker.API.Controllers
         {
             try
             {
-                var notes = await this._notesService.GetAllNotesAsync();
+                var notes = await this._notesService.GetAllNotesAsync(this.UserId);
                 if (notes is not null)
                 {
                     return this.PrepareSuccessResponse(notes);
@@ -67,7 +68,7 @@ namespace NotesTracker.API.Controllers
         {
             try
             {
-                var note = await this._notesService.GetNoteAsync(noteId);
+                var note = await this._notesService.GetNoteAsync(noteId, this.UserId);
                 if (note is not null)
                 {
                     return this.PrepareSuccessResponse(note);
@@ -135,7 +136,7 @@ namespace NotesTracker.API.Controllers
         {
             try
             {
-                var deletedNote = await this._notesService.DeleteNoteAsync(noteId);
+                var deletedNote = await this._notesService.DeleteNoteAsync(noteId, this.UserId);
                 return this.PrepareSuccessResponse(deletedNote);
             }
             catch (Exception ex)

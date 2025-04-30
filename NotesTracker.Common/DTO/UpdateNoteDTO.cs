@@ -35,5 +35,13 @@ namespace NotesTracker.Shared.DTO
 		/// The note description.
 		/// </value>
 		public string NoteDescription { get; set; } = string.Empty;
+
+		/// <summary>
+		/// Gets or sets the user id.
+		/// </summary>
+		/// <value>
+		/// The user id.
+		/// </value>
+		public int UserId { get; set; }
 	}
 }

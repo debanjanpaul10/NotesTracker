@@ -8,7 +8,9 @@
 namespace NotesTracker.API.Controllers
 {
 	using Microsoft.AspNetCore.Mvc;
+	using NotesTracker.Shared.Constants;
 	using NotesTracker.Shared.DTO;
+	using static NotesTracker.Shared.Constants.ConfigurationConstants;
 
 	/// <summary>
 	/// The Base Controller.
@@ -16,6 +18,37 @@ namespace NotesTracker.API.Controllers
 	/// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
 	public abstract class BaseController : ControllerBase
 	{
+		/// <summary>
+		/// The user id.
+		/// </summary>
+		protected int UserId;
+
+		/// <summary>
+		/// The http context accessor.
+		/// </summary>
+		private readonly IHttpContextAccessor? _httpContextAccessor;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="BaseController"/> class.
+		/// </summary>
+		public BaseController(IHttpContextAccessor httpContextAccessor)
+		{
+			this._httpContextAccessor = httpContextAccessor;
+			if (this.GetType() != typeof(UsersController))
+			{
+				var userIdHeader = this._httpContextAccessor?.HttpContext?.Request?.Headers[UserIdHeaderConstant];
+				if (!string.IsNullOrEmpty(userIdHeader) && int.TryParse(userIdHeader, out var userId))
+				{
+					this.UserId = userId;
+				}
+				else
+				{
+					var userIdNotFoundException = new InvalidOperationException(ExceptionConstants.UserIdNotPresentExceptionConstant);
+					throw userIdNotFoundException;
+				}
+			}
+		}
+
 		/// <summary>
 		/// Prepares the success response.
 		/// </summary>

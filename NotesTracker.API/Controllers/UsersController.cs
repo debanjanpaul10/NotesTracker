@@ -18,9 +18,10 @@ namespace NotesTracker.API.Controllers
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     /// <param name="usersService">The users service.</param>
     /// <param name="logger">The logger.</param>
+    /// <param name="httpContextAccessor">The Http Context accessor</param>
     [ApiController]
     [Route(RouteConstants.ApiRoutePrefix)]
-    public class UsersController(IUsersService usersService, ILogger<UsersController> logger) : BaseController
+    public class UsersController(IUsersService usersService, ILogger<UsersController> logger, IHttpContextAccessor httpContextAccessor) : BaseController(httpContextAccessor)
     {
         /// <summary>
         /// The users service.
@@ -91,7 +92,7 @@ namespace NotesTracker.API.Controllers
         /// <returns>The response dto.</returns>
         [HttpPost]
         [Route(RouteConstants.DeleteUser_ApiRoute)]
-        public async Task<ResponseDTO> DeleteUserAsync([FromBody]int userId)
+        public async Task<ResponseDTO> DeleteUserAsync([FromBody] int userId)
         {
             try
             {

@@ -46,15 +46,16 @@ namespace NotesTracker.Business.Services
 		/// Deletes the note asynchronous.
 		/// </summary>
 		/// <param name="noteId">The note identifier.</param>
+		/// <param name="userId">The user id.</param>
 		/// <returns>
 		/// The boolean for success/failure
 		/// </returns>
 		/// <exception cref="System.ArgumentNullException">noteId</exception>
-		public Task<bool> DeleteNoteAsync(int noteId)
+		public Task<bool> DeleteNoteAsync(int noteId, int userId)
 		{
 			if (noteId > 0)
 			{
-				return this._notesDataService.DeleteNoteAsync(noteId);
+				return this._notesDataService.DeleteNoteAsync(noteId, userId);
 			}
 
 			throw new ArgumentNullException(nameof(noteId), ExceptionConstants.NoteNotFoundException);
@@ -63,27 +64,29 @@ namespace NotesTracker.Business.Services
 		/// <summary>
 		/// Gets all notes asynchronous.
 		/// </summary>
+		/// <param name="userId">The user id.</param>
 		/// <returns>
 		/// The list of note entity
 		/// </returns>
-		public Task<IEnumerable<Note>> GetAllNotesAsync()
+		public Task<IEnumerable<Note>> GetAllNotesAsync(int userId)
 		{
-			return this._notesDataService.GetAllNotesAsync();
+			return this._notesDataService.GetAllNotesAsync(userId);
 		}
 
 		/// <summary>
 		/// Gets the note asynchronous.
 		/// </summary>
 		/// <param name="noteId">The note id.</param>
+		/// <param name="userId">The user id.</param>
 		/// <returns>
 		/// The note entity
 		/// </returns>
 		/// <exception cref="System.ArgumentNullException">noteId</exception>
-		public Task<Note> GetNoteAsync(int noteId)
+		public Task<Note> GetNoteAsync(int noteId, int userId)
 		{
 			if (noteId > 0)
 			{
-				return this._notesDataService.GetNoteAsync(noteId);
+				return this._notesDataService.GetNoteAsync(noteId, userId);
 			}
 
 			throw new ArgumentNullException(nameof(noteId), ExceptionConstants.NoteNotFoundException);

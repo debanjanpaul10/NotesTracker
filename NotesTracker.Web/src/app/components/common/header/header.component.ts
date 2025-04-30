@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import {
-  CacheKeys,
-  HeaderPageConstants,
-  SuccessMessages,
-} from '../../../helpers/Constants';
+import { CacheKeys, HeaderPageConstants } from '../../../helpers/Constants';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ToasterService } from '../../../services/toaster.service';
 import { AuthService } from '@auth0/auth0-angular';
 
 /**
@@ -45,9 +40,8 @@ class HeaderComponent implements OnInit {
   /**
    * Initializes a new instance of `HeaderComponent`
    * @param auth0 The auth service.
-   * @param toaster The toaster service.
    */
-  constructor(private toaster: ToasterService, private auth0: AuthService) {}
+  constructor(private auth0: AuthService) {}
 
   ngOnInit(): void {
     const savedTheme =
@@ -79,7 +73,6 @@ class HeaderComponent implements OnInit {
    */
   public handleUserLogin(): void {
     this.auth0.loginWithRedirect();
-    this.toaster.showSuccess(SuccessMessages.UserLoginSuccess);
   }
 
   /**

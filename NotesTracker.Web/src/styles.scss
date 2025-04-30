@@ -16,6 +16,8 @@ $dark-primary: mat.define-palette(mat.$blue-grey-palette);
 $dark-accent: mat.define-palette(mat.$indigo-palette, A200, A100, A400);
 $dark-warn: mat.define-palette(mat.$red-palette);
 
+$dark-default-color: #1a2025;
+
 $dark-theme: mat.define-dark-theme(
   (
     color: (
@@ -69,6 +71,10 @@ textarea {
   margin-top: 10px !important;
 }
 
+button {
+  font-weight: bolder !important;
+}
+
 /* Light Theme */
 body.light-theme {
   background-color: #ffffff;
@@ -76,8 +82,8 @@ body.light-theme {
 }
 
 body.light-theme .navbar {
-  background-color: #f8f9fa;
-  color: #000000;
+  background-color: $dark-default-color !important;
+  color: #ffffff;
 }
 
 /* Dark Theme */
@@ -87,7 +93,7 @@ body.dark-theme {
 }
 
 body.dark-theme .navbar {
-  background-color: #343a40;
+  background-color: $dark-default-color !important;
   color: #ffffff;
 }
 

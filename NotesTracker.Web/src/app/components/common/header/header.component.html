@@ -1,9 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="d-flex w-100 container-fluid">
     <div class="navbar-nav mr-auto">
-      <a routerLink="/" class="navbar-brand">{{
-        HeaderConstants.Headings.Title
-      }}</a>
+      <a routerLink="/" class="navbar-brand"
+        ><img
+          src="assets/brand.png"
+          alt="Notes Tracker Application"
+          height="50px"
+      /></a>
     </div>
 
     <div class="navbar-nav ml-auto">
@@ -14,16 +17,7 @@
 
       <div *ngIf="isUserLoggedIn === false">
         <button mat-fab extended class="ml-2 mt-1" (click)="handleUserLogin()">
-          {{ HeaderConstants.Headings.Login }}
-        </button>
-        &nbsp; &nbsp;
-        <button
-          mat-fab
-          extended
-          class="ml-2 mt-1"
-          (click)="handleUserLogin()"
-        >
-          {{ HeaderConstants.Headings.Register }}
+          {{ HeaderConstants.Headings.LoginRegister }}
         </button>
       </div>
 

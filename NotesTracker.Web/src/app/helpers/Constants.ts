@@ -53,9 +53,8 @@ export const AddNotePageConstants = {
 export const HeaderPageConstants = {
   Headings: {
     Title: 'Notes Tracker',
-    Login: 'Login',
+    LoginRegister: 'Login/Register',
     Logout: 'Logout',
-    Register: 'Register',
   },
   ThemeSettings: {
     LightMode: {

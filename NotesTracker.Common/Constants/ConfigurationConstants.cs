@@ -26,5 +26,15 @@ namespace NotesTracker.Shared.Constants
         /// The user id header constant.
         /// </summary>
         public const string UserIdHeaderConstant = "X-User-Id";
+
+        /// <summary>
+        /// The audience constant.
+        /// </summary>
+        public const string AudienceConstant = "Auth0:Audience";
+
+        /// <summary>
+        /// The domain constant.
+        /// </summary>
+        public const string DomainConstant = "Auth0:Domain";
     }
 }

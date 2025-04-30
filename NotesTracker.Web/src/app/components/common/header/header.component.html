@@ -13,7 +13,7 @@
       &nbsp; &nbsp;
 
       <div *ngIf="isUserLoggedIn === false">
-        <button mat-fab extended class="ml-2 mt-1" (click)="openLoginDialog()">
+        <button mat-fab extended class="ml-2 mt-1" (click)="handleUserLogin()">
           {{ HeaderConstants.Headings.Login }}
         </button>
         &nbsp; &nbsp;
@@ -21,7 +21,7 @@
           mat-fab
           extended
           class="ml-2 mt-1"
-          (click)="openRegisterDialog()"
+          (click)="handleUserLogin()"
         >
           {{ HeaderConstants.Headings.Register }}
         </button>

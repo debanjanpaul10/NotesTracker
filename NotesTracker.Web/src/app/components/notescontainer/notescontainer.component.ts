@@ -3,11 +3,16 @@ import { Notes } from '../../models/notes.model';
 import { NotesService } from '../../services/notes.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { CacheKeys, NotesContainerConstants } from '../../helpers/Constants';
+import {
+  CacheKeys,
+  ExceptionMessages,
+  NotesContainerConstants,
+} from '../../helpers/Constants';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoaderComponent } from '../common/loader/loader.component';
 import { ToasterService } from '../../services/toaster.service';
+import { AuthService, User } from '@auth0/auth0-angular';
 
 /**
  * The Notes Container component.
@@ -46,6 +51,10 @@ class NotesContainerComponent implements OnInit {
    */
   public notesContainerConstants = NotesContainerConstants;
 
+  private isUserAuthenticated: boolean = false;
+
+  private loggedInUserData: User = new User();
+
   /**
    * Initializes a new instance of `NotesContainerComponent`
    * @param notesService The notes service.
@@ -55,14 +64,22 @@ class NotesContainerComponent implements OnInit {
   constructor(
     private notesService: NotesService,
     private router: Router,
-    private toaster: ToasterService
+    private toaster: ToasterService,
+    private auth0: AuthService
   ) {}
 
   ngOnInit(): void {
-    const isUserLoggedIn = localStorage.getItem(CacheKeys.LoggedInUser);
-    if (isUserLoggedIn !== null && isUserLoggedIn !== '') {
+    this.auth0.isAuthenticated$.subscribe((isAuth: boolean) => {
+      this.isUserAuthenticated = isAuth;
+    });
+
+    if (this.isUserAuthenticated) {
       this.getAllNotes();
+    } else {
     }
+    this.auth0.user$.subscribe((userData: any) => {
+      this.loggedInUserData = userData;
+    });
   }
 
   /**
@@ -78,7 +95,11 @@ class NotesContainerComponent implements OnInit {
       error: (err) => {
         console.error(err);
         this.loading = false;
-        this.toaster.showError(err.error.title);
+        if (err?.error?.title) {
+          this.toaster.showError(err.error.title);
+        } else {
+          this.toaster.showError(ExceptionMessages.DefaultErrorMessage);
+        }
       },
     });
   }

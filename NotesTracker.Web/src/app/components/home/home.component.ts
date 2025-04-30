@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomePageConstants } from '../../helpers/Constants';
 import { NotesContainerComponent } from '../notescontainer/notescontainer.component';
@@ -17,12 +17,13 @@ class HomeComponent {
   /**
    * The home page title constant.
    */
-  homePageTitle: string = HomePageConstants.Headings.WelcomeMessage;
+  public homePageTitle: string = HomePageConstants.Headings.WelcomeMessage;
 
   /**
    * The home page subtitle constant.
    */
-  homePageSubTitle: string = HomePageConstants.Headings.SubHeadingMessage;
+  public homePageSubTitle: string =
+    HomePageConstants.Headings.SubHeadingMessage;
 }
 
 export { HomeComponent };

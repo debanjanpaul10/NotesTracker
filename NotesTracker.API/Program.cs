@@ -7,10 +7,9 @@
 
 namespace NotesTracker.API
 {
-	using Microsoft.AspNetCore.Authentication.JwtBearer;
 	using Microsoft.OpenApi.Models;
-	using NotesTracker.API.Middleware;
-	using static NotesTracker.Shared.Constants.ConfigurationConstants;
+    using NotesTracker.API.Middleware;
+    using static NotesTracker.Shared.Constants.ConfigurationConstants;
 
 	/// <summary>
 	/// The Program Class.
@@ -26,12 +25,7 @@ namespace NotesTracker.API
 			var builder = WebApplication.CreateBuilder(args);
 			builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
 				.AddJsonFile(path: LocalAppsettingsFileConstant, optional: true).AddEnvironmentVariables();
-
-			builder.Services.ConfigureServices();
-			builder.ConfigureApplicationDependencies();
-			builder.Services.ConfigureBusinessDependencies();
-			builder.Services.ConfigureDataDependencies();
-			builder.ConfigureAuthenticationServices();
+			builder.ConfigureApiServices();
 
 			var app = builder.Build();
 			app.ConfigureApplication();
@@ -105,24 +99,7 @@ namespace NotesTracker.API
 			app.Run();
 		}
 
-		/// <summary>
-		/// Configures authentication services.
-		/// </summary>
-		/// <param name="builder">The builder.</param>
-		private static void ConfigureAuthenticationServices(this WebApplicationBuilder builder)
-		{
-			var configuration = builder.Configuration;
-			builder.Services.AddAuthentication(options =>
-			{
-				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-			}).AddJwtBearer(options =>
-				{
-					options.Authority = $"https://{configuration[DomainConstant]}/";
-					options.Audience = configuration[AudienceConstant];
-				});
-
-		}
+		
 	}
 
 }

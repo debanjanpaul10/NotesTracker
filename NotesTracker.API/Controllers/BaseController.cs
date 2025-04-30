@@ -7,8 +7,8 @@
 
 namespace NotesTracker.API.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
+	using Microsoft.AspNetCore.Authorization;
+	using Microsoft.AspNetCore.Mvc;
 	using NotesTracker.Shared.Constants;
 	using NotesTracker.Shared.DTO;
 	using static NotesTracker.Shared.Constants.ConfigurationConstants;
@@ -23,7 +23,7 @@ namespace NotesTracker.API.Controllers
 		/// <summary>
 		/// The user id.
 		/// </summary>
-		protected int UserId;
+		protected string UserName = string.Empty;
 
 		/// <summary>
 		/// The http context accessor.
@@ -36,12 +36,12 @@ namespace NotesTracker.API.Controllers
 		public BaseController(IHttpContextAccessor httpContextAccessor)
 		{
 			this._httpContextAccessor = httpContextAccessor;
-			if (this.GetType() != typeof(UsersController))
+			if (this._httpContextAccessor.HttpContext is not null && this._httpContextAccessor.HttpContext?.User is not null)
 			{
-				var userIdHeader = this._httpContextAccessor?.HttpContext?.Request?.Headers[UserIdHeaderConstant];
-				if (!string.IsNullOrEmpty(userIdHeader) && int.TryParse(userIdHeader, out var userId))
+				var userName = this._httpContextAccessor.HttpContext?.User?.Claims?.FirstOrDefault(x => x.Type.Equals(NickNameConstant))?.Value;
+				if (!string.IsNullOrEmpty(userName))
 				{
-					this.UserId = userId;
+					this.UserName = userName;
 				}
 				else
 				{

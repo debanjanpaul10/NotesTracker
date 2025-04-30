@@ -10,7 +10,7 @@ import { switchMap } from 'rxjs';
 /**
  * The Authentication Interceptor Service Function.
  */
-export const AuthInterceptor: HttpInterceptorFn = (
+const AuthInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
 ) => {
@@ -29,5 +29,6 @@ export const AuthInterceptor: HttpInterceptorFn = (
     })
   );
 
-  return next(req);
 };
+
+export { AuthInterceptor };

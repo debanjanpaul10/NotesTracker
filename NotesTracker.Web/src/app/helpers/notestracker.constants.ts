@@ -45,9 +45,7 @@ export const ExceptionMessages = {
 };
 
 export const SuccessMessages = {
-  UserRegisteredSuccess: 'The user registration was successful',
-  UserLoginSuccess: 'The user has been logged in successfully',
-  UserLogoutSuccess: 'The user has been logged out successfully',
+  NoteUpdatedSuccess: 'Note has been updated!',
 };
 
 export const HomePageConstants = {
@@ -102,8 +100,14 @@ export const NotesContainerConstants = {
 };
 
 export const NotesPageConstants = {
-  Headings: {},
-  NoteId: 'noteId',
+  Headings: {
+    NoteTitle: 'Note Title',
+    NoteDescription: 'Note Description',
+  },
+  ButtonTexts: {
+    Update: 'Update',
+    Cancel: 'Cancel',
+  },
 };
 
 export const UserLoginModalConstants = {

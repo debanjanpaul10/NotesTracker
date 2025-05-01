@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@auth0/auth0-angular';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { Notes } from '../../models/notes.model';
 import { NotesService } from '../../services/notes.service';
@@ -17,6 +18,7 @@ import {
 import { LoaderComponent } from '../common/loader/loader.component';
 import { ToasterService } from '../../services/toaster.service';
 import { MadeWithComponent } from '../made-with/made-with.component';
+import { NoteComponent } from '../note/note.component';
 
 /**
  * The Notes Container component.
@@ -33,6 +35,7 @@ import { MadeWithComponent } from '../made-with/made-with.component';
     MadeWithComponent,
     MatCardModule,
     MatChipsModule,
+    MatDialogModule,
   ],
   templateUrl: './notescontainer.component.html',
   styleUrl: './notescontainer.component.scss',
@@ -71,15 +74,16 @@ class NotesContainerComponent implements OnInit {
   /**
    * Initializes a new instance of `NotesContainerComponent`
    * @param notesService The notes service.
-   * @param router The router.
+   * @param router The router service.
    * @param toaster The toaster service.
    * @param auth0 The auth service.
+   * @param dialog The material dialog service.
    */
   constructor(
     private notesService: NotesService,
-    private router: Router,
     private toaster: ToasterService,
-    private auth0: AuthService
+    private auth0: AuthService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -105,11 +109,7 @@ class NotesContainerComponent implements OnInit {
       error: (err) => {
         console.error(err);
         this.loading.set(false);
-        if (err?.error?.title) {
-          this.toaster.showError(err.error.title);
-        } else {
-          this.toaster.showError(ExceptionMessages.DefaultErrorMessage);
-        }
+        this.toaster.showError(ExceptionMessages.AllNoteFetchFailedMessage);
       },
     });
   }
@@ -125,7 +125,7 @@ class NotesContainerComponent implements OnInit {
         this.isDeleteOperationSuccess.set(response);
         this.loading.set(false);
         if (this.isDeleteOperationSuccess()) {
-          this.router.navigate([AngularRoutes.Home.Link]);
+          this.getAllNotes();
         }
       },
       error: (err) => {
@@ -137,11 +137,21 @@ class NotesContainerComponent implements OnInit {
   }
 
   /**
-   * Handles the navigation to edit note page.
-   * @param noteId The note id.
+   * Handles the edit note event.
+   * @param noteId
    */
-  public navigateToEditNote(noteId: number): void {
-    this.router.navigate([NotesContainerConstants.RouteLinks.Notes, noteId]);
+  public handleNoteEdit(noteId: number): void {
+    const dialogRef = this.dialog.open(NoteComponent, {
+      width: '400px',
+      disableClose: true,
+      data: { noteId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result?.success) {
+        this.getAllNotes();
+      }
+    });
   }
 }
 

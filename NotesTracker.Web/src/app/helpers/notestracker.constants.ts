@@ -1,4 +1,3 @@
-export const ApiBaseUrl: string = 'https://localhost:41619';
 export const ApiUrls = {
   Notes: {
     BaseRoute: 'notesapi/Notes/',
@@ -46,9 +45,7 @@ export const ExceptionMessages = {
 };
 
 export const SuccessMessages = {
-  UserRegisteredSuccess: 'The user registration was successful',
-  UserLoginSuccess: 'The user has been logged in successfully',
-  UserLogoutSuccess: 'The user has been logged out successfully',
+  NoteUpdatedSuccess: 'Note has been updated!',
 };
 
 export const HomePageConstants = {
@@ -103,8 +100,14 @@ export const NotesContainerConstants = {
 };
 
 export const NotesPageConstants = {
-  Headings: {},
-  NoteId: 'noteId',
+  Headings: {
+    NoteTitle: 'Note Title',
+    NoteDescription: 'Note Description',
+  },
+  ButtonTexts: {
+    Update: 'Update',
+    Cancel: 'Cancel',
+  },
 };
 
 export const UserLoginModalConstants = {
@@ -155,37 +158,35 @@ export const MadeWithComponentConstants = {
       Heading: '.NET',
       Description: `
         <div>.NET is a free, cross-platform, open-source developer platform used for building various types of applications, including web apps, mobile apps, desktop apps, and more. It is maintained by Microsoft and the .NET Foundation on GitHub.</div>
-        <br />
-        <a href='https://dotnet.microsoft.com/en-us/'>
-          Official Page
-        </a>`,
+        <br />`,
       Image: 'assets/dotnet-img.png',
+      Link: 'https://dotnet.microsoft.com/en-us/',
     },
     Angular: {
       Heading: 'Angular',
       Description: `
       <div>Angular is a TypeScript-based free and open-source single-page web application framework. It is developed by Google and by a community of individuals and corporations. Angular is a complete rewrite from the same team that built AngularJS.</div>
-      <br />
-      <a href='https://angular.dev/'>Official Page</a>`,
+      <br />`,
       Image: 'assets/angular-img.png',
+      Link: 'https://dotnet.microsoft.com/en-us/',
     },
     SQLServer: {
       Heading: 'Microsoft SQL Server',
       Description: `
         <div>Get the flexibility you need to use integrated solutions and apps with your data—in the cloud, on-premises, or at the edge. </div>
         <div>SQL Server 2022 is the most Azure-enabled release yet, with innovation across performance, security, and availability.</div>
-        <br />
-        <a href='https://www.microsoft.com/en-in/sql-server'>Official Page</a>`,
+        <br />`,
       Image: 'assets/sqlserver-img.png',
+      Link: 'https://www.microsoft.com/en-in/sql-server',
     },
     Auth0: {
       Heading: 'Auth0',
       Description: `
         <div>Auth0 is a flexible, drop-in solution to add authentication and authorization services to your applications. Your team and organization can avoid the cost, time, 
         and risk that come with building your own solution to authenticate and authorize users.</div>
-        <br />
-        <a href='https://auth0.com/'>Official Page</a>`,
+        <br />`,
       Image: 'assets/auth0-img.png',
+      Link: 'https://auth0.com/',
     },
   },
 

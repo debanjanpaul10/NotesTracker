@@ -15,7 +15,9 @@ namespace NotesTracker.Shared.Constants
 		/// <summary>
 		/// The notes API route prefix
 		/// </summary>
-		public const string NotesApiRoutePrefix = "api/[controller]";
+		public const string ApiRoutePrefix = "notesapi/[controller]";
+
+		#region NOTES
 
 		/// <summary>
 		/// The get all notes API route
@@ -41,5 +43,26 @@ namespace NotesTracker.Shared.Constants
 		/// The delete note API route
 		/// </summary>
 		public const string DeleteNote_ApiRoute = "DeleteNote";
+
+		#endregion
+
+		#region USERS
+
+		/// <summary>
+		/// The get user api route.
+		/// </summary>
+		public const string GetUser_ApiRoute = "GetUser";
+
+		/// <summary>
+		/// The add new user api route.
+		/// </summary>
+		public const string AddNewUser_ApiRoute = "AddNewUser";
+
+		/// <summary>
+		/// The delete user api route.
+		/// </summary>
+		public const string DeleteUser_ApiRoute = "DeleteUser";
+
+		#endregion
 	}
 }

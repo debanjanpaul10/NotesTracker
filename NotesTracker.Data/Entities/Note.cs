@@ -59,5 +59,13 @@ namespace NotesTracker.Data.Entities
 		///   <c>true</c> if this instance is active; otherwise, <c>false</c>.
 		/// </value>
 		public bool IsActive { get; set; }
+
+		/// <summary>
+		/// Gets or sets the owner user name.
+		/// </summary>
+		/// <value>
+		/// The owner user id.
+		/// </value>
+		public string UserName { get; set; } = string.Empty;
 	}
 }

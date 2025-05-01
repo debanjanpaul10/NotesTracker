@@ -54,6 +54,14 @@ namespace NotesTracker.Data
 		public DbSet<Note> Notes { get; set; }
 
 		/// <summary>
+		/// Gets or sets the users.
+		/// </summary>
+		/// <value>
+		/// The users.
+		/// </value>
+		public DbSet<User> Users { get; set; }
+
+		/// <summary>
 		/// Override this method to configure the database (and other options) to be used for this context.
 		/// This method is called for each instance of the context that is created.
 		/// The base implementation does nothing.
@@ -108,6 +116,18 @@ namespace NotesTracker.Data
 				entity.Property(e => e.NoteDescription).HasColumnName(NoteDescriptionColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
 				entity.Property(e => e.CreatedDate).HasColumnName(CreatedDateColumnNameConstant).HasColumnType(DateTimeDataTypeConstant).IsRequired();
 				entity.Property(e => e.LastModifiedDate).HasColumnName(LastModifiedDateColumnNameConstant).HasColumnType(DateTimeDataTypeConstant).IsRequired();
+				entity.Property(e => e.IsActive).HasColumnName(IsActiveColumnNameConstant).HasColumnType(BitDataTypeConstant).IsRequired();
+				entity.Property(e => e.UserName).HasColumnName(UserNameColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
+
+			});
+			modelBuilder.Entity<User>(entity => {
+				entity.ToTable(UsersTableConstant);
+				entity.HasKey(e => e.UserId).HasName(PrimaryKeyUsersConstant);
+				entity.Property(e => e.UserId).HasColumnName(UserIdColumnNameConstant).HasColumnType(IntegerDataTypeConstant).ValueGeneratedOnAdd();
+
+				entity.Property(e => e.UserEmail).HasColumnName(UserEmailColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
+				entity.Property(e => e.UserName).HasColumnName(UserNameColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
+				entity.Property(e => e.UserPassword).HasColumnName(UserPasswordColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
 				entity.Property(e => e.IsActive).HasColumnName(IsActiveColumnNameConstant).HasColumnType(BitDataTypeConstant).IsRequired();
 
 			});

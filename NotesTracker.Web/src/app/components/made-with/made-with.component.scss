@@ -1,0 +1,39 @@
+.mwc-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.mwc-card {
+  width: 300px;
+  text-align: left;
+}
+
+.mwc-card img {
+  height: 150px; /* Set a constant height */
+  width: 100%; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image fits within the bounds */
+}
+
+.mwc-card-header {
+  display: flex;
+  justify-content: space-between; /* Pushes the title to the left and the button to the right */
+  align-items: center; /* Vertically aligns the title and button */
+  margin-bottom: 10px;
+  height: 60px; /* Set a constant height for all headers */
+  padding: 0 16px; /* Add some padding for spacing */
+  box-sizing: border-box; /* Ensure padding is included in the height */
+  margin-top: 10px;
+}
+
+.mwc-card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.mwc-card-button {
+  margin-left: auto; /* Ensures the button stays on the far right */
+}
+
+

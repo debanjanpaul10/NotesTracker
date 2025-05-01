@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiBaseUrl, ApiUrls, ExceptionMessages } from '../helpers/Constants';
+import { ApiUrls, ExceptionMessages } from '../helpers/notestracker.constants';
+import { ConfigurationConstants } from '../helpers/config.constants';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { User } from '../models/user.model';
@@ -22,7 +23,7 @@ class UsersService {
   /**
    * The api url.
    */
-  private apiUrl: string = `${ApiBaseUrl}/${ApiUrls.Users.BaseRoute}`;
+  private apiUrl: string = `${ConfigurationConstants.ApiBaseUrl}/${ApiUrls.Users.BaseRoute}`;
 
   /**
    * The users routes.

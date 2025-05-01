@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { NotesService } from '../../services/notes.service';
 import { Notes } from '../../models/notes.model';
-import { NotesPageConstants } from '../../helpers/Constants';
+import { NotesPageConstants } from '../../helpers/notestracker.constants';
 
 /**
  * The Notes Component.

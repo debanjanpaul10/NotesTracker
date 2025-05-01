@@ -1,14 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NoteDTO } from '../../models/dto/note-dto.class';
-import { NotesService } from '../../services/notes.service';
-import { AddNotePageConstants, AngularRoutes } from '../../helpers/Constants';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
+
+import { NoteDTO } from '../../models/dto/note-dto.class';
+import { NotesService } from '../../services/notes.service';
+import {
+  AddNotePageConstants,
+  AngularRoutes,
+} from '../../helpers/notestracker.constants';
 import { ToasterService } from '../../services/toaster.service';
 import { UsersService } from '../../services/users.service';
-import { AuthService } from '@auth0/auth0-angular';
 
 /**
  * The Add Note Component.

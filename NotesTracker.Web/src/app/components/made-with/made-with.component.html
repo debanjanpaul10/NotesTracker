@@ -1,21 +1,33 @@
 <div class="row text-center mt-5">
   <div class="col-sm-12">
-    <p class="lead">{{ mwcConstants.SubTitle }}</p>
+    <p class="lead">{{ mwcObjects().SubTitle }}</p>
   </div>
 </div>
 <div class="mwc-container mt-2 mb-3">
   <mat-card
     class="mwc-card"
     appearance="outlined"
-    *ngFor="let data of mwcConstants.Items | keyvalue"
+    *ngFor="let data of mwcObjects().Items | keyvalue"
   >
-    <mat-card-header>
-      <mat-card-title>{{ data.value.Heading }}</mat-card-title>
+    <mat-card-header class="mwc-card-header">
+      <mat-card-title class="mwc-card-title">{{
+        data.value.Heading
+      }}</mat-card-title>
+      <button
+        mat-fab
+        extended
+        color="accent"
+        class="mwc-card-button"
+        (click)="redirectTo(data.value.Link)"
+      >
+        Go visit
+      </button>
     </mat-card-header>
     <img
       mat-card-image
       [src]="data.value.Image"
       alt="{{ data.value.Heading }}"
+      class="mwc-card-image"
     />
     <mat-card-content class="mt-2">
       <p [innerHTML]="data.value.Description"></p>

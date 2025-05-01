@@ -4,7 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NoteComponent } from './components/note/note.component';
 import { AddNoteComponent } from './components/addnote/addnote.component';
 import { ErrorPageComponent } from './components/common/error-page/error-page.component';
-import { AngularRoutes } from './helpers/Constants';
+import { AngularRoutes } from './helpers/notestracker.constants';
 
 /**
  * The configured routes.

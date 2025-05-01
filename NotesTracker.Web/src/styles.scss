@@ -11,12 +11,18 @@
 /* Importing Bootstrap SCSS file. */
 @import "bootstrap/scss/bootstrap";
 
+/* SCSS variables */
+
+$light-background-color: #ffffff;
+$dark-default-color: #1a2025;
+$dark-border-color: #555555;
+$dark-background-color: #333333;
+$dark-text-color: #bbbbbb;
+
 // Define the dark theme palette
 $dark-primary: mat.define-palette(mat.$blue-grey-palette);
 $dark-accent: mat.define-palette(mat.$indigo-palette, A200, A100, A400);
 $dark-warn: mat.define-palette(mat.$red-palette);
-
-$dark-default-color: #1a2025;
 
 $dark-theme: mat.define-dark-theme(
   (
@@ -83,79 +89,85 @@ body.light-theme {
 
 body.light-theme .navbar {
   background-color: $dark-default-color !important;
-  color: #ffffff;
+  color: $light-background-color;
 }
 
 body.light-theme .mwc-card {
   background-color: #ffffff;
-  color: #555555;
+  color: $dark-border-color;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-body.light-theme .mwc-card a {
-  color: inherit;
-  font-weight: bold;
+body.light-theme .mwc-card-image {
+  border: 1px solid $dark-border-color;
+}
+
+body.light-theme .notes-card {
+  background-color: #ffffff;
+  color: $dark-border-color;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .notes-card-header {
+  background-color: $dark-text-color;
+  margin-top: 0px;
 }
 
 /* Dark Theme */
 body.dark-theme {
   background-color: #121212;
-  color: #ffffff;
+  color: $light-background-color;
 }
 
 body.dark-theme .navbar {
   background-color: $dark-default-color !important;
-  color: #ffffff;
+  color: $light-background-color;
 }
 
-body.dark-theme .card {
-  background-color: #333333;
-  color: #ffffff;
+body.dark-theme .notes-card {
+  background-color: $dark-background-color;
+  color: $light-background-color;
 }
 
-body.dark-theme .card-header {
-  background-color: #555555;
+body.dark-theme .notes-card-header {
+  background-color: $dark-border-color;
+  margin-top: 0px;
 }
 
 body.dark-theme .form-control {
-  background-color: #333333;
-  color: #ffffff;
-  border: 1px solid #555555;
+  background-color: $dark-background-color;
+  color: $light-background-color;
+  border: 1px solid $dark-border-color;
 }
 
 body.dark-theme .form-control-plaintext {
-  background-color: #333333;
-  color: #ffffff;
-  border: 1px solid #555555;
+  background-color: $dark-background-color;
+  color: $light-background-color;
+  border: 1px solid $dark-border-color;
 }
 
 body.dark-theme .form-control::placeholder {
-  color: #bbbbbb;
+  color: $dark-text-color;
 }
 
 body.dark-theme .form-label {
-  color: #bbbbbb;
-  background-color: #333333;
+  color: $dark-text-color;
+  background-color: $dark-background-color;
 }
 
 body.dark-theme .loginForm {
-  color: #bbbbbb;
-  background-color: #333333;
+  color: $dark-text-color;
+  background-color: $dark-background-color;
 }
 
 body.dark-theme .registerForm {
-  color: #bbbbbb;
-  background-color: #333333;
+  color: $dark-text-color;
+  background-color: $dark-background-color;
 }
 
 body.dark-theme .mwc-card {
-  background-color: #333333;
-  color: #ffffff;
-}
-
-body.dark-theme .mwc-card a {
-  color: inherit;
-  font-weight: bold;
+  background-color: $dark-background-color;
+  color: $light-background-color;
 }
 
 .customFont {

@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import { CacheKeys, HeaderPageConstants } from '../../../helpers/Constants';
-import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
+
+import {
+  CacheKeys,
+  HeaderPageConstants,
+} from '../../../helpers/notestracker.constants';
 
 /**
  * The Header Component.

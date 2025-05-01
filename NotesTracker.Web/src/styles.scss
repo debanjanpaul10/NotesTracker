@@ -113,6 +113,11 @@ body.light-theme .notes-card-header {
   margin-top: 0rem;
 }
 
+body.light-theme .noteEditForm {
+  background-color: $light-background-color;
+  color: #000000;
+}
+
 /* Dark Theme */
 body.dark-theme {
   background-color: #121212;

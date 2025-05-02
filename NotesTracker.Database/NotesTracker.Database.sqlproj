@@ -10,6 +10,9 @@
   <ItemGroup>
     <Folder Include="Tables" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Publish\NotesTracker.Database_1.publish.xml" />
+  </ItemGroup>
   <Target Name="BeforeBuild">
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
   </Target>

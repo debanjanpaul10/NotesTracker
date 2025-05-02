@@ -7,9 +7,10 @@
 
 namespace NotesTracker.API
 {
+	using Azure.Identity;
 	using Microsoft.OpenApi.Models;
-    using NotesTracker.API.Middleware;
-    using static NotesTracker.Shared.Constants.ConfigurationConstants;
+	using NotesTracker.API.Middleware;
+	using static NotesTracker.Shared.Constants.ConfigurationConstants;
 
 	/// <summary>
 	/// The Program Class.
@@ -25,6 +26,16 @@ namespace NotesTracker.API
 			var builder = WebApplication.CreateBuilder(args);
 			builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
 				.AddJsonFile(path: LocalAppsettingsFileConstant, optional: true).AddEnvironmentVariables();
+
+			var credentials = builder.Environment.IsDevelopment()
+				? new DefaultAzureCredential()
+				: new DefaultAzureCredential(new DefaultAzureCredentialOptions
+				{
+					ManagedIdentityClientId = builder.Configuration[ManagedIdentityClientIdConstant],
+				});
+
+			builder.Services.ConfigureServices();
+			builder.ConfigureAzureAppConfiguration(credentials);
 			builder.ConfigureApiServices();
 
 			var app = builder.Build();
@@ -99,7 +110,7 @@ namespace NotesTracker.API
 			app.Run();
 		}
 
-		
+
 	}
 
 }

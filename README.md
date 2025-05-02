@@ -23,6 +23,11 @@ It is a simple ToDo Notes Application that help track your todos and notes. You 
     - Once done, run the script `npm start` or `ng serve`. This will host the application on development server.
 - Once the steps are done, visit the website on the localhost uri as mentioned in the terminal for the web root. The application must be up and running!
 
+### For Electron Application
+- Do the above mentioned steps first. Once done, open a new terminal and then go to `NotesTracker.Web > electron`.
+- Run the command `npm start`.
+- The Electron app will run.
+
 # Infrastructure
 ## Build and Deploy
 - TODO: The build and deploy steps are a WIP. Will be released once done.

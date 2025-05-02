@@ -4,3 +4,5 @@
 appsettings.development.json
 bin
 .angular
+
+**node_modules

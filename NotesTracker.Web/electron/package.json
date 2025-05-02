@@ -1,0 +1,15 @@
+{
+  "name": "notes-tracker-desktop",
+  "version": "1.0.0",
+  "description": "The Notes Tracker webapp now in Desktop app",
+  "main": "main.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Debanjan Paul",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^36.1.0"
+  }
+}

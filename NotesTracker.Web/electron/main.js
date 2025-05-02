@@ -1,15 +1,24 @@
 const { app, BrowserWindow, Menu } = require("electron");
+const {
+  WINDOW_WIDTH,
+  WINDOW_HEIGHT,
+  APP_URL,
+} = require("./helpers/constants.electron");
 
+/**
+ * Creates the electron desktop application window.
+ * Sets the `window height`, `window width` and the `web base url`.
+ */
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1920,
-    height: 1080,
+    width: WINDOW_WIDTH,
+    height: WINDOW_HEIGHT,
     webPreferences: {
       nodeIntegration: true,
     },
   });
 
-  win.loadURL("http://localhost:4200/");
+  win.loadURL(APP_URL);
 
   // Disable the default Menu.
   Menu.setApplicationMenu(null);

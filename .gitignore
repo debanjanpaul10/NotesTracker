@@ -6,3 +6,4 @@ bin
 .angular
 
 **node_modules
+NotesTracker.Database/Publish/**

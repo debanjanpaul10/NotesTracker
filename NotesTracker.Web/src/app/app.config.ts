@@ -9,6 +9,10 @@ import { routes } from './app.routes';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { ConfigurationConstants } from './helpers/config.constants';
 
+/**
+ * Determines the redirect uri for auth0 authentication.
+ * @returns The redirect base URI.
+ */
 function determineRedirectUri(): string {
   const currentHost = window.location.origin;
 

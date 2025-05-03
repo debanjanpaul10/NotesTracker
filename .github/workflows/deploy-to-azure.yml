@@ -48,7 +48,7 @@ jobs:
     # Checkout the repository
     - name: Checkout code
       uses: actions/checkout@v3
-
+    
     # Set up Node.js
     - name: Set up Node.js
       uses: actions/setup-node@v3
@@ -64,9 +64,9 @@ jobs:
 
     # Deploy the Angular project to Azure App Service
     - name: Deploy Web to Azure Web App
-      uses: azure/webapps-deploy@v2
+      uses: Azure/static-web-apps-deploy@v1
       with:
-        app-name: webapp-web-notes-tracker
-        slot-name: production
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: NotesTracker.Web/dist/notes-tracker-web # Path to the Angular build output
+        azure_static_web_apps_api_token: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        action: 'upload'
+        app_location: 'NotesTracker.Web' # Path to the Angular project
+        output_location: 'dist/notes-tracker-web/browser' # Path to the build output folder

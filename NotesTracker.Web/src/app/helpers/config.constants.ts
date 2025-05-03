@@ -7,7 +7,7 @@ const ConfigurationConstants = {
     Audience: '1f39bae6-a069-452d-8633-1a726157d0a2',
     RedirectBaseUris: [
       'http://localhost:4200',
-      'https://nice-cliff-0aee44a00.6.azurestaticapps.net',
+      'https://jolly-hill-03d2ef300.6.azurestaticapps.net',
     ],
   },
   LocalHostBaseUrl: 'localhost',

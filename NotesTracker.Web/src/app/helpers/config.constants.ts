@@ -1,6 +1,5 @@
 const ConfigurationConstants = {
-  ApiBaseUrl:
-    'https://app-webapi-notes-tracker-h4h5f8fxdhh7d6cy.centralindia-01.azurewebsites.net',
+  ApiBaseUrl: 'https://localhost:41619',
   Auth0: {
     Domain: 'dev-debanjan-app.uk.auth0.com',
     ClientId: 'onIb50nBAs96sTV0aC3lP2ivt2NCJQXX',

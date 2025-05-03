@@ -34,6 +34,7 @@ namespace NotesTracker.Shared.Constants
 
         /// <summary>
         /// The domain constant.
+        /// Alternatively, https://{DomainConstant} would be the auth0 management api route.
         /// </summary>
         public const string DomainConstant = "Auth0:Domain";
 
@@ -61,5 +62,54 @@ namespace NotesTracker.Shared.Constants
         /// The notes a p i app config key constant.
         /// </summary>
         public const string NotesAPIAppConfigKeyConstant = "NotesAPI";
+
+        /// <summary>
+        /// The auth0 token url.
+        /// </summary>
+        public const string Auth0TokenUrl = "Auth0:TokenUrl";
+
+        #region Notes Function
+
+        /// <summary>
+        /// The notes function app config key constant.
+        /// </summary>
+        public const string NotesFunctionAppConfigKeyConstant = "NotesFunction";
+
+        /// <summary>
+        /// The auth0 management api client id constant.
+        /// </summary>
+        public const string Auth0ManagementApiClientIdConstant = "Auth0:ManagementClientId";
+
+        /// <summary>
+        /// The auth0 management api client secret constant.
+        /// </summary>
+        public const string Auth0ManagementApiClientSecretConstant = "Auth0:ManagementClientSecret";
+
+        /// <summary>
+        /// The client credentials grant.
+        /// </summary>
+        public const string ClientCredentialsGrant = "client_credentials";
+
+        /// <summary>
+        /// The application json constant.
+        /// </summary>
+        public const string ApplicationJsonConstant = "application/json";
+
+        /// <summary>
+        /// The bearer constant.
+        /// </summary>
+        public const string BearerConstant = "Bearer";
+
+        /// <summary>
+        /// The access token constant.
+        /// </summary>
+        public const string AccessTokenConstant = "access_token";
+
+        /// <summary>
+        /// The auth0 management api audience constant.
+        /// </summary>
+        public const string Auth0ManagementApiAudienceConstant = "Auth0:ManagementApiAudience";
+
+        #endregion
     }
 }

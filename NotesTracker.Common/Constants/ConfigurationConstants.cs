@@ -41,5 +41,25 @@ namespace NotesTracker.Shared.Constants
         /// The nick name constant.
         /// </summary>
         public const string NickNameConstant = "nickname";
+
+        /// <summary>
+        /// The app configuration endpoint key constant.
+        /// </summary>
+        public const string AppConfigurationEndpointKeyConstant = "AppConfigurationEndpoint";
+
+        /// <summary>
+        /// The managed identity client id constant.
+        /// </summary>
+        public const string ManagedIdentityClientIdConstant = "ManagedIdentityClientId";
+
+        /// <summary>
+        /// The base configuration app config key constant.
+        /// </summary>
+        public const string BaseConfigurationAppConfigKeyConstant = "BaseConfiguration";
+
+        /// <summary>
+        /// The notes a p i app config key constant.
+        /// </summary>
+        public const string NotesAPIAppConfigKeyConstant = "NotesAPI";
     }
 }

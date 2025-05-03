@@ -12,6 +12,27 @@ namespace NotesTracker.Shared.Constants
 	/// </summary>
 	public static class ExceptionConstants
 	{
+		#region System Exceptions
+
+		/// <summary>
+		/// The user id not present exception constant.
+		/// </summary>
+		public const string UserIdNotPresentExceptionConstant = "User id is not present in the headers.";
+
+		/// <summary>
+		/// The invalid token exception constant.
+		/// </summary>
+		public const string InvalidTokenExceptionConstant = "Invalid token: Identity is not authenticated.";
+
+		/// <summary>
+		/// The missing configuration message.
+		/// </summary>
+		public const string MissingConfigurationMessage = "The Configuration Key is missing";
+
+		#endregion
+
+		#region Custom Exceptions
+
 		/// <summary>
 		/// The notes not found exception
 		/// </summary>
@@ -67,14 +88,6 @@ namespace NotesTracker.Shared.Constants
 		/// </summary>
 		public const string UserDeletionFailedMessageConstant = "The user deletion operation failed!";
 
-		/// <summary>
-		/// The user id not present exception constant.
-		/// </summary>
-		public const string UserIdNotPresentExceptionConstant = "User id is not present in the headers.";
-
-		/// <summary>
-		/// The invalid token exception constant.
-		/// </summary>
-		public const string InvalidTokenExceptionConstant = "Invalid token: Identity is not authenticated.";
+		#endregion
 	}
 }

@@ -1,0 +1,72 @@
+name: CI-CD for NotesTracker
+
+on:
+  push:
+    branches:
+      - main 
+      - dev
+
+jobs:
+  build-and-deploy-api:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Set up .NET
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '9.0.x' # Use the .NET version specified in your project
+
+    # Install dependencies and build the project
+    - name: Install dependencies and build
+      run: |
+        dotnet restore NotesTracker.API/NotesTracker.API.csproj
+        dotnet build NotesTracker.API/NotesTracker.API.csproj --configuration Release --no-restore
+
+    # Publish the project to a folder
+    - name: Publish the project
+      run: |
+        dotnet publish NotesTracker.API/NotesTracker.API.csproj --configuration Release --output ./publish
+
+    # Deploy to Azure App Service
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: app-webapi-notes-tracker # Replace with your Azure App Service name
+        slot-name: production
+        publish-profile: ${{ secrets.AZURE_WEBAPI_PUBLISH_PROFILE }}
+        package: ./publish
+
+  build-and-deploy-web:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    # Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x' # Use the Node.js version compatible with your Angular project
+
+    # Install dependencies and build the Angular project
+    - name: Install dependencies and build Web
+      run: |
+        cd NotesTracker.Web
+        npm install
+        npm run build
+
+    # Deploy the Angular project to Azure App Service
+    - name: Deploy Web to Azure Web App
+      uses: Azure/static-web-apps-deploy@v1
+      with:
+        azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_JOLLY_HILL_03D2EF300 }}
+        action: 'upload'
+        app_location: 'NotesTracker.Web' # Path to the Angular project
+        output_location: 'dist/notes-tracker-web/browser' # Path to the build output folder

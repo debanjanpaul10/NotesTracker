@@ -60,7 +60,7 @@ jobs:
       run: |
         cd NotesTracker.Web
         npm install
-        npm run build -- --prod
+        npm run build
 
     # Deploy the Angular project to Azure Static Web App
     - name: Deploy Web to Azure Static Web App

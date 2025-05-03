@@ -19,6 +19,7 @@ It is a simple ToDo Notes Application that help track your todos and notes. You 
     - Once the build is successful, run the project by `dotnet run`.
 - Once done, for the UI:
     - Go to the `NotesTracker.Web` folder. This will be the web solution root.
+    - In the file `src/app/helpers/config.constants.ts`, change the `ApiBaseUrl` to `https://localhost:41619` which is the local API url.
     - Open the terminal and perform an `npm install` task to install the node dependencies.
     - Once done, run the script `npm start` or `ng serve`. This will host the application on development server.
 - Once the steps are done, visit the website on the localhost uri as mentioned in the terminal for the web root. The application must be up and running!
@@ -30,7 +31,13 @@ It is a simple ToDo Notes Application that help track your todos and notes. You 
 
 # Infrastructure
 ## Build and Deploy
-- TODO: The build and deploy steps are a WIP. Will be released once done.
+- The entire application is deployed via Azure services. Check the Wiki to find out more about the workflow diagram.
+- Deployment will be completely to Azure Services with Github Actions. The pipeline `CI-CD for Notes Tracker` will be handling the deployments.
+- As of now, only `main` and `dev` commits will be deployed. Feature branch integrations will be done later on.
+- The Deployment will be in two stages:
+    - The .NET stage will build the .NET app with .NET 9.0.x SDK and the build artifacts will be deployed to a specified Azure App Service via Github Actions connections and Deployment secret.
+    - The Angular(Node.js) stage will install the npm packages and create html and respective css and js files. These files will be deployed to an Azure Static Web App via the build created artifacts.
+    - TODO: The NotesTracker.Database will be deployed to Azure SQL Databases via DACPAC. 
 
 ## Branching strategy
 - The `main` branch will be containing the stable code that will contain GA release.

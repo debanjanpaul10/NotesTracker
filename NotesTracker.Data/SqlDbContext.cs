@@ -122,12 +122,14 @@ namespace NotesTracker.Data
 			});
 			modelBuilder.Entity<User>(entity => {
 				entity.ToTable(UsersTableConstant);
-				entity.HasKey(e => e.UserId).HasName(PrimaryKeyUsersConstant);
-				entity.Property(e => e.UserId).HasColumnName(UserIdColumnNameConstant).HasColumnType(IntegerDataTypeConstant).ValueGeneratedOnAdd();
+				entity.HasKey(e => e.Id).HasName(PrimaryKeyUsersConstant);
+				entity.Property(e => e.Id).HasColumnName(IdColumnNameConstant).HasColumnType(IntegerDataTypeConstant).ValueGeneratedOnAdd();
 
 				entity.Property(e => e.UserEmail).HasColumnName(UserEmailColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
 				entity.Property(e => e.UserName).HasColumnName(UserNameColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
-				entity.Property(e => e.UserPassword).HasColumnName(UserPasswordColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
+				entity.Property(e => e.UserId).HasColumnName(UserIdColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
+				entity.Property(e => e.Provider).HasColumnName(ProviderColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
+				entity.Property(e => e.IsSocial).HasColumnName(IsSocialColumnNameConstant).HasColumnType(BitDataTypeConstant).IsRequired();
 				entity.Property(e => e.IsActive).HasColumnName(IsActiveColumnNameConstant).HasColumnType(BitDataTypeConstant).IsRequired();
 
 			});

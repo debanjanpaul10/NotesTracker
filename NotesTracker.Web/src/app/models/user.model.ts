@@ -3,11 +3,6 @@
  */
 export class User {
   /**
-   * The user id.
-   */
-  public userId: number;
-
-  /**
    * The user email address.
    */
   public userEmail: string;
@@ -18,26 +13,39 @@ export class User {
   public userName: string;
 
   /**
-   * The user password.
+   * The user id.
    */
-  public userPassword: string;
+  public userId: string;
+
+  /**
+   * The provider.
+   */
+  public provider: string;
+
+  /**
+   * The is social flag.
+   */
+  public isSocial: boolean;
 
   /**
    * Initializes a new instance of `User`
    * @param UserId The user id.
    * @param UserEmail The user email.
    * @param UserName The user name.
-   * @param UserPassword The user password.
+   * @param Provider The provider.
+   * @param IsSocial The is social flag.
    */
   constructor(
-    UserId: number,
+    UserId: string,
     UserEmail: string,
     UserName: string,
-    UserPassword: string,
+    Provider: string,
+    IsSocial: boolean,
   ) {
     this.userEmail = UserEmail;
     this.userId = UserId;
     this.userName = UserName;
-    this.userPassword = UserPassword;
+    this.provider = Provider;
+    this.isSocial = IsSocial;
   }
 }

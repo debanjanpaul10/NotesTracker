@@ -10,10 +10,9 @@ namespace NotesTracker.Functions
     using Azure.Identity;
     using Microsoft.Azure.Functions.Worker.Builder;
     using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Configuration.AzureAppConfiguration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using NotesTracker.Shared.Constants;
+    using NotesTracker.Functions.Middleware;
     using static NotesTracker.Shared.Constants.ConfigurationConstants;
 
     /// <summary>
@@ -39,37 +38,16 @@ namespace NotesTracker.Functions
                 });
 
             builder.ConfigureFunctionsWebApplication();
+            
             builder.Configuration.ConfigureAzureAppConfiguration(credentials);
             builder.Services.AddHttpClient();
-            
+            builder.ConfigureDatabaseConnection();
+            builder.Services.ConfigureFunctionDependencies();
+
             builder.Build().Run();
         }
 
-        /// <summary>
-        /// Configures azure app configuration.
-        /// </summary>
-        /// <param name="builder">The builder.</param>
-        /// <param name="credentials">The credentials.</param>
-        /// <exception cref="InvalidOperationException">InvalidOperationException error.</exception>
-        public static void ConfigureAzureAppConfiguration(this ConfigurationManager configuration, DefaultAzureCredential credentials)
-        {
-            var appConfigurationEndpoint = configuration[AppConfigurationEndpointKeyConstant];
-            if (string.IsNullOrEmpty(appConfigurationEndpoint))
-            {
-                throw new InvalidOperationException(ExceptionConstants.MissingConfigurationMessage);
-            }
-
-            configuration.AddAzureAppConfiguration(options =>
-            {
-                options.Connect(new Uri(appConfigurationEndpoint), credentials)
-                .Select(KeyFilter.Any).Select(KeyFilter.Any, BaseConfigurationAppConfigKeyConstant)
-                .Select(KeyFilter.Any, NotesFunctionAppConfigKeyConstant)
-                .ConfigureKeyVault(configure =>
-                {
-                    configure.SetCredential(credentials);
-                });
-            });
-        }
+        
     }
 }
 

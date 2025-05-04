@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ApiUrls, ExceptionMessages } from '../helpers/notestracker.constants';
-import { ConfigurationConstants } from '../helpers/config.constants';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+
+import { ApiUrls, ExceptionMessages } from '../helpers/notestracker.constants';
+import { ConfigurationConstants } from '../helpers/config.constants';
 import { User } from '../models/user.model';
 import { ResponseDTO } from '../models/dto/response-dto.class';
 import { UserLoginDTO } from '../models/dto/user-login-dto.class';

@@ -6,6 +6,7 @@ import {
 import { AuthService } from '@auth0/auth0-angular';
 import { inject } from '@angular/core';
 import { switchMap } from 'rxjs';
+
 import { UsersService } from './users.service';
 
 /**

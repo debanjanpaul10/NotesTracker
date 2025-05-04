@@ -18,7 +18,7 @@ namespace NotesTracker.Data.Entities
         /// <value>
         /// The user id.
         /// </value>
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the user email.
@@ -37,12 +37,28 @@ namespace NotesTracker.Data.Entities
         public string UserName { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the user password.
+        /// Gets or sets the user id.
         /// </summary>
         /// <value>
-        /// The user password.
+        /// The user id.
         /// </value>
-        public string UserPassword { get; set; } = string.Empty;
+        public string UserId { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the provider.
+        /// </summary>
+        /// <value>
+        /// The provider.
+        /// </value>
+        public string Provider { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the is social flag.
+        /// </summary>
+        /// <value>
+        /// The is social.
+        /// </value>
+        public bool IsSocial { get; set; }
 
         /// <summary>
         /// Gets or sets the is active.

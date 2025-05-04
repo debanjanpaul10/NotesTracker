@@ -68,6 +68,15 @@ jobs:
     - name: Publish the Function project
       run:  |
         dotnet publish NotesTracker.Functions/NotesTracker.Functions.csproj --configuration Release --output ./publish-functions
+    
+    # Debugging: List published files  
+    - name: List published files
+      run: |
+        ls -R ./publish-functions
+    
+     # Debugging: Check package size
+    - name: Check package size
+      run: du -sh ./publish-functions
       
     # Deploy to Azure Function App
     - name: Deploy to Azure Function App

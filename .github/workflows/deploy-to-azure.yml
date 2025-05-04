@@ -76,8 +76,6 @@ jobs:
         app-name: func-notes-tracker
         publish-profile: ${{ secrets.AZURE_FUNCTIONS_PUBLISH_PROFILE }}
         package: ./publish-functions
-        scm-do-build-during-deployment: false
-        enable-oryx-build: false
 
   build-and-deploy-web:
     name: 'Build and Deploy NotesTracker.Web'

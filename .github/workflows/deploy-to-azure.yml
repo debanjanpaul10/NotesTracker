@@ -27,9 +27,6 @@ on:
         default: false
         type: boolean
 
-permissions:
-  id-token: write
-  contents: read
 
 jobs:
   # STEP: BUILD AND DEPLOY API
@@ -37,11 +34,10 @@ jobs:
     name: 'Build and Deploy NotesTracker.API'
     if: ${{ inputs.deploy_api }}
     uses: './.github/workflows/deploy-api.yml'
-    with:
-      azure_managed_identity_client_id: ${{ secrets.AZURE_MANAGED_IDENTITY_CLIENT_ID }}
-      azure_credentials_tenant_id: ${{ secrets.AZURE_CREDENTIALS_TENANT_ID }}
-      azure_credentials_subscription_id: ${{ secrets.AZURE_CREDENTIALS_SUBSCRIPTION_ID }}
-      azure_webapi_publish_profile: ${{ secrets.AZURE_WEBAPI_PUBLISH_PROFILE }}
+    permissions:
+      id-token: write
+      contents: read
+    secrets: inherit
 
   # STEP: BUILD AND DEPLOY FUNCTIONS
   build-and-deploy-function:

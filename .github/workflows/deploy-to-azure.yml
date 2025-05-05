@@ -22,7 +22,7 @@ on:
         type: boolean
 
       deploy_database:
-        description: 'NotesTracker.Database dacpac'
+        description: 'NotesTracker.Database'
         required: false
         default: false
         type: boolean

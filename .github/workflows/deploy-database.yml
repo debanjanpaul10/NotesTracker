@@ -17,26 +17,16 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '9.0.x'
-
-    # Install sqlpackage
-    - name: Install sqlpackage
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget unzip
-        wget https://aka.ms/sqlpackage-linux -O sqlpackage.zip
-        unzip sqlpackage.zip -d /usr/local/sqlpackage
-        sudo chmod +x /usr/local/sqlpackage/sqlpackage
-        export PATH=$PATH:/usr/local/sqlpackage
     
     # Build the database project
     - name: Build and Deploy Database
       run:  |
-        dotnet restore NotesTracker.Database/NotesTracker.Database.sqlproj
-        dotnet build NotesTracker.Database/NotesTracker.Database.sqlproj --configuration Release --output ./output
+        dotnet build NotesTracker.Database/NotesTracker.Database.sqlproj --configuration Release --output ./db_output
 
     # Publish the database to Azure SQL
     - name: Deploy to Azure SQL database
-      run: |
-        /usr/local/sqlpackage/sqlpackage /Action:Publish \
-          /TargetConnectionString:"${{ secrets.AZURE_SQL_CONNECTION_STRING }}" \
-          /SourceFile:./output/NotesTracker.Database.dacpac
+      uses: azure/sql-action@v2
+      with:
+        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+        path: ./db_output/NotesTracker.Database.dacpac
+        action: 'Publish'

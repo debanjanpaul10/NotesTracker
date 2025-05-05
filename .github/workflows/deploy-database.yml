@@ -17,11 +17,18 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '9.0.x'
+
+    # Install sqlpackage
+    - name: Install sqlpackage
+      run: |
+        wget -q https://aka.ms/sqlpackage-linux -O sqlpackage.zip
+        unzip sqlpackage.zip -d sqlpackage
+        sudo chmod +x ./sqlpackage/sqlpackage
+        echo "$PWD/sqlpackage" >> "$GITHUB_PATH"
     
     # Build the database project
     - name: Build and Deploy Database
       run:  |
-        echo "$PWD/sqlpackage" >> "$GITHUB_PATH"
         dotnet build NotesTracker.Database/NotesTracker.Database.sqlproj --configuration Release --output ./db_output
 
     # Publish the database to Azure SQL

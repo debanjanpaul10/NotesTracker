@@ -1,4 +1,4 @@
-name: CI-CD for NotesTracker
+name: Build and Deploy NotesTracker
 
 on:
   workflow_dispatch:

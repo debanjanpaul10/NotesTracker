@@ -4,7 +4,7 @@ on:
   workflow_call:
     
 jobs:
-  build-and-deploy:
+  build-and-deploy-api:
     runs-on: ubuntu-latest
 
     steps:

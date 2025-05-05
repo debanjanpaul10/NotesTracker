@@ -29,6 +29,12 @@ namespace NotesTracker.Shared.Constants
 		/// </summary>
 		public const string MissingConfigurationMessage = "The Configuration Key is missing";
 
+		/// <summary>
+		/// The method failed with message constant.
+		/// </summary>
+		/// <returns>{0} failed at {1} with {2}</returns>
+		public const string MethodFailedWithMessageConstant = "{0} failed at {1} with {2}";
+
 		#endregion
 
 		#region Custom Exceptions

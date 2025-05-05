@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "NotesTracker.Functions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 6996",
+      "launchBrowser": false
+    }
+  }
+}

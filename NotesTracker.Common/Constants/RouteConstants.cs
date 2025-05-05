@@ -64,5 +64,19 @@ namespace NotesTracker.Shared.Constants
 		public const string DeleteUser_ApiRoute = "DeleteUser";
 
 		#endregion
+
+		#region EXTERNAL APIS
+
+		/// <summary>
+		/// The auth0 users_ api route.
+		/// </summary>
+		public const string Auth0Users_ApiRoute = "users";
+
+		/// <summary>
+		/// The auth0 token_ api route.
+		/// </summary>
+		public const string Auth0Token_ApiRoute = "oauth/token";
+
+		#endregion
 	}
 }

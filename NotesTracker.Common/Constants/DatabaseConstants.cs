@@ -95,7 +95,7 @@ namespace NotesTracker.Shared.Constants
 		/// <summary>
 		/// The user id column name constant.
 		/// </summary>
-		public const string UserIdColumnNameConstant = "UserId";
+		public const string IdColumnNameConstant = "Id";
 
 		/// <summary>
 		/// The user email column name constant.
@@ -110,7 +110,17 @@ namespace NotesTracker.Shared.Constants
 		/// <summary>
 		/// The user password column name constant.
 		/// </summary>
-		public const string UserPasswordColumnNameConstant = "UserPassword";
+		public const string UserIdColumnNameConstant = "UserId";
+
+		/// <summary>
+		/// The provider column name constant.
+		/// </summary>
+		public const string ProviderColumnNameConstant = "Provider";
+
+		/// <summary>
+		/// The is social column name constant.
+		/// </summary>
+		public const string IsSocialColumnNameConstant = "IsSocial";
 
 		#endregion
 

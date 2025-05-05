@@ -2,6 +2,10 @@ name: Build and Deploy NotesTracker.API
 
 on:
   workflow_call:
+
+permissions: 
+  contents: read
+  id-token: write
     
 jobs:
   build-and-deploy-api:

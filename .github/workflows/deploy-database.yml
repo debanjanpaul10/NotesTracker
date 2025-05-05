@@ -17,6 +17,16 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '9.0.x'
+
+    # Install sqlpackage
+    - name: Install sqlpackage
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget unzip
+        wget https://aka.ms/sqlpackage-linux -O sqlpackage.zip
+        unzip sqlpackage.zip -d /usr/local/sqlpackage
+        sudo chmod +x /usr/local/sqlpackage/sqlpackage
+        export PATH=$PATH:/usr/local/sqlpackage
     
     # Build the database project
     - name: Build and Deploy Database
@@ -26,8 +36,7 @@ jobs:
 
     # Publish the database to Azure SQL
     - name: Deploy to Azure SQL database
-      uses: azure/sql-action@v2
-      with:
-        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-        path: './output/NotesTracker.Database.dacpac'
-        action: 'Publish'
+      run: |
+        /usr/local/sqlpackage/sqlpackage /Action:Publish \
+          /TargetConnectionString:"${{ secrets.AZURE_SQL_CONNECTION_STRING }}" \
+          /SourceFile:./output/NotesTracker.Database.dacpac

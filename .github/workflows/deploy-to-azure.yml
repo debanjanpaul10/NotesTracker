@@ -5,25 +5,25 @@ on:
     inputs:
       deploy_api:
         description: 'Build and Deploy NotesTracker.API'
-        required: false
+        required: true
         default: true
         type: boolean
 
       deploy_function:
         description: 'Build and Deploy NotesTracker.Function'
-        required: false
+        required: true
         default: true
         type: boolean
 
       deploy_web:
         description: 'Build and Deploy NotesTracker.Web'
-        required: false
+        required: true
         default: true
         type: boolean
 
       deploy_database:
         description: 'Build and Deploy NotesTracker.Database'
-        required: false
+        required: true
         default: true
         type: boolean
 
@@ -31,7 +31,7 @@ jobs:
   # STEP: BUILD AND DEPLOY API
   build-and-deploy-api:
     name: 'Build and Deploy NotesTracker.API'
-    if: ${{ inputs.deploy_api == 'true' }}
+    if: ${{ inputs.deploy_api == 'false' }}
     runs-on: ubuntu-latest
     steps:
       - name: Debug INPUT VALUE

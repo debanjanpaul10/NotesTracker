@@ -1,6 +1,11 @@
 name: Build and Deploy NotesTracker
 
 on:
+  push:
+    branches:
+      - main
+      - dev
+      
   workflow_dispatch:
     inputs:
       deploy_api:

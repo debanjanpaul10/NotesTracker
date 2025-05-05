@@ -1,0 +1,38 @@
+name: Build and Deploy NotesTracker.Functions
+
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Set up .NET
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '9.0.x'
+
+    # Install dependencies and build Azure Function project
+    - name: Install dependencies and build Function
+      run: |
+        dotnet restore NotesTracker.Functions/NotesTracker.Functions.csproj
+        dotnet build NotesTracker.Functions/NotesTracker.Functions.csproj --configuration Release --no-restore
+
+    # Publish the Azure Functions project to a folder
+    - name: Publish the Function project
+      run: |
+        dotnet publish NotesTracker.Functions/NotesTracker.Functions.csproj --configuration Release --output ./publish-functions
+
+    # Deploy to Azure Function App
+    - name: Deploy to Azure Function App
+      uses: azure/functions-action@v1
+      with:
+        app-name: func-notes-tracker
+        publish-profile: ${{ secrets.AZURE_FUNCTIONS_PUBLISH_PROFILE }}
+        package: ./publish-functions

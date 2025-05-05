@@ -1,0 +1,33 @@
+name: Build and Deploy NotesTracker.Database
+
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Setup .NET
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '9.0.x'
+    
+    # Build the database project
+    - name: Build and Deploy Database
+      run:  |
+        dotnet restore NotesTracker.Database/NotesTracker.Database.sqlproj
+        dotnet build NotesTracker.Database/NotesTracker.Database.sqlproj --configuration Release --output ./output
+
+    # Publish the database to Azure SQL
+    - name: Deploy to Azure SQL database
+      uses: azure/sql-action@v2
+      with:
+        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+        path: './output'
+        dacpac-package: ./output/NotesTracker.Database.dacpac

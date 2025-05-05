@@ -32,84 +32,22 @@ jobs:
   build-and-deploy-api:
     name: 'Build and Deploy NotesTracker.API'
     if: ${{ inputs.deploy_api }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Debug INPUT VALUE
-        run: |
-          echo "deploy_api$": ${{ inputs.deploy_api }}
-        
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '9.0.x'
-
-      - name: Build and Deploy API
-        run: |
-          dotnet restore NotesTracker.API/NotesTracker.API.csproj
-          dotnet build NotesTracker.API/NotesTracker.API.csproj --configuration Release
-          dotnet publish NotesTracker.API/NotesTracker.API.csproj --configuration Release --output ./publish
-          # Add deployment steps here
+    uses: './.github/workflows/deploy-api.yml'
 
   # STEP: BUILD AND DEPLOY FUNCTIONS
   build-and-deploy-function:
     name: 'Build and Deploy NotesTracker.Functions'
     if: ${{ inputs.deploy_function }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '9.0.x'
-
-      - name: Build and Deploy Functions
-        run: |
-          dotnet restore NotesTracker.Functions/NotesTracker.Functions.csproj
-          dotnet build NotesTracker.Functions/NotesTracker.Functions.csproj --configuration Release
-          dotnet publish NotesTracker.Functions/NotesTracker.Functions.csproj --configuration Release --output ./publish-functions
-          # Add deployment steps here
+    uses: './.github/workflows/deploy-functions.yml'
 
   # STEP: BUILD AND DEPLOY WEB
   build-and-deploy-web:
     name: 'Build and Deploy NotesTracker.Web'
     if: ${{ inputs.deploy_web }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-
-      - name: Build and Deploy Web
-        run: |
-          cd NotesTracker.Web
-          npm install
-          npm run build
-          # Add deployment steps here
+    uses: './.github/workflows/deploy-web.yml'
 
   # STEP: BUILD AND DEPLOY DATABASE
   build-and-deploy-database:
     name: 'Build and Deploy NotesTracker.Database'
     if: ${{ inputs.deploy_database }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '9.0.x'
-
-      - name: Build and Deploy Database
-        run: |
-          dotnet build NotesTracker.Database/NotesTracker.Database.sqlproj --configuration Release
-          # Add deployment steps here for Azure SQL
+    uses: './.github/workflows/deploy-database.yml'

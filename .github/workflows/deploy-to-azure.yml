@@ -4,37 +4,40 @@ on:
   workflow_dispatch:
     inputs:
       deploy_api:
-        description: 'Deploy NotesTracker.API'
+        description: 'Build and Deploy NotesTracker.API'
         required: false
         default: true
         type: boolean
 
       deploy_function:
-        description: 'Deploy NotesTracker.Function'
+        description: 'Build and Deploy NotesTracker.Function'
         required: false
         default: true
         type: boolean
 
       deploy_web:
-        description: 'Deploy NotesTracker.Web'
+        description: 'Build and Deploy NotesTracker.Web'
         required: false
         default: true
         type: boolean
 
       deploy_database:
-        description: 'Deploy NotesTracker.Database'
+        description: 'Build and Deploy NotesTracker.Database'
         required: false
         default: true
         type: boolean
 
 jobs:
-
   # STEP: BUILD AND DEPLOY API
   build-and-deploy-api:
     name: 'Build and Deploy NotesTracker.API'
     if: ${{ inputs.deploy_api == 'true' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Debug INPUT VALUE
+        run: |
+          echo "deploy_api$": ${{ inputs.deploy_api }}
+        
       - name: Checkout code
         uses: actions/checkout@v3
 

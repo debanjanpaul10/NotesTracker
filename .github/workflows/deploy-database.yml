@@ -21,6 +21,7 @@ jobs:
     # Build the database project
     - name: Build and Deploy Database
       run:  |
+        echo "$PWD/sqlpackage" >> "$GITHUB_PATH"
         dotnet build NotesTracker.Database/NotesTracker.Database.sqlproj --configuration Release --output ./db_output
 
     # Publish the database to Azure SQL

@@ -44,15 +44,27 @@ jobs:
     name: 'Build and Deploy NotesTracker.Functions'
     if: ${{ inputs.deploy_function }}
     uses: './.github/workflows/deploy-functions.yml'
+    permissions:
+      id-token: write
+      contents: read
+    secrets: inherit
 
   # STEP: BUILD AND DEPLOY WEB
   build-and-deploy-web:
     name: 'Build and Deploy NotesTracker.Web'
     if: ${{ inputs.deploy_web }}
     uses: './.github/workflows/deploy-web.yml'
+    permissions:
+      id-token: write
+      contents: read
+    secrets: inherit
 
   # STEP: BUILD AND DEPLOY DATABASE
   build-and-deploy-database:
     name: 'Build and Deploy NotesTracker.Database'
     if: ${{ inputs.deploy_database }}
     uses: './.github/workflows/deploy-database.yml'
+    permissions:
+      id-token: write
+      contents: read
+    secrets: inherit

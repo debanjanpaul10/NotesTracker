@@ -2,31 +2,30 @@ name: Build and Deploy NotesTracker
 
 on:
   workflow_dispatch:
-  # workflow_dispatch:
-  #   inputs:
-  #     deploy_api:
-  #       description: 'Deploy NotesTracker.API'
-  #       required: false
-  #       default: false
-  #       type: boolean
+    inputs:
+      deploy_api:
+        description: 'Deploy NotesTracker.API'
+        required: false
+        default: true
+        type: boolean
 
-  #     deploy_function:
-  #       description: 'Deploy NotesTracker.Function'
-  #       required: false
-  #       default: false
-  #       type: boolean
+      deploy_function:
+        description: 'Deploy NotesTracker.Function'
+        required: false
+        default: true
+        type: boolean
 
-  #     deploy_web:
-  #       description: 'Deploy NotesTracker.Web'
-  #       required: false
-  #       default: false
-  #       type: boolean
+      deploy_web:
+        description: 'Deploy NotesTracker.Web'
+        required: false
+        default: true
+        type: boolean
 
-  #     deploy_database:
-  #       description: 'Deploy NotesTracker.Database'
-  #       required: false
-  #       default: false
-  #       type: boolean
+      deploy_database:
+        description: 'Deploy NotesTracker.Database'
+        required: false
+        default: true
+        type: boolean
 
 jobs:
 

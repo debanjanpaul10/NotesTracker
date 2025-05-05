@@ -4,25 +4,25 @@ on:
   workflow_dispatch:
     inputs:
       deploy_api:
-        description: 'Build and Deploy NotesTracker.API'
+        description: 'NotesTracker.API'
         required: false
         default: false
         type: boolean
 
       deploy_function:
-        description: 'Build and Deploy NotesTracker.Function'
+        description: 'NotesTracker.Function'
         required: false
         default: false
         type: boolean
 
       deploy_web:
-        description: 'Build and Deploy NotesTracker.Web'
+        description: 'NotesTracker.Web'
         required: false
         default: false
         type: boolean
 
       deploy_database:
-        description: 'Build and Deploy NotesTracker.Database'
+        description: 'NotesTracker.Database dacpac'
         required: false
         default: false
         type: boolean

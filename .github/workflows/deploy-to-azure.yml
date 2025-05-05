@@ -31,21 +31,21 @@ jobs:
   build-and-deploy-api:
     name: 'Build and Deploy NotesTracker.API'
     if: ${{ inputs.deploy_api == 'true' }}
-    uses: ./.github/workflows/templates/deploy-api.yml
+    uses: ./.github/workflows/deploy-api.yml
     
 
   build-and-deploy-function:
     name: 'Build and Deploy NotesTracker.Functions'
     if: ${{ inputs.deploy_function == 'true' }}
-    uses: ./.github/workflows/templates/deploy-function.yml
+    uses: ./.github/workflows/deploy-function.yml
 
   build-and-deploy-web:
     name: 'Build and Deploy NotesTracker.Web'
     if: ${{ inputs.deploy_web == 'true' }}
-    uses: './.github/workflows/templates/deploy-web.yml'
+    uses: './.github/workflows/deploy-web.yml'
 
   build-and-deploy-database:
     name: 'Build and Deploy NotesTracker.Database'
     if: ${{ inputs.deploy_database == 'true' }}
-    uses: './.github/workflows/templates/deploy-database.yml'
+    uses: './.github/workflows/deploy-database.yml'
     

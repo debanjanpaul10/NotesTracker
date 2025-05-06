@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './components/common/header/header.component';
 import { CommonModule } from '@angular/common';
+import { MsalService } from '@azure/msal-angular';
+
+import { HeaderComponent } from './components/common/header/header.component';
 import { SpinnerComponent } from './components/common/spinner/spinner.component';
-import { AuthService } from '@auth0/auth0-angular';
+import { passwordResetRequest } from './services/azure-auth-config';
 
 /**
  * The Main app component.
@@ -19,26 +21,44 @@ class AppComponent implements OnInit {
   /**
    * The is loading boolean flag.
    */
-  public isLoading: boolean = true;
+  public isLoading: WritableSignal<boolean> = signal(true);
 
   /**
    * Initializes a new instance of `AppComponent`
-   * @param auth0 The Auth0 service.
+   * @param msalService The MSAL service.
    */
-  constructor(private auth0: AuthService) {}
+  constructor(private msalService: MsalService) {}
 
   ngOnInit(): void {
-    this.auth0.isAuthenticated$.subscribe((isAuth: boolean) => {
-      if (isAuth) {
-        this.auth0.idTokenClaims$.subscribe((value: any) => {
-          if (value) {
-            this.isLoading = false;
-          }
-        });
-      } else {
-        this.isLoading = false;
-      }
-    });
+    // Wait for MSAL instance to initialize and handle redirect
+    this.msalService.instance
+      .initialize()
+      .then(() => {
+        return this.msalService.instance.handleRedirectPromise();
+      })
+      .then((response) => {
+        if (response && response.account) {
+          // Set the active account after successful login
+          this.msalService.instance.setActiveAccount(response.account);
+        }
+      })
+      .catch((error) => {
+        if (error.errorMessage && error.errorMessage.includes('AADB2C90118')) {
+          // Handle password reset event
+          console.warn(
+            'Password reset requested. Redirecting to password reset flow...'
+          );
+          this.msalService.loginRedirect(passwordResetRequest);
+        } else {
+          console.error(
+            'Error during MSAL initialization or redirect handling:',
+            error
+          );
+        }
+      })
+      .finally(() => {
+        this.isLoading.set(false);
+      });
   }
 }
 

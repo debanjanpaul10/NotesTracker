@@ -11,7 +11,6 @@
       <form>
         <div class="addnote-card-container mt-2 mb-3">
           <mat-card class="addnote-card" appearance="outlined">
-            
             <mat-card-content class="form-group row mt-3">
               <div class="col sm-12 mb-3 mb-sm-0">
                 <div class="row p-2">
@@ -24,7 +23,7 @@
                   />
                 </div>
               </div>
-              
+
               <div class="col sm-12 mb-3 mb-sm-0">
                 <div class="row p-2">
                   <textarea
@@ -45,16 +44,16 @@
                   mat-fab
                   extended
                   (click)="handleFormSubmit(newNote)"
-                  [disabled]="loading"
+                  [disabled]="this.loading()"
                   aria-label="Save"
                 >
                   <span class="customFont">{{
                     AddNotesConstants.SaveButton
                   }}</span>
                 </button>
-                
+
                 &nbsp;
-                
+
                 <button
                   mat-fab
                   extended

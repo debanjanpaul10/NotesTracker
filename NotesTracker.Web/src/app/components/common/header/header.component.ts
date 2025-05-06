@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '@auth0/auth0-angular';
+import { MsalService } from '@azure/msal-angular';
 
 import {
   CacheKeys,
@@ -29,7 +29,7 @@ class HeaderComponent implements OnInit {
   /**
    * The is dark mode boolean flag.
    */
-  public isDarkMode: boolean = false;
+  public isDarkMode: WritableSignal<boolean> = signal(false);
 
   /**
    * The theme settings constants.
@@ -39,32 +39,32 @@ class HeaderComponent implements OnInit {
   /**
    * The boolean flag to check if user is logged in or not.
    */
-  public isUserLoggedIn: boolean = false;
+  public isUserLoggedIn: WritableSignal<boolean> = signal(false);
 
   /**
    * Initializes a new instance of `HeaderComponent`
-   * @param auth0 The auth service.
+   * @param msalService The MSAL service.
    */
-  constructor(private auth0: AuthService) {}
+  constructor(private msalService: MsalService) {}
 
   ngOnInit(): void {
     const savedTheme =
       localStorage.getItem(CacheKeys.ThemeSettings) ||
       this.ThemeSettingsKeys.LightMode.Key;
-    this.isDarkMode = savedTheme === this.ThemeSettingsKeys.DarkMode.Key;
+    this.isDarkMode.set(savedTheme === this.ThemeSettingsKeys.DarkMode.Key);
     document.body.className = savedTheme;
 
-    this.auth0.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
-      this.isUserLoggedIn = isAuthenticated;
-    });
+    this.isUserLoggedIn.set(
+      this.msalService.instance.getActiveAccount() !== null
+    );
   }
 
   /**
    * Handles the theme toggle event.
    */
   public toggleTheme(): void {
-    this.isDarkMode = !this.isDarkMode;
-    const theme = this.isDarkMode
+    this.isDarkMode.set(!this.isDarkMode());
+    const theme = this.isDarkMode()
       ? this.ThemeSettingsKeys.DarkMode.Key
       : this.ThemeSettingsKeys.LightMode.Key;
     document.body.className = theme;
@@ -76,18 +76,16 @@ class HeaderComponent implements OnInit {
    * Handles the login dialog open event.
    */
   public handleUserLogin(): void {
-    this.auth0.loginWithRedirect();
+    this.msalService.loginRedirect();
   }
 
   /**
    * Handle user logout event.
    */
   public handleUserLogout(): void {
-    if (this.isUserLoggedIn) {
-      this.auth0.logout({
-        logoutParams: {
-          returnTo: document.location.origin,
-        },
+    if (this.isUserLoggedIn()) {
+      this.msalService.logoutRedirect({
+        postLogoutRedirectUri: document.location.origin,
       });
     }
   }

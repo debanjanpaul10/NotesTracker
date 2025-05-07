@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 import { ApiUrls, ExceptionMessages } from '../helpers/notestracker.constants';
-import { ConfigurationConstants } from '../helpers/config.constants';
+import { ApiBaseUrl } from '../helpers/config.constants';
 import { Notes } from '../models/notes.model';
 import { ResponseDTO } from '../models/dto/response-dto.class';
 import { NoteDTO } from '../models/dto/note-dto.class';
@@ -20,7 +20,7 @@ class NotesService {
   /**
    * The api url.
    */
-  private apiUrl: string = `${ConfigurationConstants.ApiBaseUrl}/${ApiUrls.Notes.BaseRoute}`;
+  private apiUrl: string = `${ApiBaseUrl}/${ApiUrls.Notes.BaseRoute}`;
 
   /**
    * The notes routes.

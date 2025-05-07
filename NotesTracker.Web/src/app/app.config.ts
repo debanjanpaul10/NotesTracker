@@ -7,7 +7,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { routes } from './app.routes';
 import { AuthInterceptor } from './services/auth.interceptor';
-import { ConfigurationConstants } from './helpers/config.constants';
+import { Auth0Credentials, LocalHostBaseUrl } from './helpers/config.constants';
 
 /**
  * Determines the redirect uri for auth0 authentication.
@@ -16,10 +16,10 @@ import { ConfigurationConstants } from './helpers/config.constants';
 function determineRedirectUri(): string {
   const currentHost = window.location.origin;
 
-  if (currentHost.includes(ConfigurationConstants.LocalHostBaseUrl)) {
-    return ConfigurationConstants.Auth0.RedirectBaseUris[0];
+  if (currentHost.includes(LocalHostBaseUrl)) {
+    return Auth0Credentials.RedirectBaseUris[0];
   } else {
-    return ConfigurationConstants.Auth0.RedirectBaseUris[1];
+    return Auth0Credentials.RedirectBaseUris[1];
   }
 }
 
@@ -39,10 +39,10 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideAuth0({
-      domain: ConfigurationConstants.Auth0.Domain,
-      clientId: ConfigurationConstants.Auth0.ClientId,
+      domain: Auth0Credentials.Domain,
+      clientId: Auth0Credentials.ClientId,
       authorizationParams: {
-        audience: ConfigurationConstants.Auth0.Audience,
+        audience: Auth0Credentials.Audience,
         redirect_uri: determineRedirectUri(),
       },
     }),

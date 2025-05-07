@@ -1,30 +1,32 @@
 .mwc-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
   justify-content: center;
+  align-items: center;
+  display: block; /* Ensures the image is treated as a block element */
+  margin: 0 auto; /* Centers the image horizontally */
 }
 
 .mwc-card {
-  width: 300px;
+  width: 100%;
   text-align: left;
 }
 
 .mwc-card img {
-  height: 150px; /* Set a constant height */
-  width: 100%; /* Maintain aspect ratio */
-  object-fit: cover; /* Ensure the image fits within the bounds */
+  height: 400px;
+  width: 100%; /* Ensure the image fits the card width */
+  object-fit: cover;
+  padding: 10px;
+  display: block; /* Ensures the image is treated as a block element */
+  margin: 0 auto; /* Centers the image horizontally */
 }
 
 .mwc-card-header {
   display: flex;
-  justify-content: space-between; /* Pushes the title to the left and the button to the right */
-  align-items: center; /* Vertically aligns the title and button */
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
-  height: 60px; /* Set a constant height for all headers */
-  padding: 0 16px; /* Add some padding for spacing */
-  box-sizing: border-box; /* Ensure padding is included in the height */
-  margin-top: 10px;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .mwc-card-title {
@@ -32,8 +34,7 @@
   font-weight: bold;
 }
 
-.mwc-card-button {
-  margin-left: auto; /* Ensures the button stays on the far right */
+.mwc-card-content {
+  padding: 10px;
+  text-align: justify; /* Optional: Align text for better readability */
 }
-
-

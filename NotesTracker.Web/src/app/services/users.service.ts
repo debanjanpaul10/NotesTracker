@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
 import { ApiUrls, ExceptionMessages } from '../helpers/notestracker.constants';
-import { ApiBaseUrl } from '../helpers/config.constants';
+import { ConfigurationConstants } from '../helpers/config.constants';
 import { User } from '../models/user.model';
 import { ResponseDTO } from '../models/dto/response-dto.class';
 import { UserLoginDTO } from '../models/dto/user-login-dto.class';
@@ -24,7 +24,7 @@ class UsersService {
   /**
    * The api url.
    */
-  private apiUrl: string = `${ApiBaseUrl}/${ApiUrls.Users.BaseRoute}`;
+  private apiUrl: string = `${ConfigurationConstants.ApiBaseUrl}/${ApiUrls.Users.BaseRoute}`;
 
   /**
    * The users routes.

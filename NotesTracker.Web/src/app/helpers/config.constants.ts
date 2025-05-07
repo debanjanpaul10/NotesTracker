@@ -1,18 +1,16 @@
-export const ApiBaseUrl = 'https://app-webapi-notes-tracker-h4h5f8fxdhh7d6cy.centralindia-01.azurewebsites.net';
-export const MsalAuth = {
-  ClientId: 'e77dd298-0900-4a7b-b91a-4f62e7c3b1c6',
-  Authorities: {
-    SignupSignIn:
-      'https://debanjanlab.b2clogin.com/debanjanlab.onmicrosoft.com/b2c_1_susi',
-    EditProfile:
-      'https://debanjanlab.b2clogin.com/debanjanlab.onmicrosoft.com/b2c_1_edit_profile',
-    PasswordReset:
-      'https://debanjanlab.b2clogin.com/debanjanlab.onmicrosoft.com/b2c_1_pass_reset',
+const ConfigurationConstants = {
+  ApiBaseUrl:
+    'https://app-webapi-notes-tracker-h4h5f8fxdhh7d6cy.centralindia-01.azurewebsites.net',
+  Auth0: {
+    Domain: 'dev-debanjan-app.uk.auth0.com',
+    ClientId: 'onIb50nBAs96sTV0aC3lP2ivt2NCJQXX',
+    Audience: '1f39bae6-a069-452d-8633-1a726157d0a2',
+    RedirectBaseUris: [
+      'http://localhost:4200',
+      'https://jolly-hill-03d2ef300.6.azurestaticapps.net',
+    ],
   },
-  RedirectBaseUris: [
-    'http://localhost:4200',
-    'https://jolly-hill-03d2ef300.6.azurestaticapps.net',
-  ],
-  AuthorityDomain: 'debanjanlab.b2clogin.com',
+  LocalHostBaseUrl: 'localhost',
 };
-export const LocalHostBaseUrl = 'localhost';
+
+export { ConfigurationConstants };

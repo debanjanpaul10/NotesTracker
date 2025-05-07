@@ -1,64 +1,26 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { withInterceptors, provideHttpClient } from '@angular/common/http';
-import {
-  MSAL_GUARD_CONFIG,
-  MSAL_INSTANCE,
-  MSAL_INTERCEPTOR_CONFIG,
-  MsalGuardConfiguration,
-  MsalInterceptorConfiguration,
-  MsalService,
-} from '@azure/msal-angular';
-import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
+import { provideAuth0 } from '@auth0/auth0-angular';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ToastrModule } from 'ngx-toastr';
 
-import { msalConfig, protectedResources } from './services/azure-auth-config';
 import { routes } from './app.routes';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { ConfigurationConstants } from './helpers/config.constants';
 
 /**
- * Configures the MSAL Instance factory.
- * @returns The public client application config.
+ * Determines the redirect uri for auth0 authentication.
+ * @returns The redirect base URI.
  */
-function MSALInstanceFactory(): PublicClientApplication {
-  const msalInstance = new PublicClientApplication(msalConfig);
+function determineRedirectUri(): string {
+  const currentHost = window.location.origin;
 
-  // Ensure the instance is initialized before use
-  msalInstance.initialize().catch((error) => {
-    console.error('MSAL initialization failed', error);
-  });
-
-  return msalInstance;
-}
-
-/**
- * Configures the MSAL Guard configuration factory.
- * @returns The MSAL guard configuration.
- */
-function MSALGuardConfigFactory(): MsalGuardConfiguration {
-  return {
-    interactionType: InteractionType.Redirect,
-    authRequest: {
-      scopes: ['openid', 'profile', 'offline_access'],
-    },
-  };
-}
-
-/**
- * Configures the MSAL interceptor configuration factory.
- * @returns The MSAL interceptor configuration.
- */
-function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
-  return {
-    interactionType: InteractionType.Redirect,
-    protectedResourceMap: new Map([
-      [
-        protectedResources.notesApi.endpoint[0],
-        protectedResources.notesApi.scopes,
-      ],
-    ]),
-  };
+  if (currentHost.includes(ConfigurationConstants.LocalHostBaseUrl)) {
+    return ConfigurationConstants.Auth0.RedirectBaseUris[0];
+  } else {
+    return ConfigurationConstants.Auth0.RedirectBaseUris[1];
+  }
 }
 
 /**
@@ -76,18 +38,13 @@ export const appConfig: ApplicationConfig = {
         preventDuplicates: true,
       })
     ),
-    {
-      provide: MSAL_INSTANCE,
-      useFactory: MSALInstanceFactory,
-    },
-    {
-      provide: MSAL_GUARD_CONFIG,
-      useFactory: MSALGuardConfigFactory,
-    },
-    {
-      provide: MSAL_INTERCEPTOR_CONFIG,
-      useFactory: MSALInterceptorConfigFactory,
-    },
-    MsalService,
+    provideAuth0({
+      domain: ConfigurationConstants.Auth0.Domain,
+      clientId: ConfigurationConstants.Auth0.ClientId,
+      authorizationParams: {
+        audience: ConfigurationConstants.Auth0.Audience,
+        redirect_uri: determineRedirectUri(),
+      },
+    }),
   ],
 };

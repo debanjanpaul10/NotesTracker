@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { MsalService } from '@azure/msal-angular';
 
 import { NoteDTO } from '../../models/dto/note-dto.class';
 import { NotesService } from '../../services/notes.service';
@@ -42,12 +42,12 @@ class AddNoteComponent implements OnInit {
   /**
    * The is loading boolean flag.
    */
-  public loading: WritableSignal<boolean> = signal(false);
+  public loading: boolean = false;
 
   /**
    * The is note saved boolean flag.
    */
-  public isNoteSaved: WritableSignal<boolean> = signal(false);
+  public isNoteSaved: boolean = false;
 
   /**
    * The add notes constants.
@@ -60,20 +60,21 @@ class AddNoteComponent implements OnInit {
    * @param router The router.
    * @param toaster The toaster.
    * @param userService The users service.
-   * @param msalService The MSAL service.
    */
   constructor(
     private notesService: NotesService,
     private router: Router,
     private toaster: ToasterService,
     private userService: UsersService,
-    private msalService: MsalService
+    private auth0: AuthService
   ) {}
 
   ngOnInit(): void {
-    if (this.msalService.instance.getActiveAccount() === null) {
-      this.router.navigate([AngularRoutes.Error.Link]);
-    }
+    this.auth0.isAuthenticated$.subscribe((isAuth: boolean) => {
+      if (!isAuth) {
+        this.router.navigate([AngularRoutes.Error.Link]);
+      }
+    });
   }
 
   /**
@@ -94,18 +95,18 @@ class AddNoteComponent implements OnInit {
    * @param newNote The new note.
    */
   private addNewNote(newNote: NoteDTO): void {
-    this.loading.set(true);
+    this.loading = true;
     this.notesService.addNewNoteAsync(newNote).subscribe({
       next: (noteSaveStatus) => {
-        this.isNoteSaved.set(noteSaveStatus);
-        this.loading.set(false);
-        if (this.isNoteSaved()) {
+        this.isNoteSaved = noteSaveStatus;
+        this.loading = false;
+        if (this.isNoteSaved) {
           this.router.navigate([AngularRoutes.Home.Link]);
         }
       },
       error: (error) => {
         console.error(error);
-        this.loading.set(false);
+        this.loading = false;
         this.toaster.showError(error);
       },
     });

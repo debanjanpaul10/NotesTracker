@@ -3,9 +3,9 @@ import {
   HttpHandlerFn,
   HttpInterceptorFn,
 } from '@angular/common/http';
-import { MsalService } from '@azure/msal-angular';
+import { AuthService } from '@auth0/auth0-angular';
 import { inject } from '@angular/core';
-import { from, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 
 import { UsersService } from './users.service';
 
@@ -16,31 +16,18 @@ const AuthInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
 ) => {
+  const auth0 = inject(AuthService);
   const usersService = inject(UsersService);
-  const msalService = inject(MsalService);
 
-  return from(
-    msalService.instance.acquireTokenSilent({
-      account: msalService.instance.getActiveAccount() || undefined,
-      scopes: [
-        'openid',
-        'profile',
-        'https://debanjanlab.onmicrosoft.com/notes-tracker-api/Notes.Read',
-      ], // Replace with your required scopes
-    })
-  ).pipe(
-    switchMap((response) => {
-      if (response && response.accessToken) {
-        const userName = response.account?.username || null;
+  return auth0.idTokenClaims$.pipe(
+    switchMap((claims) => {
+      if (claims && claims.__raw) {
+        const userName = claims['nickname'] || null;
         if (userName) {
           usersService.setUserAlias(userName);
         }
-
         const newReq = req.clone({
-          headers: req.headers.set(
-            'Authorization',
-            `Bearer ${response.accessToken}`
-          ),
+          headers: req.headers.set('Authorization', `Bearer ${claims.__raw}`),
         });
 
         return next(newReq);

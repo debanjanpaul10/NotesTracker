@@ -2,7 +2,7 @@ import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MsalService } from '@azure/msal-angular';
+import { AuthService } from '@auth0/auth0-angular';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -76,20 +76,20 @@ class NotesContainerComponent implements OnInit {
    * @param notesService The notes service.
    * @param router The router service.
    * @param toaster The toaster service.
-   * @param msalService The MSAL service.
+   * @param auth0 The auth service.
    * @param dialog The material dialog service.
    */
   constructor(
     private notesService: NotesService,
     private toaster: ToasterService,
-    private msalService: MsalService,
+    private auth0: AuthService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.isUserAuthenticated.set(
-      this.msalService.instance.getActiveAccount() !== null
-    );
+    this.auth0.isAuthenticated$.subscribe((isAuth: boolean) => {
+      this.isUserAuthenticated.set(isAuth);
+    });
 
     if (this.isUserAuthenticated()) {
       this.getAllNotes();

@@ -10,10 +10,7 @@ import { AngularRoutes } from './helpers/notestracker.constants';
  */
 export const routes: Routes = [
   { path: AngularRoutes.Home.Name, component: HomeComponent },
-  {
-    path: AngularRoutes.AddNote.Name,
-    component: AddNoteComponent,
-  },
+  { path: AngularRoutes.AddNote.Name, component: AddNoteComponent },
   { path: AngularRoutes.Error.Name, component: ErrorPageComponent },
 ];
 

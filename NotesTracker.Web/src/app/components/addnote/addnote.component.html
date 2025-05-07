@@ -11,7 +11,6 @@
       <form>
         <div class="addnote-card-container mt-2 mb-3">
           <mat-card class="addnote-card" appearance="outlined">
-            
             <mat-card-content class="form-group row mt-3">
               <div class="col sm-12 mb-3 mb-sm-0">
                 <div class="row p-2">
@@ -19,12 +18,12 @@
                     type="text"
                     class="form-control mt-0"
                     name="Title"
-                    [(ngModel)]="newNote.noteTitle"
+                    [(ngModel)]="this.newNote().noteTitle"
                     placeholder="{{ AddNotesConstants.TitleBarPlaceHolder }}"
                   />
                 </div>
               </div>
-              
+
               <div class="col sm-12 mb-3 mb-sm-0">
                 <div class="row p-2">
                   <textarea
@@ -32,7 +31,7 @@
                     class="form-control mt-0"
                     name="Description"
                     rows="8"
-                    [(ngModel)]="newNote.noteDescription"
+                    [(ngModel)]="this.newNote().noteDescription"
                     placeholder="{{ AddNotesConstants.DescriptionPlaceHolder }}"
                   ></textarea>
                 </div>
@@ -44,7 +43,7 @@
                 <button
                   mat-fab
                   extended
-                  (click)="handleFormSubmit(newNote)"
+                  (click)="handleFormSubmit(this.newNote())"
                   [disabled]="loading"
                   aria-label="Save"
                 >
@@ -52,9 +51,9 @@
                     AddNotesConstants.SaveButton
                   }}</span>
                 </button>
-                
+
                 &nbsp;
-                
+
                 <button
                   mat-fab
                   extended

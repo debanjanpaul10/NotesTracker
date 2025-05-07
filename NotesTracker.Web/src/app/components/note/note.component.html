@@ -4,12 +4,12 @@
       
       <div
         class="container-fluid text-center start-note-loading"
-        *ngIf="isLoading()"
+        *ngIf="this.isLoading()"
       >
         <app-spinner color="accent"></app-spinner>
       </div>
 
-      <form *ngIf="!isLoading()">
+      <form *ngIf="!this.isLoading()">
         <div class="form-group row mt-3">
           <div class="col sm-12 mb-3 mb-sm-0">
             <div class="row p-2">
@@ -21,7 +21,7 @@
                 name="noteTitle"
                 id="noteTitle"
                 class="form-control mt-0"
-                [(ngModel)]="currentNote().noteTitle"
+                [(ngModel)]="this.currentNote().noteTitle"
               />
             </div>
           </div>
@@ -38,7 +38,7 @@
                 name="noteDescription"
                 id="noteDescription"
                 class="form-control mt-0"
-                [(ngModel)]="currentNote().noteDescription"
+                [(ngModel)]="this.currentNote().noteDescription"
               />
             </div>
           </div>
@@ -50,7 +50,7 @@
             extended
             color="accent"
             aria-label="update"
-            (click)="handleNoteUpdate(currentNote())"
+            (click)="this.handleNoteUpdate(this.currentNote())"
           >
             <span class="customFont">{{
               notesConstants.ButtonTexts.Update
@@ -62,7 +62,7 @@
             extended
             color="warn"
             aria-label="cancel"
-            (click)="closeDialog()"
+            (click)="this.closeDialog()"
           >
             <span class="customFont">
               {{ notesConstants.ButtonTexts.Cancel }}

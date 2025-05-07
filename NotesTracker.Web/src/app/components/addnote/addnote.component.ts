@@ -83,7 +83,7 @@ class AddNoteComponent implements OnInit {
    */
   public handleFormSubmit(newNote: NoteDTO): void {
     if (newNote.noteTitle !== '' && newNote.noteDescription !== '') {
-      newNote.userName = this.userService.getUserAlias();
+      newNote.userId = this.userService.getUserId();
       this.addNewNote(newNote);
     } else {
       alert('Some Fields are missing!');

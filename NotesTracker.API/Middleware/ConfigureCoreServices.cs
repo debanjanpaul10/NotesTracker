@@ -85,6 +85,15 @@ namespace NotesTracker.API.Middleware
                                 return;
                             }
 
+                            // Extracting the 'sub' claim
+                            var subClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                            if (string.IsNullOrEmpty(subClaim))
+                            {
+                                context.Fail(ExceptionConstants.UserIdNotPresentExceptionConstant);
+                                return;
+                            }
+
+                            context.HttpContext.Items["UserId"] = subClaim.Split('|')[1];
                             context.HttpContext.User = new ClaimsPrincipal(claimsIdentity);
                             await Task.CompletedTask;
                         },

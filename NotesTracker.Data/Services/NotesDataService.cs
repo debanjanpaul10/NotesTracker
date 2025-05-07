@@ -29,14 +29,14 @@ namespace NotesTracker.Data.Services
 		/// <summary>
 		/// Gets all notes asynchronous.
 		/// </summary>
-		/// <param name="userName">The user name.</param>
+		/// <param name="userId">The user id.</param>
 		/// <returns>
 		/// The list of note entity
 		/// </returns>
 		/// <exception cref="System.Exception"></exception>
-		public async Task<IEnumerable<Note>> GetAllNotesAsync(string userName)
+		public async Task<IEnumerable<Note>> GetAllNotesAsync(string userId)
 		{
-			var notes = await this._dbContext.Notes.Where(note => note.IsActive == true && note.UserName == userName).ToListAsync();
+			var notes = await this._dbContext.Notes.Where(note => note.IsActive == true && note.UserId == userId).ToListAsync();
 			if (notes.Count > 0)
 			{
 				return notes;
@@ -51,12 +51,13 @@ namespace NotesTracker.Data.Services
 		/// Gets the note asynchronous.
 		/// </summary>
 		/// <param name="noteId">The note id.</param>
+		/// <param name="userId">The user id.</param>
 		/// <returns>
 		/// The note entity
 		/// </returns>
-		public async Task<Note> GetNoteAsync(int noteId, string userName)
+		public async Task<Note> GetNoteAsync(int noteId, string userId)
 		{
-			var note = await this._dbContext.Notes.FirstOrDefaultAsync(n => n.IsActive == true && n.NoteId == noteId && n.UserName == userName);
+			var note = await this._dbContext.Notes.FirstOrDefaultAsync(n => n.IsActive == true && n.NoteId == noteId && n.UserId == userId);
 			if (note is not null)
 			{
 				return note;
@@ -84,7 +85,7 @@ namespace NotesTracker.Data.Services
 					CreatedDate = DateTime.UtcNow,
 					LastModifiedDate = DateTime.UtcNow,
 					IsActive = true,
-					UserName = newNote.UserName
+					UserId = newNote.UserId
 				};
 				await this._dbContext.Notes.AddAsync(newNoteEntity);
 				await this._dbContext.SaveChangesAsync();
@@ -100,14 +101,14 @@ namespace NotesTracker.Data.Services
 		/// Deletes the note asynchronous.
 		/// </summary>
 		/// <param name="noteId">The note identifier.</param>
-		/// <param name="userName">The user name.</param>
+		/// <param name="userId">The user id.</param>
 		/// <returns>
 		/// The boolean for success/failure
 		/// </returns>
 		/// <exception cref="System.Exception"></exception>
-		public async Task<bool> DeleteNoteAsync(int noteId, string userName)
+		public async Task<bool> DeleteNoteAsync(int noteId, string userId)
 		{
-			var noteToDelete = await this._dbContext.Notes.FirstOrDefaultAsync(note => note.NoteId == noteId && note.IsActive == true && note.UserName == userName);
+			var noteToDelete = await this._dbContext.Notes.FirstOrDefaultAsync(note => note.NoteId == noteId && note.IsActive == true && note.UserId == userId);
 			if (noteToDelete is not null)
 			{
 				noteToDelete.IsActive = false;
@@ -128,7 +129,7 @@ namespace NotesTracker.Data.Services
 		/// <exception cref="System.Exception"></exception>
 		public async Task<Note> UpdateNoteAsync(UpdateNoteDTO updatedNote)
 		{
-			var noteToUpdate = await this._dbContext.Notes.FirstOrDefaultAsync(note => note.NoteId == updatedNote.NoteId && note.IsActive == true && note.UserName == updatedNote.UserName);
+			var noteToUpdate = await this._dbContext.Notes.FirstOrDefaultAsync(note => note.NoteId == updatedNote.NoteId && note.IsActive == true && note.UserId == updatedNote.UserId);
 			if (noteToUpdate is not null)
 			{
 				noteToUpdate.NoteTitle = updatedNote.NoteTitle;

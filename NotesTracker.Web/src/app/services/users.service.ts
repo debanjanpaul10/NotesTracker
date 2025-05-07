@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
@@ -19,7 +19,7 @@ class UsersService {
   /**
    * The user alias.
    */
-  private userAlias: string = '';
+  private userId: WritableSignal<string> = signal('');
 
   /**
    * The api url.
@@ -32,19 +32,19 @@ class UsersService {
   private usersRoutes: any = ApiUrls.Users;
 
   /**
-   * Sets the user alias.
-   * @param alias The passed user alias.
+   * Sets the user id.
+   * @param userId The passed user id.
    */
-  public setUserAlias(alias: string): void {
-    this.userAlias = alias;
+  public setUserId(id: string): void {
+    this.userId.set(id);
   }
 
   /**
-   * Gets the user alias.
-   * @returns The user alias.
+   * Gets the user id.
+   * @returns The user id.
    */
-  public getUserAlias(): string {
-    return this.userAlias;
+  public getUserId(): string {
+    return this.userId();
   }
 
   /**

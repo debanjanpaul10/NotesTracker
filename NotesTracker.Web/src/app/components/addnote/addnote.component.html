@@ -44,7 +44,7 @@
                   mat-fab
                   extended
                   (click)="handleFormSubmit(this.newNote())"
-                  [disabled]="loading"
+                  [disabled]="this.loading()"
                   aria-label="Save"
                 >
                   <span class="customFont">{{

@@ -6,6 +6,7 @@ on:
 jobs:
   build-and-deploy-func:
     runs-on: ubuntu-latest
+    environment: Laboratory
 
     steps:
     # Checkout the repository

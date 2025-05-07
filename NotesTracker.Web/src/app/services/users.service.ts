@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
 import { ApiUrls, ExceptionMessages } from '../helpers/notestracker.constants';
-import { ConfigurationConstants } from '../helpers/config.constants';
+import { ApiBaseUrl } from '../helpers/config.constants';
 import { User } from '../models/user.model';
 import { ResponseDTO } from '../models/dto/response-dto.class';
 import { UserLoginDTO } from '../models/dto/user-login-dto.class';
@@ -19,12 +19,12 @@ class UsersService {
   /**
    * The user alias.
    */
-  private userAlias: string = '';
+  private userId: WritableSignal<string> = signal('');
 
   /**
    * The api url.
    */
-  private apiUrl: string = `${ConfigurationConstants.ApiBaseUrl}/${ApiUrls.Users.BaseRoute}`;
+  private apiUrl: string = `${ApiBaseUrl}/${ApiUrls.Users.BaseRoute}`;
 
   /**
    * The users routes.
@@ -32,19 +32,19 @@ class UsersService {
   private usersRoutes: any = ApiUrls.Users;
 
   /**
-   * Sets the user alias.
-   * @param alias The passed user alias.
+   * Sets the user id.
+   * @param userId The passed user id.
    */
-  public setUserAlias(alias: string): void {
-    this.userAlias = alias;
+  public setUserId(id: string): void {
+    this.userId.set(id);
   }
 
   /**
-   * Gets the user alias.
-   * @returns The user alias.
+   * Gets the user id.
+   * @returns The user id.
    */
-  public getUserAlias(): string {
-    return this.userAlias;
+  public getUserId(): string {
+    return this.userId();
   }
 
   /**

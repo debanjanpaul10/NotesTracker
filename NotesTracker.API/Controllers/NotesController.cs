@@ -43,7 +43,7 @@ namespace NotesTracker.API.Controllers
         {
             try
             {
-                var notes = await this._notesService.GetAllNotesAsync(this.UserName);
+                var notes = await this._notesService.GetAllNotesAsync(this.UserId);
                 if (notes is not null)
                 {
                     return this.PrepareSuccessResponse(notes);
@@ -68,7 +68,7 @@ namespace NotesTracker.API.Controllers
         {
             try
             {
-                var note = await this._notesService.GetNoteAsync(noteId, this.UserName);
+                var note = await this._notesService.GetNoteAsync(noteId, this.UserId);
                 if (note is not null)
                 {
                     return this.PrepareSuccessResponse(note);
@@ -136,7 +136,7 @@ namespace NotesTracker.API.Controllers
         {
             try
             {
-                var deletedNote = await this._notesService.DeleteNoteAsync(noteId, this.UserName);
+                var deletedNote = await this._notesService.DeleteNoteAsync(noteId, this.UserId);
                 return this.PrepareSuccessResponse(deletedNote);
             }
             catch (Exception ex)

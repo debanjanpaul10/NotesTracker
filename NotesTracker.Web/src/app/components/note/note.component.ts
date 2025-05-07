@@ -12,7 +12,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
 import { NotesService } from '../../services/notes.service';
 import { Notes } from '../../models/notes.model';
 import {
@@ -31,16 +30,16 @@ import { ToasterService } from '../../services/toaster.service';
 @Component({
   selector: 'app-note',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    SpinnerComponent,
-    MatButtonModule,
-  ],
+  imports: [CommonModule, FormsModule, SpinnerComponent, MatButtonModule],
   templateUrl: './note.component.html',
   styleUrl: './note.component.scss',
 })
 class NoteComponent implements OnInit {
+  /**
+   * The Notes Page Constants.
+   */
+  public notesConstants = NotesPageConstants;
+  
   /**
    * The current note.
    */
@@ -52,11 +51,6 @@ class NoteComponent implements OnInit {
    * The is loading boolean flag.
    */
   public isLoading: WritableSignal<boolean> = signal(false);
-
-  /**
-   * The Notes Page Constants.
-   */
-  public notesConstants = NotesPageConstants;
 
   /**
    * Initializes a new instance of `NoteComponent`

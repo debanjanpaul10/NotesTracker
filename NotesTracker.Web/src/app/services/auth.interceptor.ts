@@ -22,9 +22,9 @@ const AuthInterceptor: HttpInterceptorFn = (
   return auth0.idTokenClaims$.pipe(
     switchMap((claims) => {
       if (claims && claims.__raw) {
-        const userName = claims['nickname'] || null;
-        if (userName) {
-          usersService.setUserAlias(userName);
+        const userId = claims['sub'].split('|')[1];
+        if (userId) {
+          usersService.setUserId(userId);
         }
         const newReq = req.clone({
           headers: req.headers.set('Authorization', `Bearer ${claims.__raw}`),

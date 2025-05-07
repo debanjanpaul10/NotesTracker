@@ -1,31 +1,37 @@
 name: Build and Deploy NotesTracker
 
 on:
+  push:
+    branches:
+      - main
+      - dev
+      
   workflow_dispatch:
     inputs:
       deploy_api:
-        description: 'Build and Deploy NotesTracker.API'
+        description: 'NotesTracker.API'
         required: false
-        default: true
+        default: false
         type: boolean
 
       deploy_function:
-        description: 'Build and Deploy NotesTracker.Function'
+        description: 'NotesTracker.Function'
         required: false
-        default: true
+        default: false
         type: boolean
 
       deploy_web:
-        description: 'Build and Deploy NotesTracker.Web'
+        description: 'NotesTracker.Web'
         required: false
-        default: true
+        default: false
         type: boolean
 
       deploy_database:
-        description: 'Build and Deploy NotesTracker.Database'
+        description: 'NotesTracker.Database'
         required: false
-        default: true
+        default: false
         type: boolean
+
 
 jobs:
   # STEP: BUILD AND DEPLOY API
@@ -33,21 +39,37 @@ jobs:
     name: 'Build and Deploy NotesTracker.API'
     if: ${{ inputs.deploy_api }}
     uses: './.github/workflows/deploy-api.yml'
+    permissions:
+      id-token: write
+      contents: read
+    secrets: inherit
 
   # STEP: BUILD AND DEPLOY FUNCTIONS
   build-and-deploy-function:
     name: 'Build and Deploy NotesTracker.Functions'
     if: ${{ inputs.deploy_function }}
     uses: './.github/workflows/deploy-functions.yml'
+    permissions:
+      id-token: write
+      contents: read
+    secrets: inherit
 
   # STEP: BUILD AND DEPLOY WEB
   build-and-deploy-web:
     name: 'Build and Deploy NotesTracker.Web'
     if: ${{ inputs.deploy_web }}
     uses: './.github/workflows/deploy-web.yml'
+    permissions:
+      id-token: write
+      contents: read
+    secrets: inherit
 
   # STEP: BUILD AND DEPLOY DATABASE
   build-and-deploy-database:
     name: 'Build and Deploy NotesTracker.Database'
     if: ${{ inputs.deploy_database }}
     uses: './.github/workflows/deploy-database.yml'
+    permissions:
+      id-token: write
+      contents: read
+    secrets: inherit

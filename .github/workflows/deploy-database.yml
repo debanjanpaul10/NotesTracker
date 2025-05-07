@@ -6,27 +6,33 @@ on:
 jobs:
   build-and-deploy-db:
     runs-on: ubuntu-latest
+    environment: Laboratory
 
     steps:
     # Checkout the repository
     - name: Checkout code
       uses: actions/checkout@v3
 
+    # Azure Login
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }} 
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }} 
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
     # Setup .NET
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '9.0.x'
-    
-    # Build the database project
-    - name: Build and Deploy Database
-      run:  |
-        dotnet restore NotesTracker.Database/NotesTracker.Database.sqlproj
-        dotnet build NotesTracker.Database/NotesTracker.Database.sqlproj --configuration Release --output ./output
 
-    # Publish the database to Azure SQL
-    - name: Deploy to Azure SQL database
-      uses: azure/sql-action@v2
+    # Build and deploy the SQL project
+    - name: Build and Deploy to Azure SQL database
+      uses: azure/sql-action@v2.3
       with:
         connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-        path: './output/NotesTracker.Database.dacpac'
+        path: './NotesTracker.Database/NotesTracker.Database.sqlproj'
+        action: 'publish'
+        build-arguments: '-c Release'
+        arguments: '/p:DropObjectsNotInSource=true'

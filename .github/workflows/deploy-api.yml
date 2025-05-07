@@ -2,10 +2,11 @@ name: Build and Deploy NotesTracker.API
 
 on:
   workflow_call:
-    
+
 jobs:
   build-and-deploy-api:
     runs-on: ubuntu-latest
+    environment: Laboratory
 
     steps:
     # Checkout the repository

@@ -1,20 +1,20 @@
 <div class="container">
-  <div *ngIf="loading()" class="mt-5">
+  <div *ngIf="this.loading()" class="mt-5">
     <app-loader></app-loader>
   </div>
 
-  <div *ngIf="!loading()" class="notes-card-container mt-2 mb-3">
+  <div *ngIf="!this.loading()" class="notes-card-container mt-2 mb-3">
     <mat-card
       appearance="outlined"
       class="notes-card"
-      *ngFor="let note of notesList()"
+      *ngFor="let note of this.notesList()"
     >
       <mat-card-header class="notes-card-header">
         <mat-card-title class="notes-card-title">
           {{ note.noteTitle }}
         </mat-card-title>
         <div class="notes-card-actions">
-          <button mat-fab color="accent" (click)="handleNoteEdit(note.noteId)">
+          <button mat-fab color="accent" (click)="this.handleNoteEdit(note.noteId)">
             <mat-icon>edit</mat-icon>
           </button>
           &nbsp;
@@ -22,7 +22,7 @@
             mat-fab
             class="custom-red-btn"
             color="warn"
-            (click)="deleteNoteById(note.noteId)"
+            (click)="this.deleteNoteById(note.noteId)"
           >
             <mat-icon>delete</mat-icon>
           </button>
@@ -38,7 +38,7 @@
       </mat-card-content>
     </mat-card>
 
-    <div class="mt-4 text-center" *ngIf="isUserAuthenticated()">
+    <div class="mt-4 text-center" *ngIf="this.isUserAuthenticated()">
       <button
         mat-fab
         extended

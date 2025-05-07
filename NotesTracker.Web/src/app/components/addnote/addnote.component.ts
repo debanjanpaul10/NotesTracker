@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
@@ -35,24 +35,24 @@ import { UsersService } from '../../services/users.service';
 })
 class AddNoteComponent implements OnInit {
   /**
+   * The add notes constants.
+   */
+  public AddNotesConstants = AddNotePageConstants.Headings;
+  
+  /**
    * The new note dto.
    */
-  public newNote: NoteDTO = new NoteDTO('', '', '');
+  public newNote: WritableSignal<NoteDTO> = signal(new NoteDTO('', '', ''));
 
   /**
    * The is loading boolean flag.
    */
-  public loading: boolean = false;
+  public loading: WritableSignal<boolean> = signal(false);
 
   /**
    * The is note saved boolean flag.
    */
-  public isNoteSaved: boolean = false;
-
-  /**
-   * The add notes constants.
-   */
-  public AddNotesConstants = AddNotePageConstants.Headings;
+  public isNoteSaved: WritableSignal<boolean> = signal(false);
 
   /**
    * Initializes a new instance of `AddNoteComponent`
@@ -83,7 +83,7 @@ class AddNoteComponent implements OnInit {
    */
   public handleFormSubmit(newNote: NoteDTO): void {
     if (newNote.noteTitle !== '' && newNote.noteDescription !== '') {
-      newNote.userName = this.userService.getUserAlias();
+      newNote.userId = this.userService.getUserId();
       this.addNewNote(newNote);
     } else {
       alert('Some Fields are missing!');
@@ -95,19 +95,20 @@ class AddNoteComponent implements OnInit {
    * @param newNote The new note.
    */
   private addNewNote(newNote: NoteDTO): void {
-    this.loading = true;
+    this.loading.set(true);
     this.notesService.addNewNoteAsync(newNote).subscribe({
       next: (noteSaveStatus) => {
-        this.isNoteSaved = noteSaveStatus;
-        this.loading = false;
-        if (this.isNoteSaved) {
+        this.isNoteSaved.set(noteSaveStatus);
+        if (this.isNoteSaved()) {
           this.router.navigate([AngularRoutes.Home.Link]);
         }
       },
       error: (error) => {
         console.error(error);
-        this.loading = false;
         this.toaster.showError(error);
+      },
+      complete: () => {
+        this.loading.set(false);
       },
     });
   }

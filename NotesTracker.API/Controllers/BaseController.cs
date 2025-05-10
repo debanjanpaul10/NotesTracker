@@ -21,14 +21,9 @@ namespace NotesTracker.API.Controllers
 	public abstract class BaseController : ControllerBase
 	{
 		/// <summary>
-		/// The user id.
+		/// The user name.
 		/// </summary>
-		protected string UserId = string.Empty;
-
-		/// <summary>
-		/// The user email.
-		/// </summary>
-		protected string UserEmail = string.Empty;
+		protected string UserName = string.Empty;
 
 		/// <summary>
 		/// The http context accessor.
@@ -43,15 +38,10 @@ namespace NotesTracker.API.Controllers
 			this._httpContextAccessor = httpContextAccessor;
 			if (this._httpContextAccessor.HttpContext is not null && this._httpContextAccessor.HttpContext?.User is not null)
 			{
-				var userEmail = this._httpContextAccessor.HttpContext?.User?.Claims?.FirstOrDefault(x => x.Type.Equals(NameClaimConstant))?.Value;
-				if (!string.IsNullOrEmpty(userEmail))
+				var userName = this._httpContextAccessor.HttpContext?.User?.Claims?.FirstOrDefault(claim => claim.Type.Equals(UserNameClaimConstant))?.Value;
+				if(!string.IsNullOrEmpty(userName))
 				{
-					this.UserEmail = userEmail;
-				}
-
-				if(this._httpContextAccessor.HttpContext?.Items["UserId"] is string userId)
-				{
-					this.UserId = userId;
+					this.UserName = userName;
 				}
 				else
 				{

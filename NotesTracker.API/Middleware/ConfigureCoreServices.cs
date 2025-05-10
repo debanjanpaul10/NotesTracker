@@ -8,6 +8,7 @@
 namespace NotesTracker.API.Middleware
 {
     using System.Security.Claims;
+    using System.Threading.Tasks;
     using Azure.Identity;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.Extensions.Configuration.AzureAppConfiguration;
@@ -52,7 +53,7 @@ namespace NotesTracker.API.Middleware
         /// <param name="builder">The builder.</param>
         public static void ConfigureApiServices(this WebApplicationBuilder builder)
         {
-            builder.ConfigureApplicationDependencies();
+            builder.ConfigureSqlServerDependency();
             builder.ConfigureAuthenticationServices();
             builder.Services.ConfigureBusinessDependencies();
             builder.Services.ConfigureDataDependencies();
@@ -77,37 +78,48 @@ namespace NotesTracker.API.Middleware
                     {
                         OnTokenValidated = async context =>
                         {
-                            var claimsPrincipal = context.Principal;
-                            var claimsIdentity = claimsPrincipal?.Identity as ClaimsIdentity;
-                            if (claimsIdentity is null || !claimsIdentity.IsAuthenticated)
-                            {
-                                context.Fail(ExceptionConstants.InvalidTokenExceptionConstant);
-                                return;
-                            }
-
-                            // Extracting the 'sub' claim
-                            var subClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                            if (string.IsNullOrEmpty(subClaim))
-                            {
-                                context.Fail(ExceptionConstants.UserIdNotPresentExceptionConstant);
-                                return;
-                            }
-
-                            context.HttpContext.Items["UserId"] = subClaim.Split('|')[1];
-                            context.HttpContext.User = new ClaimsPrincipal(claimsIdentity);
-                            await Task.CompletedTask;
+                            await context.HandleAuthTokenValidationSuccessAsync();
                         },
-                        OnAuthenticationFailed = context =>
+                        OnAuthenticationFailed = async context =>
                         {
-                            var authenticationFailedException = new UnauthorizedAccessException(ExceptionConstants.InvalidTokenExceptionConstant);
-                            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<BaseController>>();
-                            logger.LogError(authenticationFailedException, authenticationFailedException.Message);
-
-                            return Task.CompletedTask;
+                            await context.HandleAuthTokenValidationFailedAsync();
                         }
                     };
                 });
         }
+
+        #region PRIVATE Methods
+
+        /// <summary>
+        /// Handles auth token validation success async.
+        /// </summary>
+        /// <param name="context">The token validation context.</param>
+        private static async Task HandleAuthTokenValidationSuccessAsync(this TokenValidatedContext context)
+        {
+            var claimsPrincipal = context.Principal;
+            if (claimsPrincipal?.Identity is not ClaimsIdentity claimsIdentity || !claimsIdentity.IsAuthenticated)
+            {
+                context.Fail(ExceptionConstants.InvalidTokenExceptionConstant);
+                return;
+            }
+
+            context.HttpContext.User = new ClaimsPrincipal(claimsIdentity);
+            await Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Handles auth token validation failed async.
+        /// </summary>
+        /// <param name="context">The auth failed context.</param>
+        private static async Task HandleAuthTokenValidationFailedAsync(this AuthenticationFailedContext context)
+        {
+            var authenticationFailedException = new UnauthorizedAccessException(ExceptionConstants.InvalidTokenExceptionConstant);
+            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<BaseController>>();
+            logger.LogError(authenticationFailedException, authenticationFailedException.Message);
+            await Task.CompletedTask;
+        }
+
+        #endregion
     }
 }
 

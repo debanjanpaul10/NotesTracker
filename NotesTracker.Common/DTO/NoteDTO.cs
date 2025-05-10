@@ -29,11 +29,11 @@ namespace NotesTracker.Shared.DTO
 		public string NoteDescription { get; set; } = string.Empty;
 
 		/// <summary>
-		/// Gets or sets the user name.
+		/// Gets or sets the user id.
 		/// </summary>
 		/// <value>
 		/// The user id.
 		/// </value>
-		public string UserName { get; set; } = string.Empty;
+		public string UserId { get; set; } = string.Empty;
 	}
 }

@@ -11,17 +11,17 @@
 
     <div class="navbar-nav ml-auto">
       <button mat-fab class="ml-2 theme-toggle-btn" (click)="toggleTheme()">
-        {{ isDarkMode ? "☀️" : "🌙" }}
+        {{ this.isDarkMode() ? "☀️" : "🌙" }}
       </button>
       &nbsp; &nbsp;
 
-      <div *ngIf="isUserLoggedIn === false">
+      <div *ngIf="this.isUserLoggedIn() === false">
         <button mat-fab extended class="ml-2 mt-1" (click)="handleUserLogin()">
           {{ HeaderConstants.Headings.LoginRegister }}
         </button>
       </div>
 
-      <div *ngIf="isUserLoggedIn === true">
+      <div *ngIf="this.isUserLoggedIn() === true">
         <button
           mat-fab
           extended

@@ -42,6 +42,16 @@ import { NoteComponent } from '../note/note.component';
 })
 class NotesContainerComponent implements OnInit {
   /**
+   * The notes container constants object.
+   */
+  public notesContainerConstants = NotesContainerConstants;
+
+  /**
+   * The Angular routes constants
+   */
+  public angularRoutesConstants = AngularRoutes;
+  
+  /**
    * The notes list.
    */
   public notesList: WritableSignal<Notes[]> = signal([]);
@@ -52,24 +62,14 @@ class NotesContainerComponent implements OnInit {
   public loading: WritableSignal<boolean> = signal(false);
 
   /**
-   * The is delete operation success boolean flag.
-   */
-  public isDeleteOperationSuccess: WritableSignal<boolean> = signal(false);
-
-  /**
-   * The notes container constants object.
-   */
-  public notesContainerConstants = NotesContainerConstants;
-
-  /**
-   * The Angular routes constants
-   */
-  public angularRoutesConstants = AngularRoutes;
-
-  /**
    * The boolean flag to check user authenticated.
    */
   public isUserAuthenticated: WritableSignal<boolean> = signal(false);
+
+  /**
+   * The is delete operation success boolean flag.
+   */
+  public isDeleteOperationSuccess: WritableSignal<boolean> = signal(false);
 
   /**
    * Initializes a new instance of `NotesContainerComponent`

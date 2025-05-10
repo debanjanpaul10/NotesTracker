@@ -6,5 +6,5 @@ CREATE TABLE [dbo].[Notes]
   [CreatedDate] [datetime] NOT NULL,
   [LastModifiedDate] [datetime] NOT NULL,
   [IsActive] [bit] NOT NULL,
-  [UserName] [nvarchar](max) NOT NULL,
+  [UserId] [nvarchar](max) NOT NULL,
 )

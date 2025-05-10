@@ -1,0 +1,38 @@
+name: Build and Deploy NotesTracker.Database
+
+on:
+  workflow_call:
+
+jobs:
+  build-and-deploy-db:
+    runs-on: ubuntu-latest
+    environment: Laboratory
+
+    steps:
+    # Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Azure Login
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }} 
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }} 
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    # Setup .NET
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '9.0.x'
+
+    # Build and deploy the SQL project
+    - name: Build and Deploy to Azure SQL database
+      uses: azure/sql-action@v2.3
+      with:
+        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+        path: './NotesTracker.Database/NotesTracker.Database.sqlproj'
+        action: 'publish'
+        build-arguments: '-c Release'
+        arguments: '/p:DropObjectsNotInSource=true'

@@ -61,11 +61,11 @@ namespace NotesTracker.Data.Entities
 		public bool IsActive { get; set; }
 
 		/// <summary>
-		/// Gets or sets the owner user name.
+		/// Gets or sets the owner user id.
 		/// </summary>
 		/// <value>
 		/// The owner user id.
 		/// </value>
-		public string UserName { get; set; } = string.Empty;
+		public string UserId { get; set; } = string.Empty;
 	}
 }

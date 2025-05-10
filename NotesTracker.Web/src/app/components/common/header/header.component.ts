@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -27,19 +27,19 @@ class HeaderComponent implements OnInit {
   public HeaderConstants = HeaderPageConstants;
 
   /**
-   * The is dark mode boolean flag.
-   */
-  public isDarkMode: boolean = false;
-
-  /**
    * The theme settings constants.
    */
   public ThemeSettingsKeys = HeaderPageConstants.ThemeSettings;
 
   /**
+   * The is dark mode boolean flag.
+   */
+  public isDarkMode: WritableSignal<boolean> = signal(false);
+
+  /**
    * The boolean flag to check if user is logged in or not.
    */
-  public isUserLoggedIn: boolean = false;
+  public isUserLoggedIn: WritableSignal<boolean> = signal(false);
 
   /**
    * Initializes a new instance of `HeaderComponent`
@@ -51,11 +51,11 @@ class HeaderComponent implements OnInit {
     const savedTheme =
       localStorage.getItem(CacheKeys.ThemeSettings) ||
       this.ThemeSettingsKeys.LightMode.Key;
-    this.isDarkMode = savedTheme === this.ThemeSettingsKeys.DarkMode.Key;
+    this.isDarkMode.set(savedTheme === this.ThemeSettingsKeys.DarkMode.Key);
     document.body.className = savedTheme;
 
     this.auth0.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
-      this.isUserLoggedIn = isAuthenticated;
+      this.isUserLoggedIn.set(isAuthenticated);
     });
   }
 
@@ -63,8 +63,8 @@ class HeaderComponent implements OnInit {
    * Handles the theme toggle event.
    */
   public toggleTheme(): void {
-    this.isDarkMode = !this.isDarkMode;
-    const theme = this.isDarkMode
+    this.isDarkMode.set(!this.isDarkMode());
+    const theme = this.isDarkMode()
       ? this.ThemeSettingsKeys.DarkMode.Key
       : this.ThemeSettingsKeys.LightMode.Key;
     document.body.className = theme;
@@ -83,7 +83,7 @@ class HeaderComponent implements OnInit {
    * Handle user logout event.
    */
   public handleUserLogout(): void {
-    if (this.isUserLoggedIn) {
+    if (this.isUserLoggedIn()) {
       this.auth0.logout({
         logoutParams: {
           returnTo: document.location.origin,

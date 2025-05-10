@@ -173,8 +173,8 @@ export const MadeWithComponentConstants = {
     SQLServer: {
       Heading: 'Microsoft SQL Server',
       Description: `
-        <div>Get the flexibility you need to use integrated solutions and apps with your data—in the cloud, on-premises, or at the edge. </div>
-        <div>SQL Server 2022 is the most Azure-enabled release yet, with innovation across performance, security, and availability.</div>
+        <div>Get the flexibility you need to use integrated solutions and apps with your data—in the cloud, on-premises, or at the edge.
+        SQL Server 2022 is the most Azure-enabled release yet, with innovation across performance, security, and availability.</div>
         <br />`,
       Image: 'assets/sqlserver-img.png',
       Link: 'https://www.microsoft.com/en-in/sql-server',
@@ -187,6 +187,14 @@ export const MadeWithComponentConstants = {
         <br />`,
       Image: 'assets/auth0-img.png',
       Link: 'https://auth0.com/',
+    },
+    Azure: {
+      Heading: 'Azure PaaS',
+      Description: `
+      <div>Microsoft Azure, or just Azure is the cloud computing platform developed by Microsoft. It has management, access and development of applications and services to individuals, companies, and governments through its global infrastructure</div>
+      <br />`,
+      Image: 'assets/azure-img.png',
+      Link: 'https://azure.microsoft.com/',
     },
   },
 

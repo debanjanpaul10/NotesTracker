@@ -13,19 +13,19 @@ export class NoteDTO {
   public noteDescription: string;
 
   /**
-   * The user id.
+   * The user name.
    */
-  public userId: string;
+  public userName: string;
 
   /**
    * Initializes a new instance of `NoteDTO`
    * @param NoteTitle The note title.
    * @param NoteDescription The note description.
-   * @param UserId The user id.
+   * @param UserName The user name.
    */
-  constructor(NoteTitle: string, NoteDescription: string, UserId: string) {
+  constructor(NoteTitle: string, NoteDescription: string, UserName: string) {
     this.noteTitle = NoteTitle;
     this.noteDescription = NoteDescription;
-    this.userId = UserId;
+    this.userName = UserName;
   }
 }

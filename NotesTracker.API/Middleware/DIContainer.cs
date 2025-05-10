@@ -21,17 +21,26 @@ namespace NotesTracker.API.Middleware
 	public static class DIContainer
 	{
 		/// <summary>
-		/// Configures the application dependencies.
+		/// Configures the sql database dependencies.
 		/// </summary>
 		/// <param name="builder">The builder.</param>
-		public static void ConfigureApplicationDependencies(this WebApplicationBuilder builder)
+		public static void ConfigureSqlServerDependency(this WebApplicationBuilder builder)
 		{
 			var sqlConnectionString = builder.Configuration[ConfigurationConstants.SqlConnectionStringConstant];
 			if (!string.IsNullOrEmpty(sqlConnectionString))
 			{
 				builder.Services.AddDbContext<SqlDbContext>(options =>
 				{
-					options.UseSqlServer(connectionString: sqlConnectionString);
+					options.UseSqlServer
+					(
+						connectionString: sqlConnectionString,
+						options => options.EnableRetryOnFailure
+						(
+							maxRetryCount: 3,
+							maxRetryDelay: TimeSpan.FromSeconds(30),
+							errorNumbersToAdd: null
+						)
+					);
 				});
 			}
 		}

@@ -28,9 +28,9 @@ export class Notes {
   public lastModifiedDate: Date;
 
   /**
-   * The user id.
+   * The user name.
    */
-  public userId: string;
+  public userName: string;
 
   /**
    * Initializes a new instance of `Notes`
@@ -39,7 +39,7 @@ export class Notes {
    * @param NoteDescription The note description.
    * @param CreatedDate The note created date.
    * @param LastModifiedDate The note last modified date.
-   * @param UserId The user id.
+   * @param UserName The user name.
    */
   constructor(
     NoteId: number,
@@ -47,13 +47,13 @@ export class Notes {
     NoteDescription: string,
     CreatedDate: Date,
     LastModifiedDate: Date,
-    UserId: string
+    UserName: string
   ) {
     this.noteId = NoteId;
     this.noteTitle = NoteTitle;
     this.noteDescription = NoteDescription;
     this.createdDate = CreatedDate;
     this.lastModifiedDate = LastModifiedDate;
-    this.userId = UserId;
+    this.userName = UserName;
   }
 }

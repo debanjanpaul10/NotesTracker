@@ -1,0 +1,121 @@
+{
+	"Azure": {
+		"AzureResources": [
+			{
+				"Name": "rg-notes-tracker",
+				"ResourceType": "Resource Group"
+			},
+			{
+				"Name": "app-webapi-notes-tracker",
+				"ResourceType": "Azure App Service"
+			},
+			{
+				"Name": "appcs-notes-tracker",
+				"ResourceType": "Azure App Configuration"
+			},
+			{
+				"Name": "sql-notes-tracker",
+				"ResourceType": "Azure SQL Server"
+			},
+			{
+				"Name": "db-notes-tracker",
+				"ResourceType": "Azure SQL Database"
+			},
+			{
+				"Name": "func-notes-tracker",
+				"ResourceType": "Azure Function App"
+			},
+			{
+				"Name": "webapp-web-notes-tracker",
+				"ResourceType": "Static Web App"
+			},
+			{
+				"Name": "mi-user-notes-tracker",
+				"ResourceType": "User assigned Managed Identity"
+			}
+		],
+		"AzureAppConfigSettings": [
+			{
+				"key": "Auth0-AzureAD-ClientSecret",
+				"label": "Custom",
+				"value": "value from azure ad of webapp",
+				"content_type": "",
+				"tags": {}
+			},
+			{
+				"key": "Auth0:Audience",
+				"label": "BaseConfiguration",
+				"value": "tsSVL8406kXcjcI2bNmou9FjrUWyxfro",
+				"content_type": "",
+				"tags": {}
+			},
+			{
+				"key": "Auth0:Domain",
+				"label": "BaseConfiguration",
+				"value": "debanjans-lab.uk.auth0.com",
+				"content_type": "",
+				"tags": {}
+			},
+			{
+				"key": "DBCredentials",
+				"label": "BaseConfiguration",
+				"value": "value of azure sql userid and password",
+				"content_type": "json",
+				"tags": {}
+			},
+			{
+				"key": "SqlConnectionString",
+				"label": "BaseConfiguration",
+				"value": "value from sql db connection string page",
+				"content_type": "",
+				"tags": {}
+			}
+		],
+		"EnvironmentVariables": {
+			"app-webapi-notes-tracker": [
+				{
+					"name": "AppConfigurationEndpoint",
+					"value": "https://appcs-notes-tracker.azconfig.io",
+					"slotSetting": true
+				},
+				{
+					"name": "ManagedIdentityClientId",
+					"value": "6bd44147-b59e-4be2-951f-5f4ab4780fa6",
+					"slotSetting": true
+				}
+			]
+		}
+	},
+	"GitHub": {
+		"GithubActionsSecrets": [
+			{
+				"Name": "AZURE_CLIENT_ID",
+				"Value": "value of managed identity"
+			},
+			{
+				"Name": "AZURE_FUNCTIONS_PUBLISH_PROFILE",
+				"Value": "value from azure function app"
+			},
+			{
+				"Name": "AZURE_SQL_CONNECTION_STRING",
+				"Value": "value from azure sql db"
+			},
+			{
+				"Name": "AZRE_STATIC_WEB_APPS_API_TOKEN_JOLLY_HILL_03D2EF300",
+				"Value": "value from azure static web app"
+			},
+			{
+				"Name": "AZURE_SUBSCRIPTION_ID",
+				"Value": "value from tenants page"
+			},
+			{
+				"Name": "AZURE_TENANT_ID",
+				"Value": "value from tenants page"
+			},
+			{
+				"Name": "AZURE_WEBAPI_PUBLISH_PROFILE",
+				"Value": "value from azure app service of webapi"
+			}
+		]
+	}
+}

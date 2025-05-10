@@ -39,14 +39,9 @@ namespace NotesTracker.Shared.Constants
         public const string DomainConstant = "Auth0:Domain";
 
         /// <summary>
-        /// The user name constant.
+        /// The user name claim constant.
         /// </summary>
-        public const string NameClaimConstant = "name";
-
-        /// <summary>
-        /// The subject claim constant.
-        /// </summary>
-        public const string SubjectClaimConstant = "sub";
+        public const string UserNameClaimConstant = "username";
 
         /// <summary>
         /// The app configuration endpoint key constant.

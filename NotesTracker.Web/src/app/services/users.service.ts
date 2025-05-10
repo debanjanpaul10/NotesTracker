@@ -19,7 +19,7 @@ class UsersService {
   /**
    * The user alias.
    */
-  private userId: WritableSignal<string> = signal('');
+  private _userName: WritableSignal<string> = signal('');
 
   /**
    * The api url.
@@ -32,19 +32,19 @@ class UsersService {
   private usersRoutes: any = ApiUrls.Users;
 
   /**
-   * Sets the user id.
-   * @param userId The passed user id.
+   * Sets the user name.
+   * @param userName The passed user id.
    */
-  public setUserId(id: string): void {
-    this.userId.set(id);
+  public setUserName(userName: string): void {
+    this._userName.set(userName);
   }
 
   /**
-   * Gets the user id.
-   * @returns The user id.
+   * Gets the user name.
+   * @returns The user name.
    */
-  public getUserId(): string {
-    return this.userId();
+  public getUserName(): string {
+    return this._userName();
   }
 
   /**

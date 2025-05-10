@@ -46,16 +46,16 @@ namespace NotesTracker.Business.Services
 		/// Deletes the note asynchronous.
 		/// </summary>
 		/// <param name="noteId">The note identifier.</param>
-		/// <param name="userId">The user id.</param>
+		/// <param name="userName">The user id.</param>
 		/// <returns>
 		/// The boolean for success/failure
 		/// </returns>
 		/// <exception cref="System.ArgumentNullException">noteId</exception>
-		public Task<bool> DeleteNoteAsync(int noteId, string userId)
+		public Task<bool> DeleteNoteAsync(int noteId, string userName)
 		{
 			if (noteId > 0)
 			{
-				return this._notesDataService.DeleteNoteAsync(noteId, userId);
+				return this._notesDataService.DeleteNoteAsync(noteId, userName);
 			}
 
 			throw new ArgumentNullException(nameof(noteId), ExceptionConstants.NoteNotFoundException);
@@ -64,29 +64,29 @@ namespace NotesTracker.Business.Services
 		/// <summary>
 		/// Gets all notes asynchronous.
 		/// </summary>
-		/// <param name="userId">The user id.</param>
+		/// <param name="userName">The user id.</param>
 		/// <returns>
 		/// The list of note entity
 		/// </returns>
-		public Task<IEnumerable<Note>> GetAllNotesAsync(string userId)
+		public Task<IEnumerable<Note>> GetAllNotesAsync(string userName)
 		{
-			return this._notesDataService.GetAllNotesAsync(userId);
+			return this._notesDataService.GetAllNotesAsync(userName);
 		}
 
 		/// <summary>
 		/// Gets the note asynchronous.
 		/// </summary>
 		/// <param name="noteId">The note id.</param>
-		/// <param name="userId">The user id.</param>
+		/// <param name="userName">The user id.</param>
 		/// <returns>
 		/// The note entity
 		/// </returns>
 		/// <exception cref="System.ArgumentNullException">noteId</exception>
-		public Task<Note> GetNoteAsync(int noteId, string userId)
+		public Task<Note> GetNoteAsync(int noteId, string userName)
 		{
 			if (noteId > 0)
 			{
-				return this._notesDataService.GetNoteAsync(noteId, userId);
+				return this._notesDataService.GetNoteAsync(noteId, userName);
 			}
 
 			throw new ArgumentNullException(nameof(noteId), ExceptionConstants.NoteNotFoundException);

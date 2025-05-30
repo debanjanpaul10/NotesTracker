@@ -53,7 +53,7 @@ namespace NotesTracker.API.Middleware
         /// <param name="builder">The builder.</param>
         public static void ConfigureApiServices(this WebApplicationBuilder builder)
         {
-            builder.ConfigureSqlServerDependency();
+            builder.ConfigureAzureSqlServer();
             builder.ConfigureAuthenticationServices();
             builder.Services.ConfigureBusinessDependencies();
             builder.Services.ConfigureDataDependencies();

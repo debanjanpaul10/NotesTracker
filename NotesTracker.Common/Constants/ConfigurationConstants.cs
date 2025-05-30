@@ -13,6 +13,11 @@ namespace NotesTracker.Shared.Constants
     public static class ConfigurationConstants
     {
         /// <summary>
+		/// The local sql connection string constant.
+		/// </summary>
+		public const string LocalSqlConnectionStringConstant = "LocalSqlServerConnection";
+
+        /// <summary>
         /// The SQL connection string constant
         /// </summary>
         public const string SqlConnectionStringConstant = "SqlConnectionString";

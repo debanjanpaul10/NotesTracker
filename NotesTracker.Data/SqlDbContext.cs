@@ -82,8 +82,6 @@ namespace NotesTracker.Data
 		/// </remarks>
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			var connectionString = this._configuration[SqlConnectionStringConstant];
-			optionsBuilder.UseSqlServer(connectionString);
 		}
 
 		/// <summary>
@@ -120,7 +118,8 @@ namespace NotesTracker.Data
 				entity.Property(e => e.UserName).HasColumnName(UserNameColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
 
 			});
-			modelBuilder.Entity<User>(entity => {
+			modelBuilder.Entity<User>(entity =>
+			{
 				entity.ToTable(UsersTableConstant);
 				entity.HasKey(e => e.Id).HasName(PrimaryKeyUsersConstant);
 				entity.Property(e => e.Id).HasColumnName(IdColumnNameConstant).HasColumnType(IntegerDataTypeConstant).ValueGeneratedOnAdd();

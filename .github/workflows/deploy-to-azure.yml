@@ -122,6 +122,7 @@ jobs:
         name: "Build and Deploy NotesTracker.Web"
         if: ${{ inputs.deploy_web }}
         runs-on: ubuntu-latest
+        environment: Laboratory
 
         steps:
             # Checkout the repository

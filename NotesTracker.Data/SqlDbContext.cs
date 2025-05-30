@@ -8,9 +8,7 @@
 namespace NotesTracker.Data
 {
 	using Microsoft.EntityFrameworkCore;
-	using Microsoft.Extensions.Configuration;
 	using NotesTracker.Data.Entities;
-	using static NotesTracker.Shared.Constants.ConfigurationConstants;
 	using static NotesTracker.Shared.Constants.DatabaseConstants;
 
 	/// <summary>
@@ -19,10 +17,6 @@ namespace NotesTracker.Data
 	/// <seealso cref="Microsoft.EntityFrameworkCore.DbContext" />
 	public class SqlDbContext : DbContext
 	{
-		/// <summary>
-		/// The configuration
-		/// </summary>
-		private readonly IConfiguration _configuration;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SqlDbContext"/> class.
@@ -39,10 +33,8 @@ namespace NotesTracker.Data
 		/// Initializes a new instance of the <see cref="SqlDbContext"/> class.
 		/// </summary>
 		/// <param name="options">The options.</param>
-		/// <param name="configuration">The configuration.</param>
-		public SqlDbContext(DbContextOptions<SqlDbContext> options, IConfiguration configuration) : base(options)
+		public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
 		{
-			this._configuration = configuration;
 		}
 
 		/// <summary>

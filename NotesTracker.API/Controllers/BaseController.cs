@@ -39,14 +39,13 @@ namespace NotesTracker.API.Controllers
 			if (this._httpContextAccessor.HttpContext is not null && this._httpContextAccessor.HttpContext?.User is not null)
 			{
 				var userName = this._httpContextAccessor.HttpContext?.User?.Claims?.FirstOrDefault(claim => claim.Type.Equals(UserNameClaimConstant))?.Value;
-				if(!string.IsNullOrEmpty(userName))
+				if (!string.IsNullOrEmpty(userName))
 				{
 					this.UserName = userName;
 				}
 				else
 				{
-					var userIdNotFoundException = new InvalidOperationException(ExceptionConstants.UserIdNotPresentExceptionConstant);
-					throw userIdNotFoundException;
+					throw new InvalidOperationException(ExceptionConstants.UserIdNotPresentExceptionConstant);
 				}
 			}
 		}

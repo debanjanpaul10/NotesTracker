@@ -13,6 +13,7 @@ namespace NotesTracker.API.Middleware
 	using NotesTracker.Data;
 	using NotesTracker.Data.Contracts;
 	using NotesTracker.Data.Services;
+	using NotesTracker.Shared.Helpers;
 	using static NotesTracker.Shared.Constants.ConfigurationConstants;
 
 	/// <summary>
@@ -53,6 +54,7 @@ namespace NotesTracker.API.Middleware
 		/// <param name="services">The services.</param>
 		public static void ConfigureBusinessDependencies(this IServiceCollection services)
 		{
+			services.AddScoped<IHttpClientHelper, HttpClientHelper>();
 			services.AddScoped<INotesService, NotesService>();
 			services.AddScoped<IUsersService, UsersService>();
 		}

@@ -55,6 +55,7 @@ namespace NotesTracker.API.Middleware
         {
             builder.ConfigureAzureSqlServer();
             builder.ConfigureAuthenticationServices();
+            builder.ConfigureHttpClientFactory();
             builder.Services.ConfigureBusinessDependencies();
             builder.Services.ConfigureDataDependencies();
         }
@@ -117,6 +118,30 @@ namespace NotesTracker.API.Middleware
             var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<BaseController>>();
             logger.LogError(authenticationFailedException, authenticationFailedException.Message);
             await Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Configures http client factory.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        private static void ConfigureHttpClientFactory(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddHttpClient(Auth0TokenClientConstant, tokenClient =>
+            {
+                var tokenApiBaseAddress = builder.Configuration[Auth0TokenUrl];
+                if (!string.IsNullOrEmpty(tokenApiBaseAddress))
+                {
+                    tokenClient.BaseAddress = new Uri(tokenApiBaseAddress);
+                }
+            });
+            builder.Services.AddHttpClient(Auth0ManagementHttpClientConstant, managementClient =>
+            {
+                var managementApiBaseAddress = builder.Configuration[Auth0ManagementApiAudienceConstant];
+                if (!string.IsNullOrEmpty(managementApiBaseAddress))
+                {
+                    managementClient.BaseAddress = new Uri(managementApiBaseAddress);
+                }
+            });
         }
 
         #endregion

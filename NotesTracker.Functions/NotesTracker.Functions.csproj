@@ -19,7 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NotesTracker.Business\NotesTracker.Business.csproj" />
-    <ProjectReference Include="..\NotesTracker.Common\NotesTracker.Shared.csproj" />
+    <ProjectReference Include="..\NotesTracker.Shared\NotesTracker.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.35821.62
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesTracker.API", "NotesTracker.API\NotesTracker.API.csproj", "{DD1791BE-22F4-0F59-CE10-0127CFE8E056}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesTracker.Shared", "NotesTracker.Common\NotesTracker.Shared.csproj", "{48C47046-23DE-4921-83EA-9F06BD09EB6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesTracker.Shared", "NotesTracker.Shared\NotesTracker.Shared.csproj", "{48C47046-23DE-4921-83EA-9F06BD09EB6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesTracker.Business", "NotesTracker.Business\NotesTracker.Business.csproj", "{DB5B20DE-0626-4C7C-9C2D-FD907EBD4AFF}"
 EndProject

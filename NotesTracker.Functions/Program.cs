@@ -38,16 +38,17 @@ namespace NotesTracker.Functions
                 });
 
             builder.ConfigureFunctionsWebApplication();
-            
+
             builder.Configuration.ConfigureAzureAppConfiguration(credentials);
             builder.Services.AddHttpClient();
             builder.ConfigureDatabaseConnection();
+            builder.ConfigureHttpClientFactory();
             builder.Services.ConfigureFunctionDependencies();
 
             builder.Build().Run();
         }
 
-        
+
     }
 }
 

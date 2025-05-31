@@ -13,11 +13,13 @@ namespace NotesTracker.Functions.Middleware
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Configuration.AzureAppConfiguration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using NotesTracker.Business.Contracts;
     using NotesTracker.Business.Services;
     using NotesTracker.Data;
     using NotesTracker.Data.Contracts;
     using NotesTracker.Data.Services;
+    using NotesTracker.Shared.Helpers;
     using static NotesTracker.Shared.Constants.ConfigurationConstants;
     using static NotesTracker.Shared.Constants.ExceptionConstants;
 
@@ -58,12 +60,23 @@ namespace NotesTracker.Functions.Middleware
         /// <param name="builder">The builder.</param>
         public static void ConfigureDatabaseConnection(this FunctionsApplicationBuilder builder)
         {
-            var sqlConnectionString = builder.Configuration[SqlConnectionStringConstant];
+            var sqlConnectionString = builder.Environment.IsDevelopment()
+                ? builder.Configuration[LocalSqlConnectionStringConstant]
+                : builder.Configuration[SqlConnectionStringConstant];
             if (!string.IsNullOrEmpty(sqlConnectionString))
             {
                 builder.Services.AddDbContext<SqlDbContext>(options =>
                 {
-                    options.UseSqlServer(connectionString: sqlConnectionString);
+                    options.UseSqlServer
+                    (
+                        connectionString: sqlConnectionString,
+                        options => options.EnableRetryOnFailure
+                        (
+                            maxRetryCount: 3,
+                            maxRetryDelay: TimeSpan.FromSeconds(30),
+                            errorNumbersToAdd: null
+                        )
+                    );
                 });
             }
         }
@@ -76,12 +89,36 @@ namespace NotesTracker.Functions.Middleware
         {
             // Business Manager Dependencies
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IHttpClientHelper, HttpClientHelper>();
 
             // Data Manager Dependencies
             services.AddScoped<IUsersDataService, UsersDataService>();
         }
-    }
 
+        /// <summary>
+        /// Configures http client factory.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        public static void ConfigureHttpClientFactory(this FunctionsApplicationBuilder builder)
+        {
+            builder.Services.AddHttpClient(Auth0TokenClientConstant, tokenClient =>
+            {
+                var tokenApiBaseAddress = builder.Configuration[Auth0TokenUrl];
+                if (!string.IsNullOrEmpty(tokenApiBaseAddress))
+                {
+                    tokenClient.BaseAddress = new Uri(tokenApiBaseAddress);
+                }
+            });
+            builder.Services.AddHttpClient(Auth0ManagementHttpClientConstant, managementClient =>
+            {
+                var managementApiBaseAddress = builder.Configuration[Auth0ManagementApiAudienceConstant];
+                if (!string.IsNullOrEmpty(managementApiBaseAddress))
+                {
+                    managementClient.BaseAddress = new Uri(managementApiBaseAddress);
+                }
+            });
+        }
+    }
 
 }
 

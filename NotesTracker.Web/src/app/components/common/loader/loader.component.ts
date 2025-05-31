@@ -5,11 +5,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 /**
  * The Loader Component.
  */
-@Component({
+@Component( {
   selector: 'app-loader',
   standalone: true,
-  imports: [CommonModule, MatProgressBarModule],
+  imports: [ CommonModule, MatProgressBarModule ],
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss',
-})
-export class LoaderComponent {}
+} )
+export class LoaderComponent { }

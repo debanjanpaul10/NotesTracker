@@ -1,7 +1,8 @@
 /**
  * The notes model.
  */
-export class Notes {
+export class Notes
+{
   /**
    * The note id.
    */
@@ -48,7 +49,8 @@ export class Notes {
     CreatedDate: Date,
     LastModifiedDate: Date,
     UserName: string
-  ) {
+  )
+  {
     this.noteId = NoteId;
     this.noteTitle = NoteTitle;
     this.noteDescription = NoteDescription;

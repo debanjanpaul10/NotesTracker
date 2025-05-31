@@ -60,39 +60,14 @@ namespace NotesTracker.Shared.Constants
 		public const string NewNoteNullException = "The new note cannot be null.";
 
 		/// <summary>
-		/// The user not exists exception.
-		/// </summary>
-		public const string UserNotExistsException = "The entered username or password is incorrect";
-
-		/// <summary>
-		/// The user addition failed exception.
-		/// </summary>
-		public const string UserAdditionFailedException = "Something went wrong while creating the user!";
-
-		/// <summary>
-		/// The user already exists message constant.
-		/// </summary>
-		public const string UserAlreadyExistsMessageConstant = "The given user alias and the user email is already being used!";
-
-		/// <summary>
-		/// The user identifier not correct message constant
-		/// </summary>
-		public const string UserIdNotCorrectMessageConstant = "The user id is not correct. Please enter a valid user id";
-
-		/// <summary>
 		/// The user does not exists message constant
 		/// </summary>
 		public const string UserDoesNotExistsMessageConstant = "The user data does not exist with us anymore!";
 
 		/// <summary>
-		/// The null user message constant
+		/// The attempted to enter blank user message constant.
 		/// </summary>
-		public const string NullUserMessageConstant = "Attempted to add null user data.";
-
-		/// <summary>
-		/// The user deletion failed message constant.
-		/// </summary>
-		public const string UserDeletionFailedMessageConstant = "The user deletion operation failed!";
+		public const string AttemptedToEnterBlankUserMessageConstant = "Attempted to get notes for null user";
 
 		#endregion
 	}

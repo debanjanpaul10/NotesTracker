@@ -1,7 +1,8 @@
 /**
  * The update note DTO class.
  */
-export class UpdateNoteDTO {
+export class UpdateNoteDTO
+{
   /**
    * The note id.
    */
@@ -34,7 +35,8 @@ export class UpdateNoteDTO {
     NoteTitle: string,
     NoteDescription: string,
     UserName: string,
-  ) {
+  )
+  {
     this.noteId = NoteId;
     this.noteTitle = NoteTitle;
     this.noteDescription = NoteDescription;

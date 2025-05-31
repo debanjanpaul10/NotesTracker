@@ -38,14 +38,14 @@
 			{
 				"key": "Auth0-AzureAD-ClientSecret",
 				"label": "Custom",
-				"value": "value from azure ad of webapp",
+				"value": "<AD_CLIENT_SECRET>",
 				"content_type": "",
 				"tags": {}
 			},
 			{
 				"key": "Auth0:Audience",
 				"label": "BaseConfiguration",
-				"value": "tsSVL8406kXcjcI2bNmou9FjrUWyxfro",
+				"value": "<SECRET_AUTH_0>",
 				"content_type": "",
 				"tags": {}
 			},
@@ -57,16 +57,37 @@
 				"tags": {}
 			},
 			{
-				"key": "DBCredentials",
+				"key": "Auth0:ManagementAPI:Audience",
 				"label": "BaseConfiguration",
-				"value": "value of azure sql userid and password",
-				"content_type": "json",
+				"value": "https://debanjans-lab.uk.auth0.com/api/v2/",
+				"content_type": "",
+				"tags": {}
+			},
+			{
+				"key": "Auth0:ManagementAPI:ClientId",
+				"label": "BaseConfiguration",
+				"value": "<CLIENT_ID_SECRET>",
+				"content_type": "",
+				"tags": {}
+			},
+			{
+				"key": "Auth0:ManagementAPI:ClientSecret",
+				"label": "BaseConfiguration",
+				"value": "<AUTH0_CLIENT_SECRET>",
+				"content_type": "",
+				"tags": {}
+			},
+			{
+				"key": "Auth0:TokenUrl",
+				"label": "BaseConfiguration",
+				"value": "https://debanjans-lab.uk.auth0.com/oauth/token",
+				"content_type": "",
 				"tags": {}
 			},
 			{
 				"key": "SqlConnectionString",
 				"label": "BaseConfiguration",
-				"value": "value from sql db connection string page",
+				"value": "<SQL_CONNECTION_STRING>",
 				"content_type": "",
 				"tags": {}
 			}
@@ -80,7 +101,7 @@
 				},
 				{
 					"name": "ManagedIdentityClientId",
-					"value": "6bd44147-b59e-4be2-951f-5f4ab4780fa6",
+					"value": "64922270-0b44-4ac3-beee-dc44195f7236",
 					"slotSetting": true
 				}
 			]
@@ -88,10 +109,6 @@
 	},
 	"GitHub": {
 		"GithubActionsSecrets": [
-			{
-				"Name": "AZURE_CLIENT_ID",
-				"Value": "value of managed identity"
-			},
 			{
 				"Name": "AZURE_FUNCTIONS_PUBLISH_PROFILE",
 				"Value": "value from azure function app"
@@ -105,16 +122,12 @@
 				"Value": "value from azure static web app"
 			},
 			{
-				"Name": "AZURE_SUBSCRIPTION_ID",
-				"Value": "value from tenants page"
-			},
-			{
-				"Name": "AZURE_TENANT_ID",
-				"Value": "value from tenants page"
-			},
-			{
 				"Name": "AZURE_WEBAPI_PUBLISH_PROFILE",
 				"Value": "value from azure app service of webapi"
+			},
+			{
+				"Name": "AZURE_DB_SECRET",
+				"Value": "The azure db secret from AAD"
 			}
 		]
 	}

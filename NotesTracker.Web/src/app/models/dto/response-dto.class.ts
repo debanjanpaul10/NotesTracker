@@ -1,7 +1,8 @@
 /**
  * The Response DTO
  */
-export class ResponseDTO {
+export class ResponseDTO
+{
   /**
    * The status code.
    */
@@ -23,7 +24,8 @@ export class ResponseDTO {
    * @param IsSuccess The is Success flag.
    * @param ResponseData The Response Data.
    */
-  constructor(StatusCode: number, IsSuccess: boolean, ResponseData: any) {
+  constructor( StatusCode: number, IsSuccess: boolean, ResponseData: any )
+  {
     this.statusCode = StatusCode;
     this.isSuccess = IsSuccess;
     this.responseData = ResponseData;

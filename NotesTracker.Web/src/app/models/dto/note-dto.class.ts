@@ -1,7 +1,8 @@
 /**
  * The Note DTO.
  */
-export class NoteDTO {
+export class NoteDTO
+{
   /**
    * The note title.
    */
@@ -23,7 +24,8 @@ export class NoteDTO {
    * @param NoteDescription The note description.
    * @param UserName The user name.
    */
-  constructor(NoteTitle: string, NoteDescription: string, UserName: string) {
+  constructor( NoteTitle: string, NoteDescription: string, UserName: string )
+  {
     this.noteTitle = NoteTitle;
     this.noteDescription = NoteDescription;
     this.userName = UserName;

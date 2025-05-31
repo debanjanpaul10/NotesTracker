@@ -10,7 +10,7 @@ import { MadeWithComponentConstants } from '../../helpers/notestracker.constants
 /**
  * The Made With Component
  */
-@Component({
+@Component( {
   selector: 'app-made-with',
   standalone: true,
   imports: [
@@ -22,8 +22,9 @@ import { MadeWithComponentConstants } from '../../helpers/notestracker.constants
   ],
   templateUrl: './made-with.component.html',
   styleUrl: './made-with.component.scss',
-})
-class MadeWithComponent {
+} )
+class MadeWithComponent
+{
   /**
    * The MWC Data
    */
@@ -33,8 +34,9 @@ class MadeWithComponent {
    * Handles link redirection
    * @param link The Link URL
    */
-  public redirectTo(link: string): void {
-    window.open(link, '_blank');
+  public redirectTo ( link: string ): void
+  {
+    window.open( link, '_blank' );
   }
 }
 

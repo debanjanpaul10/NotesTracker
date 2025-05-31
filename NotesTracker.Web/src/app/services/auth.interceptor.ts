@@ -1,4 +1,5 @@
-import {
+import
+{
   HttpRequest,
   HttpHandlerFn,
   HttpInterceptorFn,
@@ -15,26 +16,30 @@ import { UsersService } from './users.service';
 const AuthInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
-) => {
-  const auth0 = inject(AuthService);
-  const usersService = inject(UsersService);
+) =>
+{
+  const auth0 = inject( AuthService );
+  const usersService = inject( UsersService );
 
   return auth0.idTokenClaims$.pipe(
-    switchMap((claims) => {
-      if (claims && claims.__raw) {
-        const userName = claims['username'];
-        if (userName) {
-          usersService.setUserName(userName);
+    switchMap( ( claims ) =>
+    {
+      if ( claims && claims.__raw )
+      {
+        const userName = claims[ 'username' ];
+        if ( userName )
+        {
+          usersService.setUserName( userName );
         }
-        const newReq = req.clone({
-          headers: req.headers.set('Authorization', `Bearer ${claims.__raw}`),
-        });
+        const newReq = req.clone( {
+          headers: req.headers.set( 'Authorization', `Bearer ${ claims.__raw }` ),
+        } );
 
-        return next(newReq);
+        return next( newReq );
       }
 
-      return next(req);
-    })
+      return next( req );
+    } )
   );
 };
 

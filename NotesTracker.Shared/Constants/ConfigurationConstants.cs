@@ -13,6 +13,11 @@ namespace NotesTracker.Shared.Constants
     public static class ConfigurationConstants
     {
         /// <summary>
+		/// The local sql connection string constant.
+		/// </summary>
+		public const string LocalSqlConnectionStringConstant = "LocalSqlServerConnection";
+
+        /// <summary>
         /// The SQL connection string constant
         /// </summary>
         public const string SqlConnectionStringConstant = "SqlConnectionString";
@@ -78,12 +83,12 @@ namespace NotesTracker.Shared.Constants
         /// <summary>
         /// The auth0 management api client id constant.
         /// </summary>
-        public const string Auth0ManagementApiClientIdConstant = "Auth0:ManagementClientId";
+        public const string Auth0ManagementApiClientIdConstant = "Auth0:ManagementAPI:ClientId";
 
         /// <summary>
         /// The auth0 management api client secret constant.
         /// </summary>
-        public const string Auth0ManagementApiClientSecretConstant = "Auth0:ManagementClientSecret";
+        public const string Auth0ManagementApiClientSecretConstant = "Auth0:ManagementAPI:ClientSecret";
 
         /// <summary>
         /// The client credentials grant.
@@ -108,7 +113,17 @@ namespace NotesTracker.Shared.Constants
         /// <summary>
         /// The auth0 management api audience constant.
         /// </summary>
-        public const string Auth0ManagementApiAudienceConstant = "Auth0:ManagementApiAudience";
+        public const string Auth0ManagementApiAudienceConstant = "Auth0:ManagementAPI:Audience";
+
+        /// <summary>
+        /// The auth0 client constant.
+        /// </summary>
+        public const string Auth0TokenClientConstant = "Auth0TokenClient";
+
+        /// <summary>
+        /// The auth0 management client constant.
+        /// </summary>
+        public const string Auth0ManagementHttpClientConstant = "Auth0ManagementHttpClient";
 
         #endregion
     }

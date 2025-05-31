@@ -13,7 +13,8 @@ namespace NotesTracker.API.Middleware
 	using NotesTracker.Data;
 	using NotesTracker.Data.Contracts;
 	using NotesTracker.Data.Services;
-	using NotesTracker.Shared.Constants;
+	using NotesTracker.Shared.Helpers;
+	using static NotesTracker.Shared.Constants.ConfigurationConstants;
 
 	/// <summary>
 	/// The Dependency Injection Container Class.
@@ -24,9 +25,11 @@ namespace NotesTracker.API.Middleware
 		/// Configures the sql database dependencies.
 		/// </summary>
 		/// <param name="builder">The builder.</param>
-		public static void ConfigureSqlServerDependency(this WebApplicationBuilder builder)
+		public static void ConfigureAzureSqlServer(this WebApplicationBuilder builder)
 		{
-			var sqlConnectionString = builder.Configuration[ConfigurationConstants.SqlConnectionStringConstant];
+			var sqlConnectionString = builder.Environment.IsDevelopment()
+				? builder.Configuration[LocalSqlConnectionStringConstant]
+				: builder.Configuration[SqlConnectionStringConstant];
 			if (!string.IsNullOrEmpty(sqlConnectionString))
 			{
 				builder.Services.AddDbContext<SqlDbContext>(options =>
@@ -51,6 +54,7 @@ namespace NotesTracker.API.Middleware
 		/// <param name="services">The services.</param>
 		public static void ConfigureBusinessDependencies(this IServiceCollection services)
 		{
+			services.AddScoped<IHttpClientHelper, HttpClientHelper>();
 			services.AddScoped<INotesService, NotesService>();
 			services.AddScoped<IUsersService, UsersService>();
 		}

@@ -13,13 +13,16 @@ import { Auth0Credentials, LocalHostBaseUrl } from './helpers/config.constants';
  * Determines the redirect uri for auth0 authentication.
  * @returns The redirect base URI.
  */
-function determineRedirectUri(): string {
+function determineRedirectUri (): string
+{
   const currentHost = window.location.origin;
 
-  if (currentHost.includes(LocalHostBaseUrl)) {
-    return Auth0Credentials.RedirectBaseUris[0];
-  } else {
-    return Auth0Credentials.RedirectBaseUris[1];
+  if ( currentHost.includes( LocalHostBaseUrl ) )
+  {
+    return Auth0Credentials.RedirectBaseUris[ 0 ];
+  } else
+  {
+    return Auth0Credentials.RedirectBaseUris[ 1 ];
   }
 }
 
@@ -28,23 +31,23 @@ function determineRedirectUri(): string {
  */
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter( routes ),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([AuthInterceptor])),
+    provideHttpClient( withInterceptors( [ AuthInterceptor ] ) ),
     importProvidersFrom(
-      ToastrModule.forRoot({
+      ToastrModule.forRoot( {
         timeOut: 5000,
         positionClass: 'toast-bottom-right',
         preventDuplicates: true,
-      })
+      } )
     ),
-    provideAuth0({
+    provideAuth0( {
       domain: Auth0Credentials.Domain,
       clientId: Auth0Credentials.ClientId,
       authorizationParams: {
         audience: Auth0Credentials.Audience,
         redirect_uri: determineRedirectUri(),
       },
-    }),
+    } ),
   ],
 };

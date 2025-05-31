@@ -34,6 +34,7 @@ namespace NotesTracker.Business.Services
 		/// <exception cref="System.ArgumentNullException">newNote</exception>
 		public Task<bool> AddNewNoteAsync(NoteDTO newNote)
 		{
+			HandleUserValidation(newNote.UserName);
 			if (newNote is not null)
 			{
 				return this._notesDataService.AddNewNoteAsync(newNote);
@@ -53,6 +54,7 @@ namespace NotesTracker.Business.Services
 		/// <exception cref="System.ArgumentNullException">noteId</exception>
 		public Task<bool> DeleteNoteAsync(int noteId, string userName)
 		{
+			HandleUserValidation(userName);
 			if (noteId > 0)
 			{
 				return this._notesDataService.DeleteNoteAsync(noteId, userName);
@@ -70,6 +72,7 @@ namespace NotesTracker.Business.Services
 		/// </returns>
 		public Task<IEnumerable<Note>> GetAllNotesAsync(string userName)
 		{
+			HandleUserValidation(userName);
 			return this._notesDataService.GetAllNotesAsync(userName);
 		}
 
@@ -84,6 +87,7 @@ namespace NotesTracker.Business.Services
 		/// <exception cref="System.ArgumentNullException">noteId</exception>
 		public Task<Note> GetNoteAsync(int noteId, string userName)
 		{
+			HandleUserValidation(userName);
 			if (noteId > 0)
 			{
 				return this._notesDataService.GetNoteAsync(noteId, userName);
@@ -102,14 +106,30 @@ namespace NotesTracker.Business.Services
 		/// <exception cref="System.ArgumentNullException">updatedNote</exception>
 		public Task<Note> UpdateNoteAsync(UpdateNoteDTO updatedNote)
 		{
+			HandleUserValidation(updatedNote.UserName);
 			if (updatedNote is not null)
 			{
 				return this._notesDataService.UpdateNoteAsync(updatedNote);
 			}
-			else
+
+			throw new ArgumentNullException(nameof(updatedNote), ExceptionConstants.NoteNotFoundException);
+		}
+
+		#region PRIVATE Methods
+
+		/// <summary>
+		/// Handles user validation.
+		/// </summary>
+		/// <param name="userName">The user name.</param>
+		/// <exception cref="ArgumentNullException">ArgumentNullException error.</exception>
+		private static void HandleUserValidation(string userName)
+		{
+			if (string.IsNullOrEmpty(userName))
 			{
-				throw new ArgumentNullException(nameof(updatedNote), ExceptionConstants.NoteNotFoundException);
+				throw new ArgumentNullException(nameof(userName), ExceptionConstants.AttemptedToEnterBlankUserMessageConstant);
 			}
 		}
+
+		#endregion
 	}
 }

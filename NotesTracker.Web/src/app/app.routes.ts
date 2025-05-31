@@ -17,8 +17,8 @@ export const routes: Routes = [
 /**
  * The Notes routing module.
  */
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class NotesRoutingModule {}
+@NgModule( {
+  imports: [ RouterModule.forRoot( routes ) ],
+  exports: [ RouterModule ],
+} )
+export class NotesRoutingModule { }

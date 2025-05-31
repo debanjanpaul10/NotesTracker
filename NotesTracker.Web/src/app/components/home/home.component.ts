@@ -7,14 +7,15 @@ import { NotesContainerComponent } from '../notescontainer/notescontainer.compon
 /**
  * The Home component.
  */
-@Component({
+@Component( {
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NotesContainerComponent],
+  imports: [ CommonModule, NotesContainerComponent ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-})
-class HomeComponent {
+} )
+class HomeComponent
+{
   /**
    * The home page title constant.
    */

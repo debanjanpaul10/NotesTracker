@@ -7,6 +7,7 @@
 
 namespace NotesTracker.API.Controllers
 {
+    using System.Globalization;
     using Microsoft.AspNetCore.Mvc;
     using NotesTracker.Business.Contracts;
     using NotesTracker.Shared.Constants;
@@ -53,6 +54,7 @@ namespace NotesTracker.API.Controllers
             }
             catch (Exception ex)
             {
+                this._logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(GetAllNotesAsync), DateTime.UtcNow, ex.Message));
                 return this.HandleBadRequestResponse(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -77,6 +79,7 @@ namespace NotesTracker.API.Controllers
             }
             catch (Exception ex)
             {
+                this._logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(GetNoteByIdAsync), DateTime.UtcNow, ex.Message));
                 return this.HandleBadRequestResponse(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -97,6 +100,7 @@ namespace NotesTracker.API.Controllers
             }
             catch (Exception ex)
             {
+                this._logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(AddNewNoteAsync), DateTime.UtcNow, ex.Message));
                 return this.HandleBadRequestResponse(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -121,6 +125,7 @@ namespace NotesTracker.API.Controllers
             }
             catch (Exception ex)
             {
+                this._logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(UpdateNoteAsync), DateTime.UtcNow, ex.Message));
                 return this.HandleBadRequestResponse(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -141,6 +146,7 @@ namespace NotesTracker.API.Controllers
             }
             catch (Exception ex)
             {
+                this._logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(DeleteNoteAsync), DateTime.UtcNow, ex.Message));
                 return this.HandleBadRequestResponse(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }

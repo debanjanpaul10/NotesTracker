@@ -4,14 +4,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 /**
  * The Spinner component.
  */
-@Component({
+@Component( {
   selector: 'app-spinner',
   standalone: true,
-  imports: [MatProgressSpinnerModule],
+  imports: [ MatProgressSpinnerModule ],
   templateUrl: './spinner.component.html',
   styleUrl: './spinner.component.scss',
-})
-class SpinnerComponent {
+} )
+class SpinnerComponent
+{
   /**
    * The color of the spinner
    */

@@ -70,5 +70,19 @@ namespace NotesTracker.Shared.Constants
 		public const string AttemptedToEnterBlankUserMessageConstant = "Attempted to get notes for null user";
 
 		#endregion
+
+		#region Logging Messages
+
+		/// <summary>
+		/// The method started message constant
+		/// </summary>
+		public static readonly string MethodStartedMessageConstant = "Method {0} started at {1} for {2}";
+
+		/// <summary>
+		/// The method ended message constant
+		/// </summary>
+		public static readonly string MethodEndedMessageConstant = "Method {0} ended at {1} for {2}";
+
+		#endregion
 	}
 }

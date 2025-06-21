@@ -1,5 +1,5 @@
 export const ApiBaseUrl =
-  'https://app-webapi-notes-tracker-h4h5f8fxdhh7d6cy.centralindia-01.azurewebsites.net';
+  'https://localhost:41619';
 export const Auth0Credentials = {
   Domain: 'debanjans-lab.uk.auth0.com',
   ClientId: 'tsSVL8406kXcjcI2bNmou9FjrUWyxfro',

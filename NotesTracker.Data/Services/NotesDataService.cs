@@ -36,7 +36,7 @@ namespace NotesTracker.Data.Services
 		/// <exception cref="System.Exception"></exception>
 		public async Task<IEnumerable<Note>> GetAllNotesAsync(string userName)
 		{
-			var notes = await this._dbContext.Notes.Where(note => note.IsActive == true && note.UserName == userName).ToListAsync();
+			var notes = await this._dbContext.Notes.Where(note => note.IsActive && note.UserName == userName).ToListAsync();
 			if (notes.Count > 0)
 			{
 				return notes;
@@ -57,7 +57,7 @@ namespace NotesTracker.Data.Services
 		/// </returns>
 		public async Task<Note> GetNoteAsync(int noteId, string userName)
 		{
-			var note = await this._dbContext.Notes.FirstOrDefaultAsync(n => n.IsActive == true && n.NoteId == noteId && n.UserName == userName);
+			var note = await this._dbContext.Notes.FirstOrDefaultAsync(n => n.IsActive && n.NoteId == noteId && n.UserName == userName);
 			if (note is not null)
 			{
 				return note;
@@ -108,7 +108,7 @@ namespace NotesTracker.Data.Services
 		/// <exception cref="System.Exception"></exception>
 		public async Task<bool> DeleteNoteAsync(int noteId, string userName)
 		{
-			var noteToDelete = await this._dbContext.Notes.FirstOrDefaultAsync(note => note.NoteId == noteId && note.IsActive == true && note.UserName == userName);
+			var noteToDelete = await this._dbContext.Notes.FirstOrDefaultAsync(note => note.NoteId == noteId && note.IsActive && note.UserName == userName);
 			if (noteToDelete is not null)
 			{
 				noteToDelete.IsActive = false;
@@ -129,7 +129,7 @@ namespace NotesTracker.Data.Services
 		/// <exception cref="System.Exception"></exception>
 		public async Task<Note> UpdateNoteAsync(UpdateNoteDTO updatedNote)
 		{
-			var noteToUpdate = await this._dbContext.Notes.FirstOrDefaultAsync(note => note.NoteId == updatedNote.NoteId && note.IsActive == true && note.UserName == updatedNote.UserName);
+			var noteToUpdate = await this._dbContext.Notes.FirstOrDefaultAsync(note => note.NoteId == updatedNote.NoteId && note.IsActive && note.UserName == updatedNote.UserName);
 			if (noteToUpdate is not null)
 			{
 				noteToUpdate.NoteTitle = updatedNote.NoteTitle;

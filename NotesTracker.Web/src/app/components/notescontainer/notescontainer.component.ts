@@ -10,8 +10,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { Notes } from '../../models/notes.model';
 import { NotesService } from '../../services/notes.service';
-import
-{
+import {
   AngularRoutes,
   ExceptionMessages,
   NotesContainerConstants,
@@ -24,7 +23,7 @@ import { NoteComponent } from '../note/note.component';
 /**
  * The Notes Container component.
  */
-@Component( {
+@Component({
   selector: 'app-notescontainer',
   standalone: true,
   imports: [
@@ -40,9 +39,8 @@ import { NoteComponent } from '../note/note.component';
   ],
   templateUrl: './notescontainer.component.html',
   styleUrl: './notescontainer.component.scss',
-} )
-class NotesContainerComponent implements OnInit
-{
+})
+class NotesContainerComponent implements OnInit {
   /**
    * The notes container constants object.
    */
@@ -56,22 +54,22 @@ class NotesContainerComponent implements OnInit
   /**
    * The notes list.
    */
-  public notesList: WritableSignal<Notes[]> = signal( [] );
+  public notesList: WritableSignal<Notes[]> = signal([]);
 
   /**
    * The is loading boolean flag.
    */
-  public loading: WritableSignal<boolean> = signal( false );
+  public loading: WritableSignal<boolean> = signal(false);
 
   /**
    * The boolean flag to check user authenticated.
    */
-  public isUserAuthenticated: WritableSignal<boolean> = signal( false );
+  public isUserAuthenticated: WritableSignal<boolean> = signal(false);
 
   /**
    * The is delete operation success boolean flag.
    */
-  public isDeleteOperationSuccess: WritableSignal<boolean> = signal( false );
+  public isDeleteOperationSuccess: WritableSignal<boolean> = signal(false);
 
   /**
    * Initializes a new instance of `NotesContainerComponent`
@@ -86,17 +84,14 @@ class NotesContainerComponent implements OnInit
     private toaster: ToasterService,
     private auth0: AuthService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
-  ngOnInit (): void
-  {
-    this.auth0.isAuthenticated$.subscribe( ( isAuth: boolean ) =>
-    {
-      this.isUserAuthenticated.set( isAuth );
-    } );
+  ngOnInit(): void {
+    this.auth0.isAuthenticated$.subscribe((isAuth: boolean) => {
+      this.isUserAuthenticated.set(isAuth);
+    });
 
-    if ( this.isUserAuthenticated() )
-    {
+    if (this.isUserAuthenticated()) {
       this.getAllNotes();
     }
   }
@@ -104,69 +99,59 @@ class NotesContainerComponent implements OnInit
   /**
    * Gets all the notes.
    */
-  public getAllNotes (): void
-  {
-    this.loading.set( true );
-    this.notesService.getAllNotesAsync().subscribe( {
-      next: ( notes ) =>
-      {
-        this.notesList.set( notes );
-        this.loading.set( false );
+  public getAllNotes(): void {
+    this.loading.set(true);
+    this.notesService.getAllNotesAsync().subscribe({
+      next: (notes) => {
+        this.notesList.set(notes);
+        this.loading.set(false);
       },
-      error: ( err ) =>
-      {
-        console.error( err );
-        this.loading.set( false );
-        this.toaster.showError( ExceptionMessages.AllNoteFetchFailedMessage );
+      error: (err) => {
+        console.error(err);
+        this.loading.set(false);
+        this.toaster.showError(ExceptionMessages.AllNoteFetchFailedMessage);
       },
-    } );
+    });
   }
 
   /**
    * Deletes a note by note id.
    * @param noteId The note id.
    */
-  public deleteNoteById ( noteId: number ): void
-  {
-    this.loading.set( true );
-    this.notesService.deleteNoteAsync( noteId ).subscribe( {
-      next: ( response ) =>
-      {
-        this.isDeleteOperationSuccess.set( response );
-        this.loading.set( false );
-        if ( this.isDeleteOperationSuccess() )
-        {
+  public deleteNoteById(noteId: number): void {
+    this.loading.set(true);
+    this.notesService.deleteNoteAsync(noteId).subscribe({
+      next: (response) => {
+        this.isDeleteOperationSuccess.set(response);
+        this.loading.set(false);
+        if (this.isDeleteOperationSuccess()) {
           this.getAllNotes();
         }
       },
-      error: ( err ) =>
-      {
-        console.error( err );
-        this.loading.set( false );
-        this.toaster.showError( err );
+      error: (err) => {
+        console.error(err);
+        this.loading.set(false);
+        this.toaster.showError(err);
       },
-    } );
+    });
   }
 
   /**
    * Handles the edit note event.
    * @param noteId
    */
-  public handleNoteEdit ( noteId: number ): void
-  {
-    const dialogRef = this.dialog.open( NoteComponent, {
+  public handleNoteEdit(noteId: number): void {
+    const dialogRef = this.dialog.open(NoteComponent, {
       width: '400px',
       disableClose: true,
       data: { noteId },
-    } );
+    });
 
-    dialogRef.afterClosed().subscribe( ( result ) =>
-    {
-      if ( result?.success )
-      {
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result?.success) {
         this.getAllNotes();
       }
-    } );
+    });
   }
 }
 

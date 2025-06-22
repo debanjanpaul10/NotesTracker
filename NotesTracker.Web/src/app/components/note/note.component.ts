@@ -1,9 +1,9 @@
 import {
-Component,
-Inject,
-OnInit,
-signal,
-WritableSignal,
+  Component,
+  Inject,
+  OnInit,
+  signal,
+  WritableSignal,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,9 +15,9 @@ import { FormsModule } from '@angular/forms';
 import { NotesService } from '../../services/notes.service';
 import { Notes } from '../../models/notes.model';
 import {
-AngularRoutes,
-NotesPageConstants,
-SuccessMessages,
+  AngularRoutes,
+  NotesPageConstants,
+  SuccessMessages,
 } from '../../helpers/notestracker.constants';
 
 import { SpinnerComponent } from '../common/spinner/spinner.component';
@@ -63,10 +63,10 @@ class NoteComponent implements OnInit {
     private notesService: NotesService,
     private auth0Service: AuthService,
     private routerService: Router,
-    @Inject(MAT_DIALOG_DATA) public data: { noteId: number; },
+    @Inject(MAT_DIALOG_DATA) public data: { noteId: number },
     private dialogRef: MatDialogRef<NoteComponent>,
     private toaster: ToasterService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.auth0Service.isAuthenticated$.subscribe((isAuth: boolean) => {

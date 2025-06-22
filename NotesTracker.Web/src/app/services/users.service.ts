@@ -3,35 +3,30 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 /**
  * The Users Service class.
  */
-@Injectable( {
+@Injectable({
   providedIn: 'root',
-} )
-class UsersService
-{
+})
+class UsersService {
   /**
    * The user alias.
    */
-  private _userName: WritableSignal<string> = signal( '' );
+  private _userName: WritableSignal<string> = signal('');
 
   /**
    * Sets the user name.
    * @param userName The passed user id.
    */
-  public setUserName ( userName: string ): void
-  {
-    this._userName.set( userName );
+  public setUserName(userName: string): void {
+    this._userName.set(userName);
   }
 
   /**
    * Gets the user name.
    * @returns The user name.
    */
-  public getUserName (): string
-  {
+  public getUserName(): string {
     return this._userName();
   }
-
-
 }
 
 export { UsersService };

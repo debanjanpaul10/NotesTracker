@@ -5,13 +5,16 @@
         ><img
           src="assets/brand.png"
           alt="Notes Tracker Application"
-          height="50px"
+          height="50"
       /></a>
     </div>
 
     <div class="navbar-nav ml-auto">
       <button mat-fab class="ml-2 theme-toggle-btn" (click)="toggleTheme()">
-        {{ this.isDarkMode() ? "☀️" : "🌙" }}
+        <i
+          class="fas fa-lg"
+          [ngClass]="{ 'fa-moon': !isDarkMode(), 'fa-sun': isDarkMode() }"
+        ></i>
       </button>
       &nbsp; &nbsp;
 

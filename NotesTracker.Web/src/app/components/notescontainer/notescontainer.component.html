@@ -14,7 +14,11 @@
           {{ note.noteTitle }}
         </mat-card-title>
         <div class="notes-card-actions">
-          <button mat-fab color="accent" (click)="this.handleNoteEdit(note.noteId)">
+          <button
+            mat-fab
+            color="accent"
+            (click)="this.handleNoteEdit(note.noteId)"
+          >
             <mat-icon>edit</mat-icon>
           </button>
           &nbsp;

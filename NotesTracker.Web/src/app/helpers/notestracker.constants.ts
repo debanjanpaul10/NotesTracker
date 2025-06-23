@@ -200,3 +200,9 @@ export const MadeWithComponentConstants = {
 
   SubTitle: 'Made with ❤️ and ',
 };
+
+export const AuthConstants = {
+  AuthorizationConstant: 'Authorization',
+  BearerConstant: 'Bearer',
+  UserNameConstant: 'username',
+};

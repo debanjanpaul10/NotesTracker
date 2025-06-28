@@ -6,7 +6,7 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
+import { ButtonModule } from 'primeng/button';
 import { AuthService } from '@auth0/auth0-angular';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,6 @@ import {
   NotesPageConstants,
   SuccessMessages,
 } from '../../helpers/notestracker.constants';
-
 import { SpinnerComponent } from '../common/spinner/spinner.component';
 import { UpdateNoteDTO } from '../../models/dto/update-note-dto.class';
 import { ToasterService } from '../../services/toaster.service';
@@ -30,7 +29,7 @@ import { ToasterService } from '../../services/toaster.service';
 @Component({
   selector: 'app-note',
   standalone: true,
-  imports: [CommonModule, FormsModule, SpinnerComponent, MatButtonModule],
+  imports: [CommonModule, FormsModule, SpinnerComponent, ButtonModule],
   templateUrl: './note.component.html',
   styleUrl: './note.component.scss',
 })

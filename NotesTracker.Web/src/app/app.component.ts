@@ -4,6 +4,8 @@ import { HeaderComponent } from './components/common/header/header.component';
 import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from './components/common/spinner/spinner.component';
 import { AuthService } from '@auth0/auth0-angular';
+import { ToasterComponent } from './components/common/toaster/toaster.component';
+import { MessageService } from 'primeng/api';
 
 /**
  * The Main app component.
@@ -11,7 +13,13 @@ import { AuthService } from '@auth0/auth0-angular';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, CommonModule, SpinnerComponent],
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    CommonModule,
+    SpinnerComponent,
+    ToasterComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

@@ -1,22 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Component } from '@angular/core';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 /**
  * The Spinner component.
  */
-@Component( {
+@Component({
   selector: 'app-spinner',
   standalone: true,
-  imports: [ MatProgressSpinnerModule ],
+  imports: [ProgressSpinnerModule],
   templateUrl: './spinner.component.html',
   styleUrl: './spinner.component.scss',
-} )
-class SpinnerComponent
-{
-  /**
-   * The color of the spinner
-   */
-  @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
-}
+})
+class SpinnerComponent {}
 
 export { SpinnerComponent };

@@ -11,29 +11,31 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^18.2.13",
-    "@angular/cdk": "^18.2.14",
+    "@angular/cdk": "^18.2.13",
     "@angular/common": "^18.2.13",
     "@angular/compiler": "^18.2.13",
     "@angular/core": "^18.2.13",
     "@angular/forms": "^18.2.13",
-    "@angular/material": "^18.2.14",
+    "@angular/material": "^18.2.13",
     "@angular/platform-browser": "^18.2.13",
     "@angular/platform-browser-dynamic": "^18.2.13",
     "@angular/router": "^18.2.13",
     "@auth0/auth0-angular": "^2.2.3",
     "@fortawesome/fontawesome-free": "^6.7.2",
-    "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.5",
-    "mdb-angular-ui-kit": "^6.1.0",
+    "@primeng/themes": "^18.0.2",
+    "bootstrap": "^5.3.3",
+    "mdb-angular-ui-kit": "^7.0.0",
     "ngx-toastr": "^19.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^18.0.2",
     "rxjs": "~7.8.0",
     "three": "^0.177.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^20.0.3",
+    "@angular-devkit/build-angular": "^18.2.20",
     "@angular/cli": "^18.2.20",
     "@angular/compiler-cli": "^18.2.13",
     "@angular/localize": "^18.2.13",
@@ -45,6 +47,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.4.2"
+    "typescript": "^5.5.0"
   }
 }

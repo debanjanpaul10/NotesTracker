@@ -21,18 +21,17 @@ import { UsersService } from '../../services/users.service';
  * The Add Note Component.
  */
 @Component( {
-  selector: 'app-addnote',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatButtonModule,
-    RouterLink,
-    MatCardModule,
-    MatChipsModule,
-  ],
-  templateUrl: './addnote.component.html',
-  styleUrl: './addnote.component.scss',
+    selector: 'app-addnote',
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatButtonModule,
+        RouterLink,
+        MatCardModule,
+        MatChipsModule,
+    ],
+    templateUrl: './addnote.component.html',
+    styleUrl: './addnote.component.scss'
 } )
 class AddNoteComponent implements OnInit
 {

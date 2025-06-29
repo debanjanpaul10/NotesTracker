@@ -64,6 +64,7 @@ namespace NotesTracker.Business.Services
 					if (applicationInformationData is not null)
 					{
 						var applicationInformationResponseData = await applicationInformationData.Find(new BsonDocument()).ToListAsync();
+						this._cacheService.SetCacheData(CacheKeys.AboutUsDataCacheKey, applicationInformationResponseData, TimeSpan.FromMinutes(30));
 						return applicationInformationResponseData;
 					}
 

@@ -15,7 +15,7 @@ namespace NotesTracker.Shared.DTO
 	/// </summary>
 	[BsonIgnoreExtraElements]
 	public class ApplicationInfoDataDTO
-    {
+	{
 		/// <summary>
 		/// Gets or sets the identifier.
 		/// </summary>
@@ -61,7 +61,7 @@ namespace NotesTracker.Shared.DTO
 		/// </value>
 		[BsonElement("Link")]
 		public string Link { get; set; } = string.Empty;
-    }
+	}
 }
 
 

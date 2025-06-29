@@ -54,8 +54,10 @@ namespace NotesTracker.API.Middleware
 		public static void ConfigureApiServices(this WebApplicationBuilder builder)
 		{
 			builder.ConfigureAzureSqlServer();
+			builder.ConfigureMongoDbServer();
 			builder.ConfigureAuthenticationServices();
 			builder.ConfigureHttpClientFactory();
+			builder.Services.AddMemoryCache();
 			builder.Services.ConfigureBusinessDependencies();
 			builder.Services.ConfigureDataDependencies();
 		}

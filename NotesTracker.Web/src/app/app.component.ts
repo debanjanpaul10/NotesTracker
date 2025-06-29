@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './components/common/header/header.component';
-import { CommonModule } from '@angular/common';
-import { SpinnerComponent } from './components/common/spinner/spinner.component';
 import { AuthService } from '@auth0/auth0-angular';
+import { CommonModule } from '@angular/common';
+
+import { HeaderComponent } from './components/common/header/header.component';
+import { SpinnerComponent } from './components/common/spinner/spinner.component';
+import { ToasterComponent } from './components/common/toaster/toaster.component';
 
 /**
  * The Main app component.
@@ -11,7 +13,13 @@ import { AuthService } from '@auth0/auth0-angular';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, CommonModule, SpinnerComponent],
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    CommonModule,
+    SpinnerComponent,
+    ToasterComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

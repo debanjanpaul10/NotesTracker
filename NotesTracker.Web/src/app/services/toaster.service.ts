@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IndividualConfig, ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 
 /**
  * The Toaster Service.
@@ -10,16 +10,16 @@ import { IndividualConfig, ToastrService } from 'ngx-toastr';
 class ToasterService {
   /**
    * Initializes a new instance of `ToasterService`
-   * @param toaster The toaster service.
+   * @param messageService The message service.
    */
-  constructor(private toaster: ToastrService) {}
+  constructor(private messageService: MessageService) {}
 
   /**
    * Handles the success message toaster event.
    * @param message The success message.
    */
   public showSuccess(message: string): void {
-    this.toaster.success(message);
+    this.messageService.add({ key: 'confirm', severity: 'success', summary: 'Success', detail: message });
   }
 
   /**
@@ -27,11 +27,7 @@ class ToasterService {
    * @param message The error messsage.
    */
   public showError(message: string): void {
-    const options: Partial<IndividualConfig> = {
-      disableTimeOut: true,
-      closeButton: true,
-    };
-    this.toaster.error(message, '', options);
+    this.messageService.add({ key: 'confirm', severity: 'error', summary: 'Error', detail: message, life: 7000 });
   }
 }
 

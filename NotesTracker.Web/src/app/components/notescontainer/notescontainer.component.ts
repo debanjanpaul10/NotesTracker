@@ -1,12 +1,10 @@
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@auth0/auth0-angular';
 import { RouterLink } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 import { Notes } from '../../models/notes.model';
 import { NotesService } from '../../services/notes.service';
@@ -29,12 +27,10 @@ import { NoteComponent } from '../note/note.component';
   imports: [
     CommonModule,
     RouterLink,
-    MatButtonModule,
-    MatIconModule,
+    ButtonModule,
     LoaderComponent,
     MadeWithComponent,
-    MatCardModule,
-    MatChipsModule,
+    CardModule,
     MatDialogModule,
   ],
   templateUrl: './notescontainer.component.html',

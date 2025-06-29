@@ -13,3 +13,6 @@ __blobstorage__
 __queuestorage__
 __tablestorage__
 __azurite_db*.*
+
+# Environments
+**environment.development.ts

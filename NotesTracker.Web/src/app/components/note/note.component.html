@@ -5,7 +5,7 @@
         class="container-fluid text-center start-note-loading"
         *ngIf="this.isLoading()"
       >
-        <app-spinner color="accent"></app-spinner>
+        <app-spinner></app-spinner>
       </div>
 
       <form *ngIf="!this.isLoading()">
@@ -44,29 +44,27 @@
         </div>
 
         <div class="text-center mt-3 mb-3">
-          <button
-            mat-fab
-            extended
-            color="accent"
+          <p-button
+            pButton
+            pRipple
+            severity="success"
             aria-label="update"
+            [rounded]="true"
             (click)="this.handleNoteUpdate(this.currentNote())"
-          >
-            <span class="customFont">{{
-              notesConstants.ButtonTexts.Update
-            }}</span>
-          </button>
+            label="{{ notesConstants.ButtonTexts.Update }}"
+            size="small"
+          />
           &nbsp;
-          <button
-            mat-fab
-            extended
-            color="warn"
+          <p-button
+            pButton
+            pRipple
+            severity="danger"
+            [rounded]="true"
             aria-label="cancel"
+            label="{{ notesConstants.ButtonTexts.Cancel }}"
             (click)="this.closeDialog()"
-          >
-            <span class="customFont">
-              {{ notesConstants.ButtonTexts.Cancel }}
-            </span>
-          </button>
+            size="small"
+          />
         </div>
       </form>
     </div>

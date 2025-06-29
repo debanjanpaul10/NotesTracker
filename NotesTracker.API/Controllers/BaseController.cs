@@ -37,10 +37,6 @@ namespace NotesTracker.API.Controllers
 				{
 					this.UserName = userName;
 				}
-				else
-				{
-					throw new InvalidOperationException(ExceptionConstants.UserIdNotPresentExceptionConstant);
-				}
 			}
 		}
 

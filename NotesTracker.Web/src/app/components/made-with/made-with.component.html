@@ -1,35 +1,34 @@
 <div class="row text-center mt-5">
   <div class="col-sm-12">
-    <p class="lead">{{ mwcObjects.SubTitle }}</p>
+    <p class="lead">{{ this.subtitleConstant }}</p>
   </div>
 </div>
 
-<div class="mwc-container mt-2 mb-3">
+<div class="mwc-container mt-2 mb-3" *ngIf="this.aboutUsData().length > 0">
   <mdb-carousel
     [interval]="3000"
-    [indicators]="true"
     [animation]="'fade'"
     [controls]="true"
     [dark]="true"
     [keyboard]="true"
   >
-    <mdb-carousel-item *ngFor="let item of this.mwcObjects.Items | keyvalue">
+    <mdb-carousel-item *ngFor="let item of this.aboutUsData()">
       <mat-card class="mwc-card" appearance="outlined">
         <mat-card-header class="mwc-card-header">
           <mat-card-title class="mwc-card-title mt-2">{{
-            item.value.Heading
+            item.heading
           }}</mat-card-title>
         </mat-card-header>
-        <a [href]="item.value.Link" target="_blank">
+        <a [href]="item.link" target="_blank">
           <img
             mat-card-image
-            [src]="item.value.Image"
-            alt="{{ item.value.Heading }}"
+            [src]="item.image"
+            alt="{{ item.heading }}"
             class="mwc-card-image"
           />
         </a>
         <mat-card-content class="mt-2">
-          <p [innerHTML]="item.value.Description"></p>
+          <p [innerHTML]="item.description"></p>
         </mat-card-content>
       </mat-card>
     </mdb-carousel-item>

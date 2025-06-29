@@ -12,6 +12,30 @@ namespace NotesTracker.Shared.Constants
 	/// </summary>
 	public static class ConfigurationConstants
 	{
+		#region Swagger Constants
+
+		/// <summary>
+		/// The notes tracker application name
+		/// </summary>
+		public const string NotesTrackerApiName = "Notes.Tracker.API";
+
+		/// <summary>
+		/// The API version
+		/// </summary>
+		public const string ApiVersion = "v1";
+
+		/// <summary>
+		/// The swagger endpoint
+		/// </summary>
+		public const string SwaggerEndpoint = "/swagger/v1/swagger.json";
+
+		/// <summary>
+		/// The swagger UI prefix
+		/// </summary>
+		public const string SwaggerUiPrefix = "swaggerui";
+
+		#endregion
+
 		/// <summary>
 		/// The local sql connection string constant.
 		/// </summary>
@@ -21,6 +45,11 @@ namespace NotesTracker.Shared.Constants
 		/// The SQL connection string constant
 		/// </summary>
 		public const string SqlConnectionStringConstant = "SqlConnectionString";
+
+		/// <summary>
+		/// The mongo db connection string constant.
+		/// </summary>
+		public const string MongoDbConnectionStringConstant = "MongoDbConnectionString";
 
 		/// <summary>
 		/// The local appsettings file constant.
@@ -77,6 +106,11 @@ namespace NotesTracker.Shared.Constants
 		/// The auth0 token url.
 		/// </summary>
 		public const string Auth0TokenUrl = "Auth0:TokenUrl";
+
+		/// <summary>
+		/// The mongo database name constant
+		/// </summary>
+		public const string MongoDatabaseNameConstant = "MongoDatabaseName";
 
 		#region Notes Function
 

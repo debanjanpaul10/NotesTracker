@@ -77,6 +77,11 @@ namespace NotesTracker.Shared.Constants
 		/// </summary>
 		public const string Auth0Token_ApiRoute = "oauth/token";
 
+		/// <summary>
+		/// The get about us data api route.
+		/// </summary>
+		public const string GetAboutUsData_ApiRoute = "GetAboutUsData";
+
 		#endregion
 	}
 }

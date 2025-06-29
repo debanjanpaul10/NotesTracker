@@ -152,55 +152,52 @@ export const ErrorPageConstants = {
   PageNotFoundErrorMessage: 'Oops! The page could not be found!',
 };
 
-export const MadeWithComponentConstants = {
-  Items: {
-    DotNet: {
-      Heading: '.NET',
-      Description: `
+export const MadeWithComponentConstants = [
+  {
+    Heading: '.NET',
+    Description: `
         <div>.NET is a free, cross-platform, open-source developer platform used for building various types of applications, including web apps, mobile apps, desktop apps, and more. It is maintained by Microsoft and the .NET Foundation on GitHub.</div>
         <br />`,
-      Image: 'assets/dotnet-img.png',
-      Link: 'https://dotnet.microsoft.com/en-us/',
-    },
-    Angular: {
-      Heading: 'Angular',
-      Description: `
+    Image: 'assets/dotnet-img.png',
+    Link: 'https://dotnet.microsoft.com/en-us/',
+  },
+  {
+    Heading: 'Angular',
+    Description: `
       <div>Angular is a TypeScript-based free and open-source single-page web application framework. It is developed by Google and by a community of individuals and corporations. Angular is a complete rewrite from the same team that built AngularJS.</div>
       <br />`,
-      Image: 'assets/angular-img.png',
-      Link: 'https://dotnet.microsoft.com/en-us/',
-    },
-    SQLServer: {
-      Heading: 'Microsoft SQL Server',
-      Description: `
+    Image: 'assets/angular-img.png',
+    Link: 'https://dotnet.microsoft.com/en-us/',
+  },
+  {
+    Heading: 'Microsoft SQL Server',
+    Description: `
         <div>Get the flexibility you need to use integrated solutions and apps with your data—in the cloud, on-premises, or at the edge.
         SQL Server 2022 is the most Azure-enabled release yet, with innovation across performance, security, and availability.</div>
         <br />`,
-      Image: 'assets/sqlserver-img.png',
-      Link: 'https://www.microsoft.com/en-in/sql-server',
-    },
-    Auth0: {
-      Heading: 'Auth0',
-      Description: `
+    Image: 'assets/sqlserver-img.png',
+    Link: 'https://www.microsoft.com/en-in/sql-server',
+  },
+  {
+    Heading: 'Auth0',
+    Description: `
         <div>Auth0 is a flexible, drop-in solution to add authentication and authorization services to your applications. Your team and organization can avoid the cost, time, 
         and risk that come with building your own solution to authenticate and authorize users.</div>
         <br />`,
-      Image: 'assets/auth0-img.png',
-      Link: 'https://auth0.com/',
-    },
-    Azure: {
-      Heading: 'Azure PaaS',
-      Description: `
+    Image: 'assets/auth0-img.png',
+    Link: 'https://auth0.com/',
+  },
+  {
+    Heading: 'Azure PaaS',
+    Description: `
       <div>Microsoft Azure, or just Azure is the cloud computing platform developed by Microsoft. It has management, access and development of applications and services to individuals, companies, and governments through its global infrastructure</div>
       <br />`,
-      Image: 'assets/azure-img.png',
-      Link: 'https://azure.microsoft.com/',
-    },
+    Image: 'assets/azure-img.png',
+    Link: 'https://azure.microsoft.com/',
   },
+];
 
-  SubTitle: 'Made with ❤️ and ',
-};
-
+export const MadeWithSubTitle = 'Made with ❤️ and ';
 export const AuthConstants = {
   AuthorizationConstant: 'Authorization',
   BearerConstant: 'Bearer',

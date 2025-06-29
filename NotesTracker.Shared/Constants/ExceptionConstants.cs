@@ -69,6 +69,11 @@ namespace NotesTracker.Shared.Constants
 		/// </summary>
 		public const string AttemptedToEnterBlankUserMessageConstant = "Attempted to get notes for null user";
 
+		/// <summary>
+		/// Something went wrong exception message constants.
+		/// </summary>
+		public const string SomethingWentWrongMessageConstant = "Oops! It seems something went wrong!";
+
 		#endregion
 
 		#region Logging Messages

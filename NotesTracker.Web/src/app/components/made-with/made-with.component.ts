@@ -5,7 +5,10 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 
-import { MadeWithComponentConstants } from '../../helpers/notestracker.constants';
+import {
+  MadeWithComponentConstants,
+  MadeWithSubTitle,
+} from '../../helpers/notestracker.constants';
 
 /**
  * The Made With Component
@@ -25,9 +28,14 @@ import { MadeWithComponentConstants } from '../../helpers/notestracker.constants
 })
 class MadeWithComponent {
   /**
-   * The MWC Data
+   * The MWC Data.
    */
-  public mwcObjects = MadeWithComponentConstants;
+  mwcObjects = MadeWithComponentConstants;
+
+  /**
+   * The subtitle constant.
+   */
+  subtitleConstant = MadeWithSubTitle;
 
   /**
    * Handles link redirection

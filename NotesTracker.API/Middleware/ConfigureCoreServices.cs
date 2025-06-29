@@ -57,6 +57,7 @@ namespace NotesTracker.API.Middleware
 			builder.ConfigureMongoDbServer();
 			builder.ConfigureAuthenticationServices();
 			builder.ConfigureHttpClientFactory();
+			builder.Services.AddMemoryCache();
 			builder.Services.ConfigureBusinessDependencies();
 			builder.Services.ConfigureDataDependencies();
 		}

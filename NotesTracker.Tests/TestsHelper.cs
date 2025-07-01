@@ -187,6 +187,11 @@ static class TestsHelper
 		return new Note { NoteId = 10, NoteTitle = "Test", NoteDescription = "Desc", UserName = userName, IsActive = true, CreatedDate = DateTime.UtcNow, LastModifiedDate = DateTime.UtcNow };
 	}
 
+	/// <summary>
+	/// Prepares the update note data dto.
+	/// </summary>
+	/// <param name="userName">The user name.</param>
+	/// <returns>The update note data dto.</returns>
 	public static UpdateNoteDTO PrepareUpdateNoteDataDTO(string userName)
 	{
 		return new UpdateNoteDTO { NoteId = 10, NoteTitle = "NewTitle", NoteDescription = "NewDesc", UserName = userName };

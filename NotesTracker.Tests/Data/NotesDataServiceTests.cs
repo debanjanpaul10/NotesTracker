@@ -50,6 +50,10 @@ public class NotesDataServiceTests
 		this._notesDataService = new NotesDataService(this._dbContext);
 	}
 
+	/// <summary>
+	/// Tests the get all notes async method to ensure it returns only active notes for the specified user.
+	/// </summary>
+	/// <returns>A task to wait on.</returns>
 	[Fact]
 	public async Task GetAllNotesAsync_ReturnsActiveNotesForUser()
 	{
@@ -67,6 +71,10 @@ public class NotesDataServiceTests
 		Assert.All(result, n => Assert.True(n.IsActive));
 	}
 
+	/// <summary>
+	/// Tests the get all notes async method to ensure it does not return notes for other users.
+	/// </summary>
+	/// <returns>A task to wait on.</returns>
 	[Fact]
 	public async Task GetNoteAsync_ReturnsNote_WhenExistsAndActive()
 	{
@@ -84,6 +92,10 @@ public class NotesDataServiceTests
 		Assert.Equal(_userName, result.UserName);
 	}
 
+	/// <summary>
+	/// Tests the get note async method to ensure it throws an exception when the note does not exist or is inactive.
+	/// </summary>
+	/// <returns>A task to wait on</returns>
 	[Fact]
 	public async Task GetNoteAsync_ThrowsException_WhenNoteNotFound()
 	{
@@ -92,6 +104,10 @@ public class NotesDataServiceTests
 		Assert.Equal(ExceptionConstants.NoteNotFoundException, ex.Message);
 	}
 
+	/// <summary>
+	/// Tests the AddNewNoteAsync method to ensure it adds a new note successfully.
+	/// </summary>
+	/// <returns>A task to wait on.</returns>
 	[Fact]
 	public async Task AddNewNoteAsync_AddsNoteSuccessfully()
 	{
@@ -109,6 +125,10 @@ public class NotesDataServiceTests
 		Assert.True(notes[0].IsActive);
 	}
 
+	/// <summary>
+	/// Tests the AddNewNoteAsync method to ensure it throws an exception when the database context is disposed or encounters an error.
+	/// </summary>
+	/// <returns>A task to wait on</returns>
 	[Fact]
 	public async Task AddNewNoteAsync_ThrowsException_OnDbError()
 	{
@@ -125,6 +145,10 @@ public class NotesDataServiceTests
 		await Assert.ThrowsAsync<Exception>(() => service.AddNewNoteAsync(noteDto));
 	}
 
+	/// <summary>
+	/// Tests the DeleteNoteAsync method to ensure it deletes an active note successfully.
+	/// </summary>
+	/// <returns>A task to wait on</returns>
 	[Fact]
 	public async Task DeleteNoteAsync_DeletesActiveNote()
 	{
@@ -142,6 +166,10 @@ public class NotesDataServiceTests
 		Assert.False(deletedNote.IsActive);
 	}
 
+	/// <summary>
+	/// Tests the DeleteNoteAsync method to ensure it throws an exception when the note does not exist.
+	/// </summary>
+	/// <returns>A task to wait on</returns>
 	[Fact]
 	public async Task DeleteNoteAsync_ThrowsException_WhenNoteNotFound()
 	{
@@ -150,6 +178,10 @@ public class NotesDataServiceTests
 		Assert.Equal(ExceptionConstants.NoteNotFoundException, ex.Message);
 	}
 
+	/// <summary>
+	/// Tests the UpdateNoteAsync method to ensure it updates an existing note successfully.
+	/// </summary>
+	/// <returns>A task to wait on</returns>
 	[Fact]
 	public async Task UpdateNoteAsync_UpdatesNoteSuccessfully()
 	{
@@ -170,6 +202,10 @@ public class NotesDataServiceTests
 		Assert.False(updated.LastModifiedDate > note.LastModifiedDate);
 	}
 
+	/// <summary>
+	/// Tests the UpdateNoteAsync method to ensure it throws an exception when the note does not exist.
+	/// </summary>
+	/// <returns>A task to wait on</returns>
 	[Fact]
 	public async Task UpdateNoteAsync_ThrowsException_WhenNoteNotFound()
 	{

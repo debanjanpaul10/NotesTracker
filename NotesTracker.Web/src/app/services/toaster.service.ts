@@ -19,7 +19,13 @@ class ToasterService {
    * @param message The success message.
    */
   public showSuccess(message: string): void {
-    this.messageService.add({ key: 'confirm', severity: 'success', summary: 'Success', detail: message });
+    this.messageService.add({
+      key: 'confirm',
+      severity: 'success',
+      summary: 'Success',
+      detail: message,
+      sticky: true,
+    });
   }
 
   /**
@@ -27,7 +33,13 @@ class ToasterService {
    * @param message The error messsage.
    */
   public showError(message: string): void {
-    this.messageService.add({ key: 'confirm', severity: 'error', summary: 'Error', detail: message, life: 7000 });
+    this.messageService.add({
+      key: 'confirm',
+      severity: 'error',
+      summary: 'Error',
+      detail: message,
+      sticky: true,
+    });
   }
 }
 

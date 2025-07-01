@@ -119,7 +119,7 @@ class NotesContainerComponent implements OnInit {
     this.notesService.deleteNoteAsync(noteId).subscribe({
       next: (response) => {
         this.isDeleteOperationSuccess.set(response);
-        this.loading.set(false);
+
         if (this.isDeleteOperationSuccess()) {
           this.getAllNotes();
         }
@@ -127,7 +127,9 @@ class NotesContainerComponent implements OnInit {
       error: (err) => {
         console.error(err);
         this.loading.set(false);
-        this.toaster.showError(err);
+      },
+      complete: () => {
+        this.loading.set(false);
       },
     });
   }

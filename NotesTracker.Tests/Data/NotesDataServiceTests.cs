@@ -163,7 +163,7 @@ public class NotesDataServiceTests
 
 		// Assert
 		Assert.True(result);
-		Assert.False(deletedNote.IsActive);
+		Assert.False(deletedNote!.IsActive);
 	}
 
 	/// <summary>

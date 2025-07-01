@@ -8,7 +8,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import {
   CacheKeys,
   HeaderPageConstants,
-} from '../../../helpers/notestracker.constants';
+} from '@helpers/notestracker.constants';
 
 /**
  * The Header Component.
@@ -52,7 +52,8 @@ class HeaderComponent implements OnInit {
       localStorage.getItem(CacheKeys.ThemeSettings) ||
       this.ThemeSettingsKeys.LightMode.Key;
     this.isDarkMode.set(savedTheme === this.ThemeSettingsKeys.DarkMode.Key);
-    document.body.className = savedTheme;
+
+    this.applyTheme(this.isDarkMode());
 
     this.auth0.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
       this.isUserLoggedIn.set(isAuthenticated);
@@ -64,11 +65,10 @@ class HeaderComponent implements OnInit {
    */
   public toggleTheme(): void {
     this.isDarkMode.set(!this.isDarkMode());
+    this.applyTheme(this.isDarkMode());
     const theme = this.isDarkMode()
       ? this.ThemeSettingsKeys.DarkMode.Key
       : this.ThemeSettingsKeys.LightMode.Key;
-    document.body.className = theme;
-
     localStorage.setItem(CacheKeys.ThemeSettings, theme);
   }
 
@@ -89,6 +89,21 @@ class HeaderComponent implements OnInit {
           returnTo: document.location.origin,
         },
       });
+    }
+  }
+
+  /**
+   * Applies the theme to the DOM based on dark mode flag.
+   * @param isDark boolean indicating if dark mode should be applied
+   */
+  private applyTheme(isDark: boolean): void {
+    const htmlElement = document.querySelector('html');
+    if (isDark) {
+      htmlElement?.classList.add('my-app-dark');
+      document.body.className = this.ThemeSettingsKeys.DarkMode.Key;
+    } else {
+      htmlElement?.classList.remove('my-app-dark');
+      document.body.className = this.ThemeSettingsKeys.LightMode.Key;
     }
   }
 }

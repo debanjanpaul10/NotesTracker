@@ -1,4 +1,4 @@
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 /**
  * The Users Service class.
@@ -10,7 +10,7 @@ class UsersService {
   /**
    * The user alias.
    */
-  private _userName: WritableSignal<string> = signal('');
+  private _userName = signal('');
 
   /**
    * Sets the user name.

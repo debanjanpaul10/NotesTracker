@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
@@ -6,10 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { SkeletonModule } from 'primeng/skeleton';
 
-import { MadeWithSubTitle } from '../../helpers/notestracker.constants';
-import { NotesTrackerService } from '../../services/notestracker.service';
-import { AboutUs } from '../../models/about-us-dto.class';
-import { ToasterService } from '../../services/toaster.service';
+import { MadeWithSubTitle } from '@helpers/notestracker.constants';
+import { NotesTrackerService } from '@services/notestracker.service';
+import { AboutUs } from '@models/about-us-dto.class';
+import { ToasterService } from '@services/toaster.service';
 
 /**
  * The Made With Component
@@ -37,7 +37,7 @@ class MadeWithComponent implements OnInit {
   /**
    * The about us data.
    */
-  aboutUsData: WritableSignal<AboutUs[]> = signal([]);
+  aboutUsData = signal<AboutUs[]>([]);
 
   /**
    * The boolean flag for loading.

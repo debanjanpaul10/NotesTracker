@@ -12,4 +12,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss',
 })
-export class LoaderComponent {}
+class LoaderComponent {}
+
+export { LoaderComponent };

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
 import { RouterLink } from '@angular/router';
@@ -6,17 +6,17 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 
-import { Notes } from '../../models/notes.model';
-import { NotesService } from '../../services/notes.service';
+import { Notes } from '@models/notes.model';
+import { NotesService } from '@services/notes.service';
 import {
   AngularRoutes,
   ExceptionMessages,
   NotesContainerConstants,
-} from '../../helpers/notestracker.constants';
-import { LoaderComponent } from '../common/loader/loader.component';
-import { ToasterService } from '../../services/toaster.service';
-import { MadeWithComponent } from '../made-with/made-with.component';
-import { NoteComponent } from '../note/note.component';
+} from '@helpers/notestracker.constants';
+import { LoaderComponent } from '@components/common/loader/loader.component';
+import { ToasterService } from '@services/toaster.service';
+import { MadeWithComponent } from '@components/made-with/made-with.component';
+import { NoteComponent } from '@components/note/note.component';
 
 /**
  * The Notes Container component.
@@ -50,22 +50,22 @@ class NotesContainerComponent implements OnInit {
   /**
    * The notes list.
    */
-  public notesList: WritableSignal<Notes[]> = signal([]);
+  public notesList = signal<Notes[]>([]);
 
   /**
    * The is loading boolean flag.
    */
-  public loading: WritableSignal<boolean> = signal(false);
+  public loading = signal(false);
 
   /**
    * The boolean flag to check user authenticated.
    */
-  public isUserAuthenticated: WritableSignal<boolean> = signal(false);
+  public isUserAuthenticated = signal(false);
 
   /**
    * The is delete operation success boolean flag.
    */
-  public isDeleteOperationSuccess: WritableSignal<boolean> = signal(false);
+  public isDeleteOperationSuccess = signal(false);
 
   /**
    * Initializes a new instance of `NotesContainerComponent`

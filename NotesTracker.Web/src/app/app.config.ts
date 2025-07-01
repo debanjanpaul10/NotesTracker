@@ -8,8 +8,8 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 
 import { routes } from './app.routes';
-import { AuthInterceptor } from './services/auth.interceptor';
-import { environment } from '../environments/environment';
+import { AuthInterceptor } from '@services/auth.interceptor';
+import { environment } from '@environments/environment';
 
 /**
  * The application configurations.
@@ -32,6 +32,9 @@ export const appConfig: ApplicationConfig = {
       ripple: true,
       theme: {
         preset: Aura,
+        options: {
+          darkModeSelector: '.my-app-dark',
+        },
       },
     }),
   ],

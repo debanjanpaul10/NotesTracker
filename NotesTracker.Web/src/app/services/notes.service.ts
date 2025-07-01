@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
-import { ApiUrls, ExceptionMessages } from '../helpers/notestracker.constants';
-import { Notes } from '../models/notes.model';
-import { ResponseDTO } from '../models/dto/response-dto.class';
-import { NoteDTO } from '../models/dto/note-dto.class';
-import { UpdateNoteDTO } from '../models/dto/update-note-dto.class';
-import { environment } from '../../environments/environment';
+import { ApiUrls, ExceptionMessages } from '@helpers/notestracker.constants';
+import { Notes } from '@models/notes.model';
+import { ResponseDTO } from '@models/dto/response-dto.class';
+import { NoteDTO } from '@models/dto/note-dto.class';
+import { UpdateNoteDTO } from '@models/dto/update-note-dto.class';
+import { environment } from '@environments/environment';
 
 /**
  * The Notes Service class.

@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AngularRoutes } from './helpers/notestracker.constants';
+import { AngularRoutes } from '@helpers/notestracker.constants';
 
 /**
  * The configured routes.

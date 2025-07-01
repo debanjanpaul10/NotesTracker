@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { ApiUrls } from '../helpers/notestracker.constants';
 import { map, Observable } from 'rxjs';
-import { ResponseDTO } from '../models/dto/response-dto.class';
-import { AboutUs } from '../models/about-us-dto.class';
+
+import { environment } from '@environments/environment';
+import { ApiUrls } from '@helpers/notestracker.constants';
+import { ResponseDTO } from '@models/dto/response-dto.class';
+import { AboutUs } from '@models/about-us-dto.class';
 
 /**
  * The Notes Tracker Service class.

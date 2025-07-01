@@ -1,10 +1,4 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  signal,
-  WritableSignal,
-} from '@angular/core';
+import { Component, Inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from '@auth0/auth0-angular';
@@ -12,16 +6,16 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { NotesService } from '../../services/notes.service';
-import { Notes } from '../../models/notes.model';
+import { NotesService } from '@services/notes.service';
+import { Notes } from '@models/notes.model';
 import {
   AngularRoutes,
   NotesPageConstants,
   SuccessMessages,
-} from '../../helpers/notestracker.constants';
-import { SpinnerComponent } from '../common/spinner/spinner.component';
-import { UpdateNoteDTO } from '../../models/dto/update-note-dto.class';
-import { ToasterService } from '../../services/toaster.service';
+} from '@helpers/notestracker.constants';
+import { SpinnerComponent } from '@components/common/spinner/spinner.component';
+import { UpdateNoteDTO } from '@models/dto/update-note-dto.class';
+import { ToasterService } from '@services/toaster.service';
 
 /**
  * The Notes Component.
@@ -42,14 +36,14 @@ class NoteComponent implements OnInit {
   /**
    * The current note.
    */
-  public currentNote: WritableSignal<Notes> = signal(
+  public currentNote = signal<Notes>(
     new Notes(0, '', '', new Date(), new Date(), '')
   );
 
   /**
    * The is loading boolean flag.
    */
-  public isLoading: WritableSignal<boolean> = signal(false);
+  public isLoading = signal(false);
 
   /**
    * Initializes a new instance of `NoteComponent`

@@ -16,6 +16,7 @@ namespace NotesTracker.Business.Services
 	/// <summary>
 	/// The Notes Service Class.
 	/// </summary>
+	/// <param name="notesDataService">The Notes Data Service.</param>
 	/// <seealso cref="NotesTracker.Business.Contracts.INotesService" />
 	public class NotesService(INotesDataService notesDataService) : INotesService
 	{

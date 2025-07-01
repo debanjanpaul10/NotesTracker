@@ -21,7 +21,7 @@ namespace NotesTracker.Shared.DTO
         /// The provider.
         /// </value>
         [JsonPropertyName("provider")]
-        public string Provider { get; set; }
+        public string Provider { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the is social.
@@ -39,6 +39,6 @@ namespace NotesTracker.Shared.DTO
         /// The user id.
         /// </value>
         [JsonPropertyName("user_id")]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
     }
 }

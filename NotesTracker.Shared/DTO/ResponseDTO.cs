@@ -34,6 +34,6 @@ namespace NotesTracker.Shared.DTO
 		/// <value>
 		/// The response data.
 		/// </value>
-		public object ResponseData { get; set; }
+		public object ResponseData { get; set; } = default!;
 	}
 }

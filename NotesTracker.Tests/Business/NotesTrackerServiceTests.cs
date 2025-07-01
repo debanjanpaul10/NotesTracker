@@ -7,19 +7,11 @@
 
 namespace NotesTracker.Tests.Business;
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Moq;
 using MongoDB.Driver;
-using NotesTracker.Business.Services;
 using NotesTracker.Shared.Constants;
-using NotesTracker.Shared.DTO;
 using NotesTracker.Business.Contracts;
-using Xunit;
 
 /// <summary>
 /// Notes Tracker Service Tests Class.
@@ -70,7 +62,7 @@ public class NotesTrackerServiceTests
         this._mockConfiguration.Setup(x => x[ConfigurationConstants.MongoDatabaseNameConstant])
             .Returns("TestDb");
         this._mockMongoClient.Setup(x => x.GetDatabase(It.IsAny<string>(), null))
-            .Returns(_mockMongoDatabase.Object);
+            .Returns(this._mockMongoDatabase.Object);
 
         this._service = new NotesTrackerService(
             this._mockMongoClient.Object,
@@ -89,16 +81,16 @@ public class NotesTrackerServiceTests
     {
         // Arrange
         var cachedList = new List<ApplicationInfoDataDTO> { new ApplicationInfoDataDTO() };
-        _mockCacheService.Setup(x => x.GetCachedData<List<ApplicationInfoDataDTO>>(CacheKeys.AboutUsDataCacheKey))
+        this._mockCacheService.Setup(x => x.GetCachedData<List<ApplicationInfoDataDTO>>(CacheKeys.AboutUsDataCacheKey))
             .Returns(cachedList);
 
         // Act
-        var result = await _service.GetAboutUsDataAsync();
+        var result = await this._service.GetAboutUsDataAsync();
 
         // Assert
         Assert.Equal(cachedList, result);
-        _mockCacheService.Verify(x => x.GetCachedData<List<ApplicationInfoDataDTO>>(CacheKeys.AboutUsDataCacheKey), Times.Once);
-        _mockMongoDatabase.Verify(x => x.GetCollection<ApplicationInfoDataDTO>(It.IsAny<string>(), null), Times.Never);
+        this._mockCacheService.Verify(x => x.GetCachedData<List<ApplicationInfoDataDTO>>(CacheKeys.AboutUsDataCacheKey), Times.Once);
+        this._mockMongoDatabase.Verify(x => x.GetCollection<ApplicationInfoDataDTO>(It.IsAny<string>(), null), Times.Never);
     }
 
     /// <summary>
@@ -143,13 +135,13 @@ public class NotesTrackerServiceTests
     public async Task GetAboutUsDataAsync_WhenCollectionIsNull_ThrowsException()
     {
         // Arrange
-        _mockCacheService.Setup(x => x.GetCachedData<List<ApplicationInfoDataDTO>>(CacheKeys.AboutUsDataCacheKey))
+        this._mockCacheService.Setup(x => x.GetCachedData<List<ApplicationInfoDataDTO>>(CacheKeys.AboutUsDataCacheKey))
             .Returns((List<ApplicationInfoDataDTO>)null!);
-        _mockMongoDatabase.Setup(x => x.GetCollection<ApplicationInfoDataDTO>(NotesTrackerConstants.ApplicationInformationCollectionConstant, null))
+        this._mockMongoDatabase.Setup(x => x.GetCollection<ApplicationInfoDataDTO>(NotesTrackerConstants.ApplicationInformationCollectionConstant, null))
             .Returns((IMongoCollection<ApplicationInfoDataDTO>)null!);
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<Exception>(() => _service.GetAboutUsDataAsync());
+        var ex = await Assert.ThrowsAsync<Exception>(() => this._service.GetAboutUsDataAsync());
         Assert.Equal(ExceptionConstants.SomethingWentWrongMessageConstant, ex.Message);
     }
 
@@ -161,14 +153,14 @@ public class NotesTrackerServiceTests
     public async Task GetAboutUsDataAsync_WhenMongoThrows_LogsAndRethrows()
     {
         // Arrange
-        _mockCacheService.Setup(x => x.GetCachedData<List<ApplicationInfoDataDTO>>(CacheKeys.AboutUsDataCacheKey))
+        this._mockCacheService.Setup(x => x.GetCachedData<List<ApplicationInfoDataDTO>>(CacheKeys.AboutUsDataCacheKey))
             .Returns((List<ApplicationInfoDataDTO>)null!);
-        _mockMongoDatabase.Setup(x => x.GetCollection<ApplicationInfoDataDTO>(NotesTrackerConstants.ApplicationInformationCollectionConstant, null))
+        this._mockMongoDatabase.Setup(x => x.GetCollection<ApplicationInfoDataDTO>(NotesTrackerConstants.ApplicationInformationCollectionConstant, null))
             .Throws(new InvalidOperationException("Mongo error"));
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(() => _service.GetAboutUsDataAsync());
-        _mockLogger.Verify(
+        await Assert.ThrowsAsync<InvalidOperationException>(() => this._service.GetAboutUsDataAsync());
+        this._mockLogger.Verify(
             x => x.Log(
                 LogLevel.Error,
                 It.IsAny<EventId>(),

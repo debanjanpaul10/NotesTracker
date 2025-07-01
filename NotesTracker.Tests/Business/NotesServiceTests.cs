@@ -7,16 +7,6 @@
 
 namespace NotesTracker.Tests.Business;
 
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Moq;
-using NotesTracker.Business.Services;
-using NotesTracker.Data.Contracts;
-using NotesTracker.Data.Entities;
-using NotesTracker.Shared.DTO;
-using Xunit;
-
 /// <summary>
 /// Notes Service Tests Class.
 /// </summary>

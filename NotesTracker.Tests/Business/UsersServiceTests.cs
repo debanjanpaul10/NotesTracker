@@ -7,13 +7,6 @@
 
 namespace NotesTracker.Tests.Business;
 
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Moq;
-using NotesTracker.Data.Contracts;
-using Xunit;
-using NotesTracker.Business.Services;
-
 /// <summary>
 /// Users Service Tests Class.
 /// </summary>
@@ -43,13 +36,13 @@ public class UsersServiceTests
 	{
 		// Arrange
 		var mockUsersData = TestsHelper.PrepareUsersDataListDTO();
-		this._mockUsersDataService.Setup(x => x.AddUsersAsync(It.IsAny<List<Data.Entities.User>>()));
+		this._mockUsersDataService.Setup(x => x.AddUsersAsync(It.IsAny<List<User>>())).ReturnsAsync(true);
 
 		// Act
 		await this._userService.AddUsersAsync(mockUsersData);
 
 		// Assert
-		this._mockUsersDataService.Verify(x => x.AddUsersAsync(It.IsAny<List<Data.Entities.User>>()), Times.Once);
+		this._mockUsersDataService.Verify(x => x.AddUsersAsync(It.IsAny<List<User>>()), Times.Once);
 	}
 
 

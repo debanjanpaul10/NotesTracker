@@ -7,9 +7,12 @@
 
 namespace NotesTracker.Shared.DTO
 {
+	using System.Diagnostics.CodeAnalysis;
+
 	/// <summary>
 	/// The Response DTO.
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	public class ResponseDTO
 	{
 		/// <summary>

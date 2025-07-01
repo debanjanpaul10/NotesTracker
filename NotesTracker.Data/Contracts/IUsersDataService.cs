@@ -18,7 +18,7 @@ namespace NotesTracker.Data.Contracts
         /// Adds users async.
         /// </summary>
         /// <param name="newUsers">The users data.</param>
-        Task AddUsersAsync(List<User> newUsers);
+        Task<bool> AddUsersAsync(List<User> newUsers);
     }
 }
 

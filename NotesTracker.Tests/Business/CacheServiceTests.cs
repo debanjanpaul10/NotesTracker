@@ -7,11 +7,6 @@
 
 namespace NotesTracker.Tests.Business;
 
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NotesTracker.Business.Services;
-
 /// <summary>
 /// Cache service tests.
 /// </summary>

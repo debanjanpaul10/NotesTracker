@@ -5,10 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
 
-import {
-  CacheKeys,
-  HeaderPageConstants,
-} from '@app/shared/notestracker.constants';
+import { CacheKeys, HeaderPageConstants } from '@shared/notestracker.constants';
 
 /**
  * The Header Component.

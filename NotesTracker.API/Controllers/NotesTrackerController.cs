@@ -65,23 +65,28 @@ namespace NotesTracker.API.Controllers
 		[HttpPost]
 		[Route(RouteConstants.AddNewBugReport_ApiRoute)]
 		[AllowAnonymous]
-		public async Task<ResponseDTO> AddNewBugReportAsync(BugReportDTO bugReportData)
+		public async Task<IActionResult> AddNewBugReportAsync(BugReportDTO bugReportData)
 		{
 			try
 			{
 				logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodStartedMessageConstant, nameof(AddNewBugReportAsync), DateTime.UtcNow, base.UserName));
-				var result = await notesTrackerService.AddNewBugReportDataAsync(bugReportData, userName: base.UserName);
-				if (result)
+				if (base.IsAuthorized())
 				{
-					return this.PrepareSuccessResponse(result);
+					var result = await notesTrackerService.AddNewBugReportDataAsync(bugReportData, userName: base.UserName);
+					if (result)
+					{
+						return this.Ok(this.PrepareSuccessResponse(result));
+					}
+
+					return this.BadRequest(this.HandleBadRequestResponse(StatusCodes.Status400BadRequest, ExceptionConstants.SomethingWentWrongMessageConstant));
 				}
 
-				return this.HandleBadRequestResponse(StatusCodes.Status400BadRequest, ExceptionConstants.SomethingWentWrongMessageConstant);
+				return this.Unauthorized();
 			}
 			catch (Exception ex)
 			{
 				logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(AddNewBugReportAsync), DateTime.UtcNow, ex.Message));
-				return this.HandleBadRequestResponse(StatusCodes.Status500InternalServerError, ex.Message);
+				throw;
 			}
 			finally
 			{

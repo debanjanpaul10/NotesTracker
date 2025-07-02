@@ -22,10 +22,13 @@ namespace NotesTracker.Business.Helpers
 		/// </summary>
 		public MappingProfile()
 		{
-			CreateMap<BugReport, BugReportDTO>().ReverseMap()
+			CreateMap<BugReportDTO, BugReport>()
 				.ForMember(dest => dest.BugId, opt => opt.Ignore())
 				.ForMember(dest => dest.LoggedByUserName, opt => opt.Ignore())
-				.ForMember(dest => dest.BugSeverity, opt => opt.Ignore());
+				.ForMember(dest => dest.BugTitle, opt => opt.MapFrom(src => src.BugTitle))
+				.ForMember(dest => dest.BugDescription, opt => opt.MapFrom(src => src.BugDescription))
+				.ForMember(dest => dest.PageUrl, opt => opt.MapFrom(src => src.PageUrl))
+				.ForMember(dest => dest.BugSeverity, opt => opt.MapFrom(src => src.BugSeverity));
 		}
 	}
 }

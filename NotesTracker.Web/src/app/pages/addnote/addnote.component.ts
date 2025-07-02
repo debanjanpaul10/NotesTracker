@@ -12,9 +12,9 @@ import { NotesService } from '@services/notes.service';
 import {
   AddNotePageConstants,
   AngularRoutes,
-} from '@helpers/notestracker.constants';
-import { ToasterService } from '@services/toaster.service';
-import { UsersService } from '@services/users.service';
+} from '@shared/notestracker.constants';
+import { ToasterService } from '@core/toaster.service';
+import { UsersService } from '@core/users.service';
 
 /**
  * The Add Note Component.

@@ -6,10 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { SkeletonModule } from 'primeng/skeleton';
 
-import { MadeWithSubTitle } from '@helpers/notestracker.constants';
+import { MadeWithSubTitle } from '@shared/notestracker.constants';
 import { NotesTrackerService } from '@services/notestracker.service';
 import { AboutUs } from '@models/about-us-dto.class';
-import { ToasterService } from '@services/toaster.service';
+import { ToasterService } from '@core/toaster.service';
 
 /**
  * The Made With Component

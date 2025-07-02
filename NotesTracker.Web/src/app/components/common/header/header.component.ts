@@ -8,7 +8,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import {
   CacheKeys,
   HeaderPageConstants,
-} from '@helpers/notestracker.constants';
+} from '@app/shared/notestracker.constants';
 
 /**
  * The Header Component.

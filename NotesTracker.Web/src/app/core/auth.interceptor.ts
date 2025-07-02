@@ -7,8 +7,8 @@ import { AuthService } from '@auth0/auth0-angular';
 import { inject } from '@angular/core';
 import { switchMap } from 'rxjs';
 
-import { UsersService } from '@services/users.service';
-import { AuthConstants } from '@helpers/notestracker.constants';
+import { UsersService } from '@core/users.service';
+import { AuthConstants } from '@shared/notestracker.constants';
 
 /**
  * The Authentication Interceptor Service Function.

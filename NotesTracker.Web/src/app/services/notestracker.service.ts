@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
-import { ApiUrls } from '@helpers/notestracker.constants';
+import { ApiUrls } from '@app/shared/notestracker.constants';
 import { ResponseDTO } from '@models/dto/response-dto.class';
 import { AboutUs } from '@models/about-us-dto.class';
 

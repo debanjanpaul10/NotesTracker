@@ -12,11 +12,11 @@ import {
   AngularRoutes,
   ExceptionMessages,
   NotesContainerConstants,
-} from '@helpers/notestracker.constants';
+} from '@shared/notestracker.constants';
 import { LoaderComponent } from '@components/common/loader/loader.component';
-import { ToasterService } from '@services/toaster.service';
-import { MadeWithComponent } from '@components/made-with/made-with.component';
-import { NoteComponent } from '@components/note/note.component';
+import { ToasterService } from '@core/toaster.service';
+import { MadeWithComponent } from '@components/home/made-with/made-with.component';
+import { NoteComponent } from '@components/home/note/note.component';
 
 /**
  * The Notes Container component.

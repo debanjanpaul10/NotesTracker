@@ -13,6 +13,7 @@ namespace NotesTracker.API.Middleware
 	using Microsoft.AspNetCore.Authentication.JwtBearer;
 	using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 	using NotesTracker.API.Controllers;
+	using NotesTracker.Business.Helpers;
 	using NotesTracker.Shared.Constants;
 	using static NotesTracker.Shared.Constants.ConfigurationConstants;
 
@@ -60,6 +61,10 @@ namespace NotesTracker.API.Middleware
 			builder.Services.AddMemoryCache();
 			builder.Services.ConfigureBusinessDependencies();
 			builder.Services.ConfigureDataDependencies();
+			builder.Services.AddAutoMapper(config =>
+			{
+				config.AddProfile<MappingProfile>();
+			});
 		}
 
 		#region PRIVATE Methods

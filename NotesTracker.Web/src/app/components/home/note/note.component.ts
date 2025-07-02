@@ -12,10 +12,10 @@ import {
   AngularRoutes,
   NotesPageConstants,
   SuccessMessages,
-} from '@helpers/notestracker.constants';
+} from '@shared/notestracker.constants';
 import { SpinnerComponent } from '@components/common/spinner/spinner.component';
 import { UpdateNoteDTO } from '@models/dto/update-note-dto.class';
-import { ToasterService } from '@services/toaster.service';
+import { ToasterService } from '@core/toaster.service';
 
 /**
  * The Notes Component.

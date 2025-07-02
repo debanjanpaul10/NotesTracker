@@ -1,0 +1,10 @@
+CREATE TABLE BugReports
+(
+	[BugId] INT IDENTITY(1,1) NOT NULL,
+	[BugTitle] NVARCHAR(MAX) NOT NULL,
+	[BugDescription] NVARCHAR(MAX) NOT NULL,
+	[BugSeverity] NVARCHAR(MAX) NOT NULL,
+	[PageUrl] NVARCHAR(MAX) NOT NULL,
+	[BugStatus] INT NOT NULL,
+	[LoggedByUserName] NVARCHAR(MAX) NOT NULL,
+)

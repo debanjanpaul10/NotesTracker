@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HomePageConstants } from '@helpers/notestracker.constants';
-import { NotesContainerComponent } from '@components/notescontainer/notescontainer.component';
+import { HomePageConstants } from '@shared/notestracker.constants';
+import { NotesContainerComponent } from '@components/home/notescontainer/notescontainer.component';
 
 /**
  * The Home component.

@@ -89,6 +89,7 @@ namespace NotesTracker.API.Middleware
 		{
 			services.AddScoped<INotesDataService, NotesDataService>();
 			services.AddScoped<IUsersDataService, UsersDataService>();
+			services.AddScoped<INotesTrackerDataService, NotesTrackerDataService>();
 		}
 	}
 }

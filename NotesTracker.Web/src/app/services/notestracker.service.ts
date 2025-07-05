@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { first, firstValueFrom } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { ApiUrls } from '@shared/notestracker.constants';
 import { ResponseDTO } from '@models/dto/response-dto.class';
-import { AboutUs } from '@models/about-us-dto.class';
+import { AboutUs } from '@models/dto/about-us-dto.class';
 
 /**
  * The Notes Tracker Service class.
@@ -17,7 +17,7 @@ class NotesTrackerService {
   /**
    * The notes routes.
    */
-  public notesTrackerRoutes: any = ApiUrls.NotesTracker;
+  public notesTrackerRoutes = ApiUrls.NotesTracker;
 
   /**
    * Initializes a new instance of `NotesTrackerService`
@@ -41,6 +41,23 @@ class NotesTrackerService {
     );
     if (response?.isSuccess && response?.responseData !== null) {
       return response?.responseData as AboutUs[];
+    } else {
+      throw new Error(response.responseData);
+    }
+  }
+
+  /**
+   * Creates a new bug report.
+   * @param data The input data for bug report
+   * @returns The api response.
+   */
+  public async addNewBugReportAsync(data: any): Promise<boolean> {
+    const addNewBugReportDataUrl: string = `${this.apiUrl}${this.notesTrackerRoutes.AddNewBugReport_ApiRoute}`;
+    const response = await firstValueFrom(
+      this.httpClient.post<ResponseDTO>(addNewBugReportDataUrl, data)
+    );
+    if (response?.isSuccess && response?.responseData !== null) {
+      return response?.responseData as boolean;
     } else {
       throw new Error(response.responseData);
     }

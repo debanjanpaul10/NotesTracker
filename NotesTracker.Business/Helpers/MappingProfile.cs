@@ -25,6 +25,7 @@ namespace NotesTracker.Business.Helpers
 			CreateMap<BugReportDTO, BugReport>()
 				.ForMember(dest => dest.BugId, opt => opt.Ignore())
 				.ForMember(dest => dest.LoggedByUserName, opt => opt.Ignore())
+				.ForMember(dest => dest.BugStatus, opt => opt.Ignore())
 				.ForMember(dest => dest.BugTitle, opt => opt.MapFrom(src => src.BugTitle))
 				.ForMember(dest => dest.BugDescription, opt => opt.MapFrom(src => src.BugDescription))
 				.ForMember(dest => dest.PageUrl, opt => opt.MapFrom(src => src.PageUrl))

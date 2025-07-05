@@ -21,7 +21,7 @@ export const routes: Routes = [
   {
     path: AngularRoutes.Error.Name,
     loadComponent: () =>
-      import('./components/common/error-page/error-page.component').then(
+      import('./pages/error-page/error-page.component').then(
         (c) => c.ErrorPageComponent
       ),
   },

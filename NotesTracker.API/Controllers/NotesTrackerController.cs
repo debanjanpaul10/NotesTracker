@@ -36,9 +36,9 @@ namespace NotesTracker.API.Controllers
 		{
 			try
 			{
-				logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodStartedMessageConstant, nameof(GetAboutUsDataAsync), DateTime.UtcNow, "Default"));
+				logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodStartedMessageConstant, nameof(GetAboutUsDataAsync), DateTime.UtcNow, base.UserName));
 
-				var aboutUsData = await notesTrackerService.GetAboutUsDataAsync();
+				var aboutUsData = await notesTrackerService.GetAboutUsDataAsync(base.UserName);
 				if (aboutUsData is not null && aboutUsData.Count > 0)
 				{
 					return this.PrepareSuccessResponse(aboutUsData);
@@ -53,7 +53,7 @@ namespace NotesTracker.API.Controllers
 			}
 			finally
 			{
-				logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodEndedMessageConstant, nameof(GetAboutUsDataAsync), DateTime.UtcNow, "Default"));
+				logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodEndedMessageConstant, nameof(GetAboutUsDataAsync), DateTime.UtcNow, base.UserName));
 			}
 		}
 

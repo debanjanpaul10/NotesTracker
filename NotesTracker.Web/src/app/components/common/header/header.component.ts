@@ -15,6 +15,7 @@ import { Popover, PopoverModule } from 'primeng/popover';
 
 import { CacheKeys, HeaderPageConstants } from '@shared/notestracker.constants';
 import { ButtonModule } from 'primeng/button';
+import { CommonService } from '@services/common.service';
 
 /**
  * Header Component for the Notes Tracker Application
@@ -66,7 +67,10 @@ export class HeaderComponent implements OnInit {
    *
    * @param auth0 - The Auth0 authentication service for user management
    */
-  constructor(private readonly auth0: AuthService) {
+  constructor(
+    private readonly auth0: AuthService,
+    private readonly commonService: CommonService
+  ) {
     const savedTheme =
       localStorage.getItem(CacheKeys.ThemeSettings) ||
       this.ThemeSettingsKeys.LightMode.Key;
@@ -285,6 +289,6 @@ export class HeaderComponent implements OnInit {
    */
   private handleBugReport(): void {
     this.hidePopover();
-    alert('Feature being worked on');
+    this.commonService.isBugFlyoutVisible = true;
   }
 }

@@ -5,6 +5,7 @@ CREATE TABLE BugReports
 	[BugDescription] NVARCHAR(MAX) NOT NULL,
 	[BugSeverity] NVARCHAR(MAX) NOT NULL,
 	[PageUrl] NVARCHAR(MAX) NOT NULL,
-	[BugStatus] INT NOT NULL,
+	[BugStatus] INT NOT NULL DEFAULT 1,
 	[LoggedByUserName] NVARCHAR(MAX) NOT NULL,
+	CONSTRAINT PK_BugReports PRIMARY KEY ([BugId])
 )

@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[BugReportsMapping]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+	[StatusName] NVARCHAR(50) NOT NULL,
+	[StatusDescription] NVARCHAR(255) NOT NULL,
+	[IsActive] BIT NOT NULL DEFAULT 1,
+	[DateCreated] DATETIME NOT NULL DEFAULT GETDATE()
+)

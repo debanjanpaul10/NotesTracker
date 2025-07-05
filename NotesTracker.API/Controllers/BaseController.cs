@@ -9,7 +9,6 @@ namespace NotesTracker.API.Controllers
 {
 	using Microsoft.AspNetCore.Authorization;
 	using Microsoft.AspNetCore.Mvc;
-	using NotesTracker.Shared.Constants;
 	using NotesTracker.Shared.DTO;
 	using static NotesTracker.Shared.Constants.ConfigurationConstants;
 
@@ -36,6 +35,10 @@ namespace NotesTracker.API.Controllers
 				if (!string.IsNullOrEmpty(userName))
 				{
 					this.UserName = userName;
+				}
+				else
+				{
+					this.UserName = "NA";
 				}
 			}
 		}

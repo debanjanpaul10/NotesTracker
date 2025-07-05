@@ -17,8 +17,9 @@ namespace NotesTracker.Business.Contracts
 		/// <summary>
 		/// Gets the about us application data asynchronously.
 		/// </summary>
+		/// <param name="userName">The user name of the current logged in user.</param>
 		/// <returns>The list of <see cref="ApplicationInfoDataDTO"/></returns>
-		Task<List<ApplicationInfoDataDTO>> GetAboutUsDataAsync();
+		Task<List<ApplicationInfoDataDTO>> GetAboutUsDataAsync(string userName);
 
 		/// <summary>
 		/// Adds the new bug report data asynchronously.

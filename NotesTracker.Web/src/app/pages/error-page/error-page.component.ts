@@ -10,11 +10,9 @@ import { ErrorPageConstants } from '@shared/notestracker.constants';
   templateUrl: './error-page.component.html',
   styleUrl: './error-page.component.scss',
 })
-class ErrorPageComponent {
+export class ErrorPageComponent {
   /**
    * The error page constants.
    */
   public errorPageConstants = ErrorPageConstants;
 }
-
-export { ErrorPageComponent };

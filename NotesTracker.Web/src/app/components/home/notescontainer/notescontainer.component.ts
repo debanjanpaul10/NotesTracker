@@ -17,7 +17,6 @@ import { LoaderComponent } from '@components/common/loader/loader.component';
 import { ToasterService } from '@core/services/toaster.service';
 import { MadeWithComponent } from '@components/home/made-with/made-with.component';
 import { NoteComponent } from '@components/home/note/note.component';
-import { firstValueFrom } from 'rxjs';
 
 /**
  * The Notes Container component.
@@ -38,34 +37,11 @@ import { firstValueFrom } from 'rxjs';
   styleUrl: './notescontainer.component.scss',
 })
 class NotesContainerComponent implements OnInit {
-  /**
-   * The notes container constants object.
-   */
   public notesContainerConstants = NotesContainerConstants;
-
-  /**
-   * The Angular routes constants
-   */
   public angularRoutesConstants = AngularRoutes;
-
-  /**
-   * The notes list.
-   */
   public notesList = signal<Notes[]>([]);
-
-  /**
-   * The is loading boolean flag.
-   */
   public loading = signal(false);
-
-  /**
-   * The boolean flag to check user authenticated.
-   */
   public isUserAuthenticated = signal(false);
-
-  /**
-   * The is delete operation success boolean flag.
-   */
   public isDeleteOperationSuccess = signal(false);
 
   /**

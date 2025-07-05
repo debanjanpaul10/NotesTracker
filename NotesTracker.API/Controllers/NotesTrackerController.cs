@@ -64,7 +64,6 @@ namespace NotesTracker.API.Controllers
 		/// <returns>The boolean for success/failure</returns>
 		[HttpPost]
 		[Route(RouteConstants.AddNewBugReport_ApiRoute)]
-		[AllowAnonymous]
 		public async Task<IActionResult> AddNewBugReportAsync(BugReportDTO bugReportData)
 		{
 			try

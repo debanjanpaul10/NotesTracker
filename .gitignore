@@ -16,3 +16,7 @@ __azurite_db*.*
 
 # Environments
 **environment.development.ts
+
+# Database Project
+NotesTracker.Database/NotesTracker.Database.jfm
+NotesTracker.Database/NotesTracker.Database.dbmdl

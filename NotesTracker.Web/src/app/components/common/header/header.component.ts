@@ -14,7 +14,6 @@ import { Popover, PopoverModule } from 'primeng/popover';
 
 import { CacheKeys, HeaderPageConstants } from '@shared/notestracker.constants';
 import { ButtonModule } from 'primeng/button';
-import { UsersService } from '@core/services/users.service';
 
 /**
  * Header Component for the Notes Tracker Application
@@ -80,6 +79,11 @@ export class HeaderComponent implements OnInit {
         name: 'Logout',
         onClick: () => this.handleUserLogout(),
         icon: 'pi pi-sign-out',
+      },
+      {
+        name: 'Report a bug',
+        onClick: () => this.handleBugReport(),
+        icon: 'pi pi-flag',
       },
     ];
   }
@@ -256,5 +260,9 @@ export class HeaderComponent implements OnInit {
         },
       });
     }
+  }
+
+  private handleBugReport(): void {
+    alert('Feature being worked on');
   }
 }

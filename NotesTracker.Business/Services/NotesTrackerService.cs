@@ -63,12 +63,13 @@ namespace NotesTracker.Business.Services
 		/// <summary>
 		/// Gets the about us application data asynchronously.
 		/// </summary>
+		/// <param name="userName">The user name of the current logged in user.</param>
 		/// <returns>The list of <see cref="ApplicationInfoDataDTO"/></returns>
-		public async Task<List<ApplicationInfoDataDTO>> GetAboutUsDataAsync()
+		public async Task<List<ApplicationInfoDataDTO>> GetAboutUsDataAsync(string userName)
 		{
 			try
 			{
-				this._logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodStartedMessageConstant, nameof(GetAboutUsDataAsync), DateTime.UtcNow, "Default"));
+				this._logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodStartedMessageConstant, nameof(GetAboutUsDataAsync), DateTime.UtcNow, userName));
 
 				var cachedData = this._cacheService.GetCachedData<List<ApplicationInfoDataDTO>>(CacheKeys.AboutUsDataCacheKey);
 				if (cachedData is not null)
@@ -97,7 +98,7 @@ namespace NotesTracker.Business.Services
 			}
 			finally
 			{
-				this._logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodEndedMessageConstant, nameof(GetAboutUsDataAsync), DateTime.UtcNow, "Default"));
+				this._logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodEndedMessageConstant, nameof(GetAboutUsDataAsync), DateTime.UtcNow, userName));
 			}
 		}
 
@@ -115,6 +116,7 @@ namespace NotesTracker.Business.Services
 				
 				var mappedData = this._mapper.Map<BugReport>(bugReportData);
 				mappedData.LoggedByUserName = userName;
+				mappedData.BugStatus = Enums.BugStatus.Open;
 				var result = await this._notesTrackerDataService.AddNewBugReportDataAsync(mappedData);
 				
 				return result;

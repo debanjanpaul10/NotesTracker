@@ -16,6 +16,7 @@ export const ApiUrls = {
   NotesTracker: {
     BaseRoute: 'notesapi/NotesTracker/',
     GetAboutUsData_ApiRoute: 'GetAboutUsData',
+    AddNewBugReport_ApiRoute: 'AddNewBugReport',
   },
 };
 
@@ -46,10 +47,12 @@ export const ExceptionMessages = {
   AddNewUserFailedMessage: 'Failed to add new user data.',
   DefaultValidationFailedMessage: 'Some fields are missing',
   DefaultErrorMessage: 'Something went terribly wrong!',
+  CouldNotSubmitBugReport: 'Something went wrong while sending the bug report',
 };
 
 export const SuccessMessages = {
   NoteUpdatedSuccess: 'Note has been updated!',
+  BugReportUpdatedSuccess: 'Bug report has been sent successfully',
 };
 
 export const HomePageConstants = {
@@ -162,3 +165,31 @@ export const AuthConstants = {
   BearerConstant: 'Bearer',
   UserNameConstant: 'username',
 };
+
+export class BugReportDrawerConstants {
+  public static readonly HeaderConstant = 'Report a bug';
+  public static readonly DropdownMenuOptions = [
+    { label: 'Low', value: 'Low' },
+    { label: 'Medium', value: 'Medium' },
+    { label: 'High', value: 'High' },
+  ];
+  public static readonly FormLabelConstants = {
+    Title: {
+      Name: 'Bug Title',
+      Placeholder: 'Enter the bug title',
+    },
+    Description: {
+      Name: 'Bug Description',
+      Placeholder: 'Enter the bug description in about 100 words',
+    },
+    Severity: {
+      Name: 'Bug Severity',
+      Placeholder: 'Choose a severity',
+    },
+    Pageurl: {
+      Name: 'Page URL',
+      Placeholder: 'Enter the page URL',
+    },
+    SubmitButton: 'Submit',
+  };
+}

@@ -1,0 +1,19 @@
+.danger {
+  color: red;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px; /* Ensure minimum height for vertical centering */
+  width: 100%;
+}
+
+/* Additional styling for the drawer content */
+:host ::ng-deep {
+  .p-drawer-content {
+    display: flex;
+    flex-direction: column;
+  }
+}

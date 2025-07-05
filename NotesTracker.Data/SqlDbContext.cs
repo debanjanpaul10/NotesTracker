@@ -141,7 +141,7 @@ namespace NotesTracker.Data
 				entity.Property(e => e.BugDescription).HasColumnName(BugDescriptionColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
 				entity.Property(e => e.BugSeverity).HasColumnName(BugSeverityColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
 				entity.Property(e => e.PageUrl).HasColumnName(PageUrlColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
-				entity.Property(e => e.BugStatus).HasColumnName(BugStatusColumnNameConstant).HasConversion<string>().IsRequired();
+				entity.Property(e => e.BugStatus).HasColumnName(BugStatusColumnNameConstant).IsRequired();
 			});
 		}
 	}

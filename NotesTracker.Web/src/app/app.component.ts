@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '@components/common/header/header.component';
 import { SpinnerComponent } from '@components/common/spinner/spinner.component';
 import { ToasterComponent } from '@components/common/toaster/toaster.component';
+import { BugReportComponent } from '@components/bug-report/bug-report.component';
 
 /**
  * The Main app component.
@@ -19,6 +20,7 @@ import { ToasterComponent } from '@components/common/toaster/toaster.component';
     CommonModule,
     SpinnerComponent,
     ToasterComponent,
+    BugReportComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

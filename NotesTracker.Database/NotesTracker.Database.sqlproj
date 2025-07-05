@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Tables" />
+    <Folder Include="PostDeploymentScripts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NotesTracker.Database.sqlproj.user" />
@@ -18,6 +19,10 @@
     <Build Include="Tables\Users.sql" />
     <Build Include="Tables\Notes.sql" />
     <Build Include="Tables\BugReports.sql" />
+    <Build Include="Tables\BugReportsMapping.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeploymentScripts\Insert_BugReportsMapping.sql" />
   </ItemGroup>
   <Target Name="BeforeBuild">
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />

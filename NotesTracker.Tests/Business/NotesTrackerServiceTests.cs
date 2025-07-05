@@ -20,6 +20,11 @@ using AutoMapper;
 public class NotesTrackerServiceTests
 {
 	/// <summary>
+	/// The user name for the tests.
+	/// </summary>
+	private static readonly string UserName = "SampleUser";
+
+	/// <summary>
 	/// The mock of notes tracker data service.
 	/// </summary>
 	private readonly Mock<INotesTrackerDataService> _mockNotesTrackerDataService;
@@ -100,7 +105,7 @@ public class NotesTrackerServiceTests
 			.Returns(cachedList);
 
 		// Act
-		var result = await this._service.GetAboutUsDataAsync();
+		var result = await this._service.GetAboutUsDataAsync(UserName);
 
 		// Assert
 		Assert.Equal(cachedList, result);
@@ -134,7 +139,7 @@ public class NotesTrackerServiceTests
 			.Callback<string, ApplicationInfoDataDTO, TimeSpan>((key, data, expiry) => cachedData = data);
 
 		// Act
-		var result = await this._service.GetAboutUsDataAsync();
+		var result = await this._service.GetAboutUsDataAsync(UserName);
 
 		// Assert
 		Assert.NotNull(result);
@@ -156,7 +161,7 @@ public class NotesTrackerServiceTests
 			.Returns((IMongoCollection<ApplicationInfoDataDTO>)null!);
 
 		// Act & Assert
-		var ex = await Assert.ThrowsAsync<Exception>(() => this._service.GetAboutUsDataAsync());
+		var ex = await Assert.ThrowsAsync<Exception>(() => this._service.GetAboutUsDataAsync(UserName));
 		Assert.Equal(ExceptionConstants.SomethingWentWrongMessageConstant, ex.Message);
 	}
 
@@ -174,7 +179,7 @@ public class NotesTrackerServiceTests
 			.Throws(new InvalidOperationException("Mongo error"));
 
 		// Act & Assert
-		await Assert.ThrowsAsync<InvalidOperationException>(() => this._service.GetAboutUsDataAsync());
+		await Assert.ThrowsAsync<InvalidOperationException>(() => this._service.GetAboutUsDataAsync(UserName));
 		this._mockLogger.Verify(
 			x => x.Log(
 				LogLevel.Error,

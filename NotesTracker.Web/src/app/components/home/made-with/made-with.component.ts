@@ -8,7 +8,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 
 import { MadeWithSubTitle } from '@shared/notestracker.constants';
 import { NotesTrackerService } from '@services/notestracker.service';
-import { AboutUs } from '@models/about-us-dto.class';
+import { AboutUs } from '@models/dto/about-us-dto.class';
 import { ToasterService } from '@core/services/toaster.service';
 
 /**

@@ -27,7 +27,12 @@
 
         <div *ngIf="isUserLoggedIn()">
           <div class="dropdown">
-            <p-button type="text" (onClick)="toggle($event)" link>
+            <p-button 
+              type="text" 
+              (click)="toggle($event)" 
+              link
+              #profileButton
+            >
               <p-avatar
                 *ngIf="getUserPicture()"
                 [image]="getUserPicture()"
@@ -46,25 +51,27 @@
             </p-button>
 
             <p-popover #op>
-              <div class="flex flex-col gap-4">
-                <!-- User Info -->
-                <div class="user-info mb-3">
-                  <h4 class="mb-1">{{ getUserDisplayName() }}</h4>
-                </div>
+              <ng-template pTemplate="content">
+                <div class="flex flex-col gap-4">
+                  <!-- User Info -->
+                  <div class="user-info mb-3">
+                    <h4 class="mb-1">{{ getUserDisplayName() }}</h4>
+                  </div>
 
-                <!-- Menu Options -->
-                <div *ngFor="let option of menuOptions">
-                  <p-button
-                    (click)="option.onClick()"
-                    [label]="option.name"
-                    variant="text"
-                    severity="secondary"
-                    [icon]="option.icon"
-                    [disabled]="option.disabled"
-                  >
-                  </p-button>
+                  <!-- Menu Options -->
+                  <div *ngFor="let option of menuOptions">
+                    <p-button
+                      (click)="option.onClick()"
+                      [label]="option.name"
+                      variant="text"
+                      severity="secondary"
+                      [icon]="option.icon"
+                      [disabled]="option.disabled"
+                    >
+                    </p-button>
+                  </div>
                 </div>
-              </div>
+              </ng-template>
             </p-popover>
           </div>
         </div>

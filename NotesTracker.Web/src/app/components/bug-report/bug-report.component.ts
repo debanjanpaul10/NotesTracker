@@ -33,14 +33,6 @@ import { SpinnerComponent } from '@components/common/spinner/spinner.component';
  * - Loading state management during submission
  * - Automatic page URL capture
  * - Form reset after successful submission
- * 
- * @example
- * ```html
- * <app-bug-report></app-bug-report>
- * ```
- * 
- * @since 1.0.0
- * @author NotesTracker Team
  */
 @Component({
   selector: 'app-bug-report',
@@ -58,30 +50,18 @@ import { SpinnerComponent } from '@components/common/spinner/spinner.component';
   styleUrl: './bug-report.component.scss',
 })
 export class BugReportComponent {
-  /** Constants for bug report drawer configuration */
   public BugReportConstants = BugReportDrawerConstants;
-  
-  /** Signal indicating whether the component is in a loading state during form submission */
   public isLoading: WritableSignal<boolean> = signal(false);
-  
-  /** The bug report data object containing form values */
   public bugReport: BugReportDTO = new BugReportDTO(
     '',
     '',
     BugReportDrawerConstants.DropdownMenuOptions[0].value,
     window.location.origin
   );
-  
-  /** Available severity options for the dropdown menu */
   public dropdownMenuOptions = BugReportDrawerConstants.DropdownMenuOptions;
-  
-  /** Form label constants for internationalization */
   public FormLabelConstants = BugReportDrawerConstants.FormLabelConstants;
 
-  /** Validation constants for field length requirements */
   private LengthValidationConstants = BugReportValidations.LengthConstants;
-  
-  /** Validation message templates for form fields */
   private ValidationMessages = BugReportValidations.ValidationMessages;
 
   /**
@@ -95,7 +75,7 @@ export class BugReportComponent {
     private readonly commonService: CommonService,
     private readonly notesTrackerService: NotesTrackerService,
     private readonly toaster: ToasterService
-  ) {}
+  ) { }
 
   /**
    * Gets the visibility state of the bug report drawer.
@@ -122,20 +102,13 @@ export class BugReportComponent {
    * defined in the validation constants.
    * 
    * @returns {boolean} True if the title is valid, false otherwise
-   * 
-   * @example
-   * ```typescript
-   * if (this.isTitleValid()) {
-   *   // Proceed with form submission
-   * }
-   * ```
    */
   public isTitleValid(): boolean {
     return (
       this.bugReport.bugTitle.length >=
-        this.LengthValidationConstants.TITLE_MIN_LENGTH &&
+      this.LengthValidationConstants.TITLE_MIN_LENGTH &&
       this.bugReport.bugTitle.length <=
-        this.LengthValidationConstants.TITLE_MAX_LENGTH
+      this.LengthValidationConstants.TITLE_MAX_LENGTH
     );
   }
 
@@ -146,20 +119,13 @@ export class BugReportComponent {
    * defined in the validation constants.
    * 
    * @returns {boolean} True if the description is valid, false otherwise
-   * 
-   * @example
-   * ```typescript
-   * if (this.isDescriptionValid()) {
-   *   // Proceed with form submission
-   * }
-   * ```
    */
   public isDescriptionValid(): boolean {
     return (
       this.bugReport.bugDescription.length >=
-        this.LengthValidationConstants.DESCRIPTION_MIN_LENGTH &&
+      this.LengthValidationConstants.DESCRIPTION_MIN_LENGTH &&
       this.bugReport.bugDescription.length <=
-        this.LengthValidationConstants.DESCRIPTION_MAX_LENGTH
+      this.LengthValidationConstants.DESCRIPTION_MAX_LENGTH
     );
   }
 
@@ -192,15 +158,6 @@ export class BugReportComponent {
    * All fields must pass validation for the form to be considered valid.
    * 
    * @returns {boolean} True if all form fields are valid, false otherwise
-   * 
-   * @example
-   * ```typescript
-   * if (this.isFormValid()) {
-   *   await this.submitBugReport();
-   * } else {
-   *   // Show validation errors
-   * }
-   * ```
    */
   public isFormValid(): boolean {
     return (
@@ -221,14 +178,6 @@ export class BugReportComponent {
    * - Empty string if valid
    * 
    * @returns {string} The validation message for the title field
-   * 
-   * @example
-   * ```typescript
-   * const message = this.getTitleValidationMessage();
-   * if (message) {
-   *   this.showError(message);
-   * }
-   * ```
    */
   public getTitleValidationMessage(): string {
     if (!this.bugReport.bugTitle) {
@@ -259,14 +208,6 @@ export class BugReportComponent {
    * - Empty string if valid
    * 
    * @returns {string} The validation message for the description field
-   * 
-   * @example
-   * ```typescript
-   * const message = this.getDescriptionValidationMessage();
-   * if (message) {
-   *   this.showError(message);
-   * }
-   * ```
    */
   public getDescriptionValidationMessage(): string {
     if (!this.bugReport.bugDescription) {
@@ -320,12 +261,6 @@ export class BugReportComponent {
    * @returns {Promise<void>} A promise that resolves when the submission is complete
    * 
    * @throws {Error} When the API call fails or validation fails
-   * 
-   * @example
-   * ```typescript
-   * // Called from template or other component method
-   * await this.submitBugReport();
-   * ```
    */
   public async submitBugReport(): Promise<void> {
     if (!this.isFormValid()) {

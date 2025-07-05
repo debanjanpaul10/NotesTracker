@@ -8,64 +8,65 @@
           height="50"
       /></a>
     </div>
+    <div class="d-flex align-items-center">
+      <p-button
+        class="theme-toggle-btn me-3"
+        [rounded]="true"
+        [raised]="true"
+        (click)="toggleTheme()"
+        [icon]="!isDarkMode() ? 'pi pi-moon' : 'pi pi-sun'"
+      >
+      </p-button>
 
-    <div class="navbar-nav ml-auto d-flex align-items-center">
-      <div *ngIf="!isUserLoggedIn()">
-        <p-button class="ml-2" (click)="handleUserLogin()">
-          {{ HeaderConstants.Headings.LoginRegister }}
-        </p-button>
-      </div>
-
-      <div *ngIf="isUserLoggedIn()" class="d-flex align-items-center">
-        <p-button
-          class="theme-toggle-btn me-3"
-          [rounded]="true"
-          [raised]="true"
-          (click)="toggleTheme()"
-          [icon]="!isDarkMode() ? 'pi pi-moon' : 'pi pi-sun'"
-        >
-        </p-button>
-
-        <div class="dropdown">
-          <p-button type="text" (onClick)="toggle($event)" link>
-            <p-avatar
-              *ngIf="getUserPicture()"
-              [image]="getUserPicture()"
-              size="large"
-              shape="circle"
-            >
-            </p-avatar>
-            <p-avatar
-              *ngIf="!getUserPicture()"
-              [label]="getUserDisplayName().charAt(0).toUpperCase()"
-              size="large"
-              shape="circle"
-              styleClass="bg-primary"
-            >
-            </p-avatar>
+      <div class="navbar-nav ml-auto d-flex align-items-center">
+        <div *ngIf="!isUserLoggedIn()">
+          <p-button class="ml-2" (click)="handleUserLogin()">
+            {{ HeaderConstants.Headings.LoginRegister }}
           </p-button>
+        </div>
 
-          <p-popover #op>
-            <div class="flex flex-col gap-4">
-              <!-- User Info -->
-              <div class="user-info mb-3">
-                <h4 class="mb-1">{{ getUserDisplayName() }}</h4>
-              </div>
+        <div *ngIf="isUserLoggedIn()">
+          <div class="dropdown">
+            <p-button type="text" (onClick)="toggle($event)" link>
+              <p-avatar
+                *ngIf="getUserPicture()"
+                [image]="getUserPicture()"
+                size="large"
+                shape="circle"
+              >
+              </p-avatar>
+              <p-avatar
+                *ngIf="!getUserPicture()"
+                [label]="getUserDisplayName().charAt(0).toUpperCase()"
+                size="large"
+                shape="circle"
+                styleClass="bg-primary"
+              >
+              </p-avatar>
+            </p-button>
 
-              <!-- Menu Options -->
-              <div *ngFor="let option of menuOptions">
-                <p-button
-                  (click)="option.onClick()"
-                  [label]="option.name"
-                  variant="text"
-                  severity="secondary"
-                  [icon]="option.icon"
-                  [disabled]="option.disabled"
-                >
-                </p-button>
+            <p-popover #op>
+              <div class="flex flex-col gap-4">
+                <!-- User Info -->
+                <div class="user-info mb-3">
+                  <h4 class="mb-1">{{ getUserDisplayName() }}</h4>
+                </div>
+
+                <!-- Menu Options -->
+                <div *ngFor="let option of menuOptions">
+                  <p-button
+                    (click)="option.onClick()"
+                    [label]="option.name"
+                    variant="text"
+                    severity="secondary"
+                    [icon]="option.icon"
+                    [disabled]="option.disabled"
+                  >
+                  </p-button>
+                </div>
               </div>
-            </div>
-          </p-popover>
+            </p-popover>
+          </div>
         </div>
       </div>
     </div>

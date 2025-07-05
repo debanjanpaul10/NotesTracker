@@ -74,11 +74,6 @@ export class HeaderComponent implements OnInit {
 
     this.menuOptions = [
       {
-        name: 'Profile Settings',
-        onClick: () => this.handleProfilePageRedirection(),
-        icon: 'pi pi-cog',
-      },
-      {
         name: 'Report a bug',
         onClick: () => this.handleBugReport(),
         icon: 'pi pi-flag',
@@ -215,20 +210,6 @@ export class HeaderComponent implements OnInit {
   public hidePopover(): void {
     this.op.hide();
     this.isPopoverVisible.set(false);
-  }
-
-  /**
-   * Handles the user profile page redirection event
-   *
-   * Currently shows an alert indicating that profile settings are
-   * a work in progress. This method can be extended to navigate
-   * to a dedicated profile settings page. Closes the popover after execution.
-   *
-   * @returns {void}
-   */
-  private handleProfilePageRedirection(): void {
-    this.hidePopover();
-    alert('Work in progress');
   }
 
   /**

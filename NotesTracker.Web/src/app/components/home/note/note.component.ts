@@ -15,7 +15,7 @@ import {
 } from '@shared/notestracker.constants';
 import { SpinnerComponent } from '@components/common/spinner/spinner.component';
 import { UpdateNoteDTO } from '@models/dto/update-note-dto.class';
-import { ToasterService } from '@core/toaster.service';
+import { ToasterService } from '@core/services/toaster.service';
 
 /**
  * The Notes Component.
@@ -61,7 +61,7 @@ class NoteComponent implements OnInit {
     private toaster: ToasterService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.auth0Service.isAuthenticated$.subscribe((isAuth: boolean) => {
       if (!isAuth) {
         this.routerService.navigate([AngularRoutes.Error.Link]);
@@ -75,39 +75,37 @@ class NoteComponent implements OnInit {
    * Gets the note by id.
    * @param noteId The note id.
    */
-  public getNoteById(noteId: number): void {
-    this.isLoading.set(true);
-    this.notesService.getNoteByIdAsync(noteId).subscribe({
-      next: (response) => {
-        this.currentNote.set(response);
-        this.isLoading.set(false);
-      },
-      error: (err) => {
-        console.error(err);
-        this.isLoading.set(false);
-      },
-    });
+  public async getNoteById(noteId: number): Promise<void> {
+    try {
+      this.isLoading.set(true);
+      const response = await this.notesService.getNoteByIdAsync(noteId);
+      this.currentNote.set(response);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.isLoading.set(false);
+    }
   }
 
   /**
    * Handles the notes updation.
    * @param updateNote The updated note data
    */
-  public handleNoteUpdate(updateNote: UpdateNoteDTO): void {
-    this.isLoading.set(true);
-    this.notesService.updateExistingNoteAsync(updateNote).subscribe({
-      next: (response) => {
-        this.currentNote.set(response);
-        this.isLoading.set(false);
-        this.toaster.showSuccess(SuccessMessages.NoteUpdatedSuccess);
-
-        this.dialogRef.close({ success: true });
-      },
-      error: (err) => {
-        console.error(err);
-        this.isLoading.set(false);
-      },
-    });
+  public async handleNoteUpdate(updateNote: UpdateNoteDTO): Promise<void> {
+    try {
+      this.isLoading.set(true);
+      const response = await this.notesService.updateExistingNoteAsync(
+        updateNote
+      );
+      this.currentNote.set(response);
+      this.toaster.showSuccess(SuccessMessages.NoteUpdatedSuccess);
+      this.dialogRef.close({ success: true });
+    } catch (error) {
+      console.error(error);
+      this.isLoading.set(false);
+    } finally {
+      this.isLoading.set(false);
+    }
   }
 
   /**

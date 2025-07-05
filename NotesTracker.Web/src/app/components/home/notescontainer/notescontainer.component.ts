@@ -14,9 +14,10 @@ import {
   NotesContainerConstants,
 } from '@shared/notestracker.constants';
 import { LoaderComponent } from '@components/common/loader/loader.component';
-import { ToasterService } from '@core/toaster.service';
+import { ToasterService } from '@core/services/toaster.service';
 import { MadeWithComponent } from '@components/home/made-with/made-with.component';
 import { NoteComponent } from '@components/home/note/note.component';
+import { firstValueFrom } from 'rxjs';
 
 /**
  * The Notes Container component.
@@ -95,43 +96,37 @@ class NotesContainerComponent implements OnInit {
   /**
    * Gets all the notes.
    */
-  public getAllNotes(): void {
-    this.loading.set(true);
-    this.notesService.getAllNotesAsync().subscribe({
-      next: (notes) => {
-        this.notesList.set(notes);
-        this.loading.set(false);
-      },
-      error: (err) => {
-        console.error(err);
-        this.loading.set(false);
-        this.toaster.showError(ExceptionMessages.AllNoteFetchFailedMessage);
-      },
-    });
+  public async getAllNotes(): Promise<void> {
+    try {
+      this.loading.set(true);
+      const response = await this.notesService.getAllNotesAsync();
+      this.notesList.set(response);
+    } catch (error) {
+      console.error(error);
+      this.toaster.showError(ExceptionMessages.AllNoteFetchFailedMessage);
+    } finally {
+      this.loading.set(false);
+    }
   }
 
   /**
    * Deletes a note by note id.
    * @param noteId The note id.
    */
-  public deleteNoteById(noteId: number): void {
-    this.loading.set(true);
-    this.notesService.deleteNoteAsync(noteId).subscribe({
-      next: (response) => {
-        this.isDeleteOperationSuccess.set(response);
-
-        if (this.isDeleteOperationSuccess()) {
-          this.getAllNotes();
-        }
-      },
-      error: (err) => {
-        console.error(err);
-        this.loading.set(false);
-      },
-      complete: () => {
-        this.loading.set(false);
-      },
-    });
+  public async deleteNoteById(noteId: number): Promise<void> {
+    try {
+      this.loading.set(true);
+      const response = await this.notesService.deleteNoteAsync(noteId);
+      this.isDeleteOperationSuccess.set(response);
+      if (response) {
+        this.getAllNotes();
+      }
+    } catch (error) {
+      console.error(error);
+      this.toaster.showError(ExceptionMessages.AllNoteFetchFailedMessage);
+    } finally {
+      this.loading.set(false);
+    }
   }
 
   /**

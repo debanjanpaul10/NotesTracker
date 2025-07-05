@@ -7,7 +7,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { inject } from '@angular/core';
 import { switchMap } from 'rxjs';
 
-import { UsersService } from '@core/users.service';
+import { UsersService } from '@core/services/users.service';
 import { AuthConstants } from '@shared/notestracker.constants';
 
 /**
@@ -27,7 +27,7 @@ const AuthInterceptor: HttpInterceptorFn = (
       if (claims && claims.__raw) {
         const userName = claims[UserNameConstant];
         if (userName) {
-          usersService.setUserName(userName);
+          usersService.userName = userName;
         }
         const newReq = req.clone({
           headers: req.headers.set(

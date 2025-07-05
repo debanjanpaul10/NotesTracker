@@ -13,8 +13,8 @@ import {
   AddNotePageConstants,
   AngularRoutes,
 } from '@shared/notestracker.constants';
-import { ToasterService } from '@core/toaster.service';
-import { UsersService } from '@core/users.service';
+import { ToasterService } from '@core/services/toaster.service';
+import { UsersService } from '@core/services/users.service';
 
 /**
  * The Add Note Component.
@@ -82,7 +82,7 @@ class AddNoteComponent implements OnInit {
    */
   public handleFormSubmit(newNote: NoteDTO): void {
     if (newNote.noteTitle !== '' && newNote.noteDescription !== '') {
-      newNote.userName = this.userService.getUserName();
+      newNote.userName = this.userService.userName;
       this.addNewNote(newNote);
     } else {
       alert('Some Fields are missing!');
@@ -93,23 +93,20 @@ class AddNoteComponent implements OnInit {
    * Adds a new note asynchronously.
    * @param newNote The new note.
    */
-  private addNewNote(newNote: NoteDTO): void {
-    this.loading.set(true);
-    this.notesService.addNewNoteAsync(newNote).subscribe({
-      next: (noteSaveStatus) => {
-        this.isNoteSaved.set(noteSaveStatus);
-        if (this.isNoteSaved()) {
-          this.router.navigate([AngularRoutes.Home.Link]);
-        }
-      },
-      error: (error) => {
-        console.error(error);
-        this.toaster.showError(error);
-      },
-      complete: () => {
-        this.loading.set(false);
-      },
-    });
+  private async addNewNote(newNote: NoteDTO): Promise<void> {
+    try {
+      this.loading.set(true);
+      const response = await this.notesService.addNewNoteAsync(newNote);
+      this.isNoteSaved.set(response);
+      if (response) {
+        this.router.navigate([AngularRoutes.Home.Link]);
+      }
+    } catch (error: any) {
+      console.error(error);
+      this.toaster.showError(error);
+    } finally {
+      this.loading.set(false);
+    }
   }
 }
 

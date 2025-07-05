@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, first, firstValueFrom, map } from 'rxjs';
 
 import { ApiUrls, ExceptionMessages } from '@shared/notestracker.constants';
 import { Notes } from '@models/notes.model';
@@ -24,7 +24,7 @@ class NotesService {
   /**
    * The notes routes.
    */
-  private notesRoutes: any = ApiUrls.Notes;
+  private notesRoutes = ApiUrls.Notes;
 
   /**
    * Initializes a new instance of `NotesService`.
@@ -36,17 +36,16 @@ class NotesService {
    * Gets all the notes data asynchronously.
    * @returns The api response
    */
-  public getAllNotesAsync(): Observable<Notes[]> {
+  public async getAllNotesAsync(): Promise<Notes[]> {
     const getNotesUrl: string = `${this.apiUrl}${this.notesRoutes.GetAllNotes_ApiRoute}`;
-    return this.http.get<ResponseDTO>(getNotesUrl).pipe(
-      map((response: ResponseDTO) => {
-        if (response.isSuccess && response.responseData !== null) {
-          return response.responseData as Notes[];
-        } else {
-          throw new Error(response.responseData);
-        }
-      })
+    var response = await firstValueFrom(
+      this.http.get<ResponseDTO>(getNotesUrl)
     );
+    if (response?.isSuccess && response?.responseData !== null) {
+      return response.responseData as Notes[];
+    } else {
+      throw new Error(response.responseData);
+    }
   }
 
   /**
@@ -54,17 +53,16 @@ class NotesService {
    * @param noteId The note id.
    * @returns The api response.
    */
-  public getNoteByIdAsync(noteId: number): Observable<Notes> {
+  public async getNoteByIdAsync(noteId: number): Promise<Notes> {
     const getNoteByIdUrl: string = `${this.apiUrl}${this.notesRoutes.GetNoteById_ApiRoute}?noteId=${noteId}`;
-    return this.http.get<ResponseDTO>(getNoteByIdUrl).pipe(
-      map((response: ResponseDTO) => {
-        if (response.isSuccess && response.responseData !== null) {
-          return response.responseData as Notes;
-        }
-
-        throw new Error(ExceptionMessages.NoteFetchFailedMessage);
-      })
+    const response = await firstValueFrom(
+      this.http.get<ResponseDTO>(getNoteByIdUrl)
     );
+    if (response?.isSuccess && response?.responseData !== null) {
+      return response.responseData as Notes;
+    } else {
+      throw new Error(ExceptionMessages.NoteFetchFailedMessage);
+    }
   }
 
   /**
@@ -72,17 +70,16 @@ class NotesService {
    * @param newNote The new note data.
    * @returns The api response.
    */
-  public addNewNoteAsync(newNote: NoteDTO): Observable<boolean> {
+  public async addNewNoteAsync(newNote: NoteDTO): Promise<boolean> {
     const addNewNoteUrl: string = `${this.apiUrl}${this.notesRoutes.AddNewNote_ApiRoute}`;
-    return this.http.post<ResponseDTO>(addNewNoteUrl, newNote).pipe(
-      map((response: ResponseDTO) => {
-        if (response.isSuccess && response.responseData !== null) {
-          return response.responseData as boolean;
-        }
-
-        throw new Error(ExceptionMessages.AddingNoteFailedMessage);
-      })
+    var response = await firstValueFrom(
+      this.http.post<ResponseDTO>(addNewNoteUrl, newNote)
     );
+    if (response?.isSuccess && response?.responseData !== null) {
+      return response.responseData as boolean;
+    } else {
+      throw new Error(ExceptionMessages.AddingNoteFailedMessage);
+    }
   }
 
   /**
@@ -90,19 +87,18 @@ class NotesService {
    * @param updatedNote The updated note data.
    * @returns The api response.
    */
-  public updateExistingNoteAsync(
+  public async updateExistingNoteAsync(
     updatedNote: UpdateNoteDTO
-  ): Observable<Notes> {
+  ): Promise<Notes> {
     const updateNoteUrl: string = `${this.apiUrl}${this.notesRoutes.UpdateNote_ApiRoute}`;
-    return this.http.post<ResponseDTO>(updateNoteUrl, updatedNote).pipe(
-      map((response: ResponseDTO) => {
-        if (response.isSuccess && response.responseData !== null) {
-          return response.responseData as Notes;
-        }
-
-        throw new Error(ExceptionMessages.NoteFetchFailedMessage);
-      })
+    const response = await firstValueFrom(
+      this.http.post<ResponseDTO>(updateNoteUrl, updatedNote)
     );
+    if (response?.isSuccess && response?.responseData) {
+      return response?.responseData as Notes;
+    } else {
+      throw new Error(ExceptionMessages.NoteFetchFailedMessage);
+    }
   }
 
   /**
@@ -110,17 +106,16 @@ class NotesService {
    * @param noteId The note id.
    * @returns The api response.
    */
-  public deleteNoteAsync(noteId: number): Observable<boolean> {
+  public async deleteNoteAsync(noteId: number): Promise<boolean> {
     const deleteNoteUrl: string = `${this.apiUrl}${this.notesRoutes.DeleteNote_ApiRoute}`;
-    return this.http.post<ResponseDTO>(deleteNoteUrl, noteId).pipe(
-      map((response: ResponseDTO) => {
-        if (response.isSuccess && response.responseData !== null) {
-          return response.responseData as boolean;
-        }
-
-        throw new Error(ExceptionMessages.NoteFetchFailedMessage);
-      })
+    const response = await firstValueFrom(
+      this.http.post<ResponseDTO>(deleteNoteUrl, noteId)
     );
+    if (response?.isSuccess && response?.responseData !== null) {
+      return response.responseData as boolean;
+    } else {
+      throw new Error(ExceptionMessages.NoteFetchFailedMessage);
+    }
   }
 }
 

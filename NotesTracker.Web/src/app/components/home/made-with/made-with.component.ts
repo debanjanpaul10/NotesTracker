@@ -9,7 +9,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { MadeWithSubTitle } from '@shared/notestracker.constants';
 import { NotesTrackerService } from '@services/notestracker.service';
 import { AboutUs } from '@models/about-us-dto.class';
-import { ToasterService } from '@core/toaster.service';
+import { ToasterService } from '@core/services/toaster.service';
 
 /**
  * The Made With Component
@@ -28,21 +28,10 @@ import { ToasterService } from '@core/toaster.service';
   templateUrl: './made-with.component.html',
   styleUrl: './made-with.component.scss',
 })
-class MadeWithComponent implements OnInit {
-  /**
-   * The subtitle constant.
-   */
-  subtitleConstant = MadeWithSubTitle;
-
-  /**
-   * The about us data.
-   */
-  aboutUsData = signal<AboutUs[]>([]);
-
-  /**
-   * The boolean flag for loading.
-   */
-  loading = signal<boolean>(false);
+export class MadeWithComponent implements OnInit {
+  public subtitleConstant = MadeWithSubTitle;
+  public aboutUsData = signal<AboutUs[]>([]);
+  public loading = signal<boolean>(false);
 
   /**
    * Initializes a new instance of `MadeWithComponent`
@@ -68,21 +57,16 @@ class MadeWithComponent implements OnInit {
   /**
    * Handles the api call for get about us data.
    */
-  private getAboutUsData(): void {
-    this.loading.set(true);
-    this.notesTrackerService.getAboutUsDataAsync().subscribe({
-      next: (response) => {
-        this.aboutUsData.set(response || []);
-      },
-      error: (err) => {
-        console.error(err);
-        this.toasterService.showError(err?.message);
-      },
-      complete: () => {
-        this.loading.set(false);
-      },
-    });
+  private async getAboutUsData(): Promise<void> {
+    try {
+      this.loading.set(true);
+      const response = await this.notesTrackerService.getAboutUsDataAsync();
+      this.aboutUsData.set(response || []);
+    } catch (error: any) {
+      console.error(error);
+      this.toasterService.showError(error?.message);
+    } finally {
+      this.loading.set(false);
+    }
   }
 }
-
-export { MadeWithComponent };

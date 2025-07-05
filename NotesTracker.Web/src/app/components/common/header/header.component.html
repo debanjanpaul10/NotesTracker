@@ -9,31 +9,64 @@
       /></a>
     </div>
 
-    <div class="navbar-nav ml-auto">
-      <button mat-fab class="ml-2 theme-toggle-btn" (click)="toggleTheme()">
-        <i
-          class="fas fa-lg"
-          [ngClass]="{ 'fa-moon': !isDarkMode(), 'fa-sun': isDarkMode() }"
-        ></i>
-      </button>
-      &nbsp; &nbsp;
-
-      <div *ngIf="this.isUserLoggedIn() === false">
-        <button mat-fab extended class="ml-2 mt-1" (click)="handleUserLogin()">
+    <div class="navbar-nav ml-auto d-flex align-items-center">
+      <div *ngIf="!isUserLoggedIn()">
+        <p-button class="ml-2" (click)="handleUserLogin()">
           {{ HeaderConstants.Headings.LoginRegister }}
-        </button>
+        </p-button>
       </div>
 
-      <div *ngIf="this.isUserLoggedIn() === true">
-        <button
-          mat-fab
-          extended
-          color="warn"
-          class="ml-2 mt-1"
-          (click)="handleUserLogout()"
+      <div *ngIf="isUserLoggedIn()" class="d-flex align-items-center">
+        <p-button
+          class="theme-toggle-btn me-3"
+          [rounded]="true"
+          [raised]="true"
+          (click)="toggleTheme()"
+          [icon]="!isDarkMode() ? 'pi pi-moon' : 'pi pi-sun'"
         >
-          {{ HeaderConstants.Headings.Logout }}
-        </button>
+        </p-button>
+
+        <div class="dropdown">
+          <p-button type="text" (onClick)="toggle($event)" link>
+            <p-avatar
+              *ngIf="getUserPicture()"
+              [image]="getUserPicture()"
+              size="large"
+              shape="circle"
+            >
+            </p-avatar>
+            <p-avatar
+              *ngIf="!getUserPicture()"
+              [label]="getUserDisplayName().charAt(0).toUpperCase()"
+              size="large"
+              shape="circle"
+              styleClass="bg-primary"
+            >
+            </p-avatar>
+          </p-button>
+
+          <p-popover #op>
+            <div class="flex flex-col gap-4">
+              <!-- User Info -->
+              <div class="user-info mb-3">
+                <h4 class="mb-1">{{ getUserDisplayName() }}</h4>
+              </div>
+
+              <!-- Menu Options -->
+              <div *ngFor="let option of menuOptions">
+                <p-button
+                  (click)="option.onClick()"
+                  [label]="option.name"
+                  variant="text"
+                  severity="secondary"
+                  [icon]="option.icon"
+                  [disabled]="option.disabled"
+                >
+                </p-button>
+              </div>
+            </div>
+          </p-popover>
+        </div>
       </div>
     </div>
   </div>

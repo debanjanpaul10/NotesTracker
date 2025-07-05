@@ -7,9 +7,12 @@
 
 namespace NotesTracker.Shared.DTO
 {
+	using System.Diagnostics.CodeAnalysis;
+
 	/// <summary>
 	/// The Response DTO.
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	public class ResponseDTO
 	{
 		/// <summary>
@@ -34,6 +37,6 @@ namespace NotesTracker.Shared.DTO
 		/// <value>
 		/// The response data.
 		/// </value>
-		public object ResponseData { get; set; }
+		public object ResponseData { get; set; } = default!;
 	}
 }

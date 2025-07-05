@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ErrorPageConstants } from '../../../helpers/notestracker.constants';
+import { ErrorPageConstants } from '@shared/notestracker.constants';
 
 /**
  * The Error Page Component

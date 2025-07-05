@@ -12,6 +12,7 @@ namespace NotesTracker.Shared.Helpers
 	using Newtonsoft.Json;
 	using NotesTracker.Shared.Constants;
 	using System;
+	using System.Diagnostics.CodeAnalysis;
 	using System.Text;
 	using System.Text.Json;
 	using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace NotesTracker.Shared.Helpers
 	/// <summary>
 	/// Token Helper class.
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	public static class TokenHelper
 	{
 		/// <summary>

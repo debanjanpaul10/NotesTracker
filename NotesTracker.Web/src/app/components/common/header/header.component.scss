@@ -4,5 +4,13 @@
 
 .theme-toggle-btn {
   background-color: inherit;
-  border: 1px solid #ffffff;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown {
+  cursor: pointer;
 }

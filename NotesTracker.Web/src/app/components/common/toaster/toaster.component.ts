@@ -6,6 +6,8 @@ import { ToastModule } from 'primeng/toast';
   standalone: true,
   imports: [ToastModule],
   templateUrl: './toaster.component.html',
-  styleUrl: './toaster.component.scss',
+  styleUrls: ['./toaster.component.scss'],
 })
-export class ToasterComponent {}
+class ToasterComponent {}
+
+export { ToasterComponent };

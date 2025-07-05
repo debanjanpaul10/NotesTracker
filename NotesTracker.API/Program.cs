@@ -9,6 +9,7 @@
 using Azure.Identity;
 using Microsoft.OpenApi.Models;
 using NotesTracker.API.Middleware;
+using NotesTracker.Business.Helpers;
 using static NotesTracker.Shared.Constants.ConfigurationConstants;
 
 #region Configure Services

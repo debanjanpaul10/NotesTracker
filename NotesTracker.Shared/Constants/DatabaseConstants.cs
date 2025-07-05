@@ -124,5 +124,49 @@ namespace NotesTracker.Shared.Constants
 
 		#endregion
 
+		#region Bug Reports
+
+		/// <summary>
+		/// The bug status reports table constant.
+		/// </summary>
+		public const string BugReportsTableConstant = "BugReports";
+
+		/// <summary>
+		/// The primary key bug reports constant.
+		/// </summary>
+		public const string PrimaryKeyBugReportsConstant = "PK_BugReports";
+
+		/// <summary>
+		/// The Bug Id column name constant.
+		/// </summary>
+		public const string BugIdColumnNameConstant = "BugId";
+
+		/// <summary>
+		/// The bug title column name constant.
+		/// </summary>
+		public const string BugTitleColumnNameConstant = "BugTitle";
+
+		/// <summary>
+		/// The bug description column name constant.
+		/// </summary>
+		public const string BugDescriptionColumnNameConstant = "BugDescription";
+
+		/// <summary>
+		/// The bug severity column name constant.
+		/// </summary>
+		public const string BugSeverityColumnNameConstant = "BugSeverity";
+
+		/// <summary>
+		/// The page URL column name constant.
+		/// </summary>
+		public const string PageUrlColumnNameConstant = "PageUrl";
+
+		/// <summary>
+		/// The bug status column name constant.
+		/// </summary>
+		public const string BugStatusColumnNameConstant = "BugStatus";
+
+		#endregion
+
 	}
 }

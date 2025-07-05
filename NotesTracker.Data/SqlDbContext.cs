@@ -54,6 +54,14 @@ namespace NotesTracker.Data
 		public DbSet<User> Users { get; set; }
 
 		/// <summary>
+		/// Gets or sets the bug reports.
+		/// </summary>
+		/// <value>
+		/// The bug reports.
+		/// </value>
+		public DbSet<BugReport> BugReports { get; set; }
+
+		/// <summary>
 		/// Override this method to configure the database (and other options) to be used for this context.
 		/// This method is called for each instance of the context that is created.
 		/// The base implementation does nothing.
@@ -124,7 +132,17 @@ namespace NotesTracker.Data
 				entity.Property(e => e.IsActive).HasColumnName(IsActiveColumnNameConstant).HasColumnType(BitDataTypeConstant).IsRequired();
 
 			});
+			modelBuilder.Entity<BugReport>(entity =>
+			{
+				entity.ToTable(BugReportsTableConstant);
+				entity.HasKey(e => e.BugId).HasName(PrimaryKeyBugReportsConstant);
+				entity.Property(e => e.BugId).HasColumnName(BugIdColumnNameConstant).HasColumnType(IntegerDataTypeConstant).ValueGeneratedOnAdd();
+				entity.Property(e => e.BugTitle).HasColumnName(BugTitleColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
+				entity.Property(e => e.BugDescription).HasColumnName(BugDescriptionColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
+				entity.Property(e => e.BugSeverity).HasColumnName(BugSeverityColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
+				entity.Property(e => e.PageUrl).HasColumnName(PageUrlColumnNameConstant).HasColumnType(NVarCharMaxDataTypeConstant).IsRequired();
+				entity.Property(e => e.BugStatus).HasColumnName(BugStatusColumnNameConstant).HasConversion<string>().IsRequired();
+			});
 		}
-
 	}
 }

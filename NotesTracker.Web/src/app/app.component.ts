@@ -3,9 +3,9 @@ import { RouterOutlet } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { CommonModule } from '@angular/common';
 
-import { HeaderComponent } from './components/common/header/header.component';
-import { SpinnerComponent } from './components/common/spinner/spinner.component';
-import { ToasterComponent } from './components/common/toaster/toaster.component';
+import { HeaderComponent } from '@components/common/header/header.component';
+import { SpinnerComponent } from '@components/common/spinner/spinner.component';
+import { ToasterComponent } from '@components/common/toaster/toaster.component';
 
 /**
  * The Main app component.
@@ -33,7 +33,7 @@ class AppComponent implements OnInit {
    * Initializes a new instance of `AppComponent`
    * @param auth0 The Auth0 service.
    */
-  constructor(private auth0: AuthService) {}
+  constructor(private readonly auth0: AuthService) {}
 
   ngOnInit(): void {
     this.auth0.isAuthenticated$.subscribe((isAuth: boolean) => {

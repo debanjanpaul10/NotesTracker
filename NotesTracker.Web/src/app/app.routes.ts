@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AngularRoutes } from './helpers/notestracker.constants';
+import { AngularRoutes } from '@shared/notestracker.constants';
 
 /**
  * The configured routes.
@@ -9,12 +9,12 @@ export const routes: Routes = [
   {
     path: AngularRoutes.Home.Name,
     loadComponent: () =>
-      import('./components/home/home.component').then((c) => c.HomeComponent),
+      import('./pages/home/home.component').then((c) => c.HomeComponent),
   },
   {
     path: AngularRoutes.AddNote.Name,
     loadComponent: () =>
-      import('./components/addnote/addnote.component').then(
+      import('./pages/addnote/addnote.component').then(
         (c) => c.AddNoteComponent
       ),
   },

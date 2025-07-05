@@ -82,7 +82,7 @@ namespace NotesTracker.Business.Services
 				if (this._memoryCache.TryGetValue(key, out _)) // Check if key exists
 				{
 					this._memoryCache.Remove(key);
-					this._logger.LogInformation("Successfully removed cache for key: {CacheKey}", key);
+					this._logger.LogInformation(ExceptionConstants.CacheKeyRemovedMessageConstant, key);
 					return true;
 				}
 

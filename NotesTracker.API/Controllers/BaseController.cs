@@ -70,5 +70,19 @@ namespace NotesTracker.API.Controllers
 				StatusCode = statusCode,
 			};
 		}
+
+		/// <summary>
+		/// Handles the user authentication response.
+		/// </summary>
+		/// <returns>The boolean for authentication.</returns>
+		protected bool IsAuthorized()
+		{
+			if (!string.IsNullOrEmpty(this.UserName))
+			{
+				return true;
+			}
+
+			return false;
+		}
 	}
 }

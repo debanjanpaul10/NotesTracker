@@ -56,5 +56,42 @@ namespace NotesTracker.API.Controllers
 				logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodEndedMessageConstant, nameof(GetAboutUsDataAsync), DateTime.UtcNow, "Default"));
 			}
 		}
+
+		/// <summary>
+		/// Adds the new bug report data asynchronously.
+		/// </summary>
+		/// <param name="bugReportData">The bug report data.</param>
+		/// <returns>The boolean for success/failure</returns>
+		[HttpPost]
+		[Route(RouteConstants.AddNewBugReport_ApiRoute)]
+		public async Task<IActionResult> AddNewBugReportAsync(BugReportDTO bugReportData)
+		{
+			try
+			{
+				logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodStartedMessageConstant, nameof(AddNewBugReportAsync), DateTime.UtcNow, base.UserName));
+				if (base.IsAuthorized())
+				{
+					var result = await notesTrackerService.AddNewBugReportDataAsync(bugReportData, userName: base.UserName);
+					if (result)
+					{
+						return this.Ok(this.PrepareSuccessResponse(result));
+					}
+
+					return this.BadRequest(this.HandleBadRequestResponse(StatusCodes.Status400BadRequest, ExceptionConstants.SomethingWentWrongMessageConstant));
+				}
+
+				return this.Unauthorized();
+			}
+			catch (Exception ex)
+			{
+				logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(AddNewBugReportAsync), DateTime.UtcNow, ex.Message));
+				throw;
+			}
+			finally
+			{
+				logger.LogInformation(string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodEndedMessageConstant, nameof(AddNewBugReportAsync), DateTime.UtcNow, base.UserName));
+			}
+
+		}
 	}
 }

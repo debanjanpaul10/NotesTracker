@@ -7,9 +7,12 @@
 
 namespace NotesTracker.Shared.Helpers
 {
+	using System.Diagnostics.CodeAnalysis;
+
 	/// <summary>
 	/// The Notes Tracker Exceptions Handler Class.
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	public class NotesTrackerExceptions : Exception
 	{
 		/// <summary>

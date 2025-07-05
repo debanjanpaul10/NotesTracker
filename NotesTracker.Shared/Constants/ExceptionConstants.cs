@@ -103,6 +103,11 @@ namespace NotesTracker.Shared.Constants
 		/// </summary>
 		public const string CacheKeyNotFoundMessageConstant = "Cache service could not find the key: {0}";
 
+		/// <summary>
+		/// The cache key found message constant
+		/// </summary>
+		public const string CacheKeyRemovedMessageConstant = "Successfully removed cache for key: {CacheKey}";
+
 
 		#endregion
 	}

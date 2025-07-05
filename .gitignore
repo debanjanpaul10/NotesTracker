@@ -20,3 +20,4 @@ __azurite_db*.*
 # Database Project
 NotesTracker.Database/NotesTracker.Database.jfm
 NotesTracker.Database/NotesTracker.Database.dbmdl
+/NotesTracker.Database/NotesTracker.Database.dbmdl

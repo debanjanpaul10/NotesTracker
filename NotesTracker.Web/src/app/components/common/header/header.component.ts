@@ -4,6 +4,7 @@ import {
   signal,
   ViewChild,
   WritableSignal,
+  ElementRef,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -44,6 +45,7 @@ import { ButtonModule } from 'primeng/button';
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('op') op!: Popover;
+  @ViewChild('profileButton') profileButton!: ElementRef;
 
   public HeaderConstants = HeaderPageConstants;
   public ThemeSettingsKeys = HeaderPageConstants.ThemeSettings;
@@ -52,6 +54,7 @@ export class HeaderComponent implements OnInit {
   public currentLoggedInUser: WritableSignal<string> = signal('');
   public currentUserProfile: WritableSignal<User | null> = signal(null);
   public userTokenClaims: WritableSignal<any> = signal(null);
+  public isPopoverVisible: WritableSignal<boolean> = signal(false);
   public menuOptions: any = [];
 
   /**
@@ -76,14 +79,14 @@ export class HeaderComponent implements OnInit {
         icon: 'pi pi-cog',
       },
       {
-        name: 'Logout',
-        onClick: () => this.handleUserLogout(),
-        icon: 'pi pi-sign-out',
-      },
-      {
         name: 'Report a bug',
         onClick: () => this.handleBugReport(),
         icon: 'pi pi-flag',
+      },
+      {
+        name: 'Logout',
+        onClick: () => this.handleUserLogout(),
+        icon: 'pi pi-sign-out',
       },
     ];
   }
@@ -173,14 +176,45 @@ export class HeaderComponent implements OnInit {
    * Handles the toggle event for the user actions popover
    *
    * Toggles the visibility of the user profile dropdown menu when
-   * the user avatar is clicked.
+   * the user avatar is clicked. If the popover is already visible,
+   * it will be hidden. If it's hidden, it will be shown.
    *
    * @param event - The click event that triggered the toggle
    *
    * @returns {void}
    */
   public toggle(event: any): void {
-    this.op.toggle(event);
+    if (this.isPopoverVisible()) {
+      this.hidePopover();
+    } else {
+      this.showPopover(event);
+    }
+  }
+
+  /**
+   * Shows the popover dropdown menu
+   *
+   * Displays the user profile dropdown menu at the specified event position.
+   *
+   * @param event - The click event that triggered the show action
+   *
+   * @returns {void}
+   */
+  public showPopover(event: any): void {
+    this.op.show(event, this.profileButton.nativeElement);
+    this.isPopoverVisible.set(true);
+  }
+
+  /**
+   * Hides the popover dropdown menu
+   *
+   * Hides the user profile dropdown menu and updates the visibility state.
+   *
+   * @returns {void}
+   */
+  public hidePopover(): void {
+    this.op.hide();
+    this.isPopoverVisible.set(false);
   }
 
   /**
@@ -188,11 +222,12 @@ export class HeaderComponent implements OnInit {
    *
    * Currently shows an alert indicating that profile settings are
    * a work in progress. This method can be extended to navigate
-   * to a dedicated profile settings page.
+   * to a dedicated profile settings page. Closes the popover after execution.
    *
    * @returns {void}
    */
-  public handleProfilePageRedirection(): void {
+  private handleProfilePageRedirection(): void {
+    this.hidePopover();
     alert('Work in progress');
   }
 
@@ -249,10 +284,12 @@ export class HeaderComponent implements OnInit {
    *
    * Logs out the current user from Auth0 and redirects them back to the
    * application's home page. Only executes if a user is currently logged in.
+   * Closes the popover after execution.
    *
    * @returns {void}
    */
   private handleUserLogout(): void {
+    this.hidePopover();
     if (this.isUserLoggedIn()) {
       this.auth0.logout({
         logoutParams: {
@@ -262,7 +299,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  /**
+   * Handles the bug report event.
+   */
   private handleBugReport(): void {
+    this.hidePopover();
     alert('Feature being worked on');
   }
 }

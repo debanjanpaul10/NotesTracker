@@ -24,7 +24,7 @@ class ToasterService {
       severity: 'success',
       summary: 'Success',
       detail: message,
-      sticky: true,
+      life: 30,
     });
   }
 
@@ -38,7 +38,7 @@ class ToasterService {
       severity: 'error',
       summary: 'Error',
       detail: message,
-      sticky: true,
+      life: 30,
     });
   }
 }

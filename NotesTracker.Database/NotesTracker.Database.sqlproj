@@ -7,13 +7,23 @@
     <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
     <ModelCollation>1033, CI</ModelCollation>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <TargetFrameworks>net472</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Tables" />
-    <Folder Include="PostDeploymentScripts" />
+    <Build Include="Tables\BugReports.sql" />
+    <Build Include="Tables\BugReportsMapping.sql" />
+    <Build Include="Tables\Notes.sql" />
+    <Build Include="Tables\Users.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeploymentScripts\Insert_BugReportsMapping.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NotesTracker.Database.sqlproj.user" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tables\" />
+    <Folder Include="PostDeploymentScripts\" />
   </ItemGroup>
   <Target Name="BeforeBuild">
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />

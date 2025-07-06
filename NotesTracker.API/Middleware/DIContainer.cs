@@ -58,13 +58,13 @@ namespace NotesTracker.API.Middleware
 			var mongoDbConnectionString = builder.Configuration[MongoDbConnectionStringConstant];
 			if (!string.IsNullOrEmpty(mongoDbConnectionString))
 			{
-				var settings = MongoClientSettings.FromConnectionString(connectionString: mongoDbConnectionString);
-				settings.SslSettings = new SslSettings()
+				var mongoConnectionString = builder.Configuration[MongoDbConnectionStringConstant];
+				if (!string.IsNullOrEmpty(mongoConnectionString))
 				{
-					EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12
-				};
-
-				builder.Services.AddSingleton<IMongoClient>(new MongoClient(settings));
+					var settings = MongoClientSettings.FromConnectionString(mongoConnectionString);
+					settings.SslSettings = new SslSettings() { EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12 };
+					builder.Services.AddSingleton<IMongoClient>(new MongoClient(settings));
+				}
 			}
 		}
 

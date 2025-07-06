@@ -69,6 +69,46 @@ namespace NotesTracker.Shared.Constants
 		/// </summary>
 		public const string AttemptedToEnterBlankUserMessageConstant = "Attempted to get notes for null user";
 
+		/// <summary>
+		/// Something went wrong exception message constants.
+		/// </summary>
+		public const string SomethingWentWrongMessageConstant = "Oops! It seems something went wrong!";
+
+		/// <summary>
+		/// The key name is null message constant
+		/// </summary>
+		public const string KeyNameIsNullMessageConstant = "Key name is null or empty";
+
+		#endregion
+
+		#region Logging Messages
+
+		/// <summary>
+		/// The method started message constant
+		/// </summary>
+		public static readonly string MethodStartedMessageConstant = "Method {0} started at {1} for {2}";
+
+		/// <summary>
+		/// The method ended message constant
+		/// </summary>
+		public static readonly string MethodEndedMessageConstant = "Method {0} ended at {1} for {2}";
+
+		/// <summary>
+		/// The cache key found message constant.
+		/// </summary>
+		public const string CacheKeyFoundMessageConstant = "Cache service found the existing key: {0}";
+
+		/// <summary>
+		/// The cache key not found message constant.
+		/// </summary>
+		public const string CacheKeyNotFoundMessageConstant = "Cache service could not find the key: {0}";
+
+		/// <summary>
+		/// The cache key found message constant
+		/// </summary>
+		public const string CacheKeyRemovedMessageConstant = "Successfully removed cache for key: {CacheKey}";
+
+
 		#endregion
 	}
 }

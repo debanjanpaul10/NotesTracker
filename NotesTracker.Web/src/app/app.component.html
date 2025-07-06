@@ -1,7 +1,11 @@
-<div *ngIf="isLoading" class="container-fluid text-center start-loading">
+<div *ngIf="isLoading" class="text-center start-loading">
   <app-spinner color="accent"></app-spinner>
 </div>
 <div *ngIf="!isLoading">
   <app-header></app-header>
-  <router-outlet></router-outlet>
+  <app-toaster></app-toaster>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+  <app-bug-report></app-bug-report>
 </div>

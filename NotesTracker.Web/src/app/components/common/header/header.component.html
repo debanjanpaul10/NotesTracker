@@ -5,32 +5,76 @@
         ><img
           src="assets/brand.png"
           alt="Notes Tracker Application"
-          height="50px"
+          height="50"
       /></a>
     </div>
+    <div class="d-flex align-items-center">
+      <p-button
+        class="theme-toggle-btn me-3"
+        [rounded]="true"
+        [raised]="true"
+        (click)="toggleTheme()"
+        [icon]="!isDarkMode() ? 'pi pi-moon' : 'pi pi-sun'"
+      >
+      </p-button>
 
-    <div class="navbar-nav ml-auto">
-      <button mat-fab class="ml-2 theme-toggle-btn" (click)="toggleTheme()">
-        {{ this.isDarkMode() ? "☀️" : "🌙" }}
-      </button>
-      &nbsp; &nbsp;
+      <div class="navbar-nav ml-auto d-flex align-items-center">
+        <div *ngIf="!isUserLoggedIn()">
+          <p-button class="ml-2" (click)="handleUserLogin()">
+            {{ HeaderConstants.Headings.LoginRegister }}
+          </p-button>
+        </div>
 
-      <div *ngIf="this.isUserLoggedIn() === false">
-        <button mat-fab extended class="ml-2 mt-1" (click)="handleUserLogin()">
-          {{ HeaderConstants.Headings.LoginRegister }}
-        </button>
-      </div>
+        <div *ngIf="isUserLoggedIn()">
+          <div class="dropdown">
+            <p-button 
+              type="text" 
+              (click)="toggle($event)" 
+              link
+              #profileButton
+            >
+              <p-avatar
+                *ngIf="getUserPicture()"
+                [image]="getUserPicture()"
+                size="large"
+                shape="circle"
+              >
+              </p-avatar>
+              <p-avatar
+                *ngIf="!getUserPicture()"
+                [label]="getUserDisplayName().charAt(0).toUpperCase()"
+                size="large"
+                shape="circle"
+                styleClass="bg-primary"
+              >
+              </p-avatar>
+            </p-button>
 
-      <div *ngIf="this.isUserLoggedIn() === true">
-        <button
-          mat-fab
-          extended
-          color="warn"
-          class="ml-2 mt-1"
-          (click)="handleUserLogout()"
-        >
-          {{ HeaderConstants.Headings.Logout }}
-        </button>
+            <p-popover #op>
+              <ng-template pTemplate="content">
+                <div class="flex flex-col gap-4">
+                  <!-- User Info -->
+                  <div class="user-info mb-3">
+                    <h4 class="mb-1">{{ getUserDisplayName() }}</h4>
+                  </div>
+
+                  <!-- Menu Options -->
+                  <div *ngFor="let option of menuOptions">
+                    <p-button
+                      (click)="option.onClick()"
+                      [label]="option.name"
+                      variant="text"
+                      severity="secondary"
+                      [icon]="option.icon"
+                      [disabled]="option.disabled"
+                    >
+                    </p-button>
+                  </div>
+                </div>
+              </ng-template>
+            </p-popover>
+          </div>
+        </div>
       </div>
     </div>
   </div>

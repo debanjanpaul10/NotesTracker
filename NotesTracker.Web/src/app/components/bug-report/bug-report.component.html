@@ -1,0 +1,153 @@
+<p-drawer
+  [(visible)]="visible"
+  [header]="BugReportConstants.HeaderConstant"
+  [style]="{ width: '30%' }"
+  [closable]="!isLoading()"
+  [dismissible]="false"
+>
+  <div class="row">
+    <div class="col-sm-12">
+      <div *ngIf="isLoading()" class="loading-container">
+        <app-spinner></app-spinner>
+      </div>
+
+      <form
+        *ngIf="!isLoading()"
+        (ngSubmit)="submitBugReport()"
+        class="bug-report-form"
+      >
+        <div class="form-group row">
+          <div class="col sm-12 mb-3 mb-sm-0">
+            <div class="row">
+              <label for="bugTitle">{{ FormLabelConstants.Title.Name }}</label>
+            </div>
+            <div class="row">
+              <p-inputgroup>
+                <p-inputgroup-addon>
+                  <i class="pi pi-align-justify"></i>
+                </p-inputgroup-addon>
+
+                <input
+                  id="bugTitle"
+                  pInputText
+                  [(ngModel)]="bugReport.bugTitle"
+                  name="bugTitle"
+                  [style]="{ width: '100%', padding: '10px' }"
+                  required
+                  [placeholder]="FormLabelConstants.Title.Placeholder"
+                  variant="filled"
+                />
+              </p-inputgroup>
+            </div>
+          </div>
+          <div *ngIf="!isTitleValid() && bugReport.bugTitle" class="error row">
+            <span class="danger">{{ getTitleValidationMessage() }}</span>
+          </div>
+        </div>
+
+        <div class="form-group row pt-4">
+          <div class="col sm-12 mb-3 mb-sm-0">
+            <div class="row">
+              <label for="bugDescription">{{
+                FormLabelConstants.Description.Name
+              }}</label>
+            </div>
+            <div class="row">
+              <p-inputgroup>
+                <textarea
+                  id="bugDescription"
+                  pInputTextarea
+                  [(ngModel)]="bugReport.bugDescription"
+                  name="bugDescription"
+                  [style]="{ width: '100%', padding: '10px' }"
+                  required
+                  [placeholder]="FormLabelConstants.Description.Placeholder"
+                ></textarea>
+              </p-inputgroup>
+            </div>
+          </div>
+          <div
+            *ngIf="!isDescriptionValid() && bugReport.bugDescription"
+            class="error row"
+          >
+            <span class="danger">{{ getDescriptionValidationMessage() }}</span>
+          </div>
+        </div>
+
+        <div class="form-group row pt-4">
+          <div class="col sm-12 mb-3 mb-sm-0">
+            <div class="row">
+              <label for="bugSeverity">{{
+                FormLabelConstants.Severity.Name
+              }}</label>
+            </div>
+            <div class="row">
+              <p-inputgroup>
+                <p-inputgroup-addon>
+                  <i class="pi pi-exclamation-circle"></i>
+                </p-inputgroup-addon>
+
+                <p-select
+                  id="bugSeverity"
+                  [checkmark]="true"
+                  [(ngModel)]="bugReport.bugSeverity"
+                  name="bugSeverity"
+                  [options]="dropdownMenuOptions"
+                  [style]="{ width: '100%' }"
+                  [placeholder]="FormLabelConstants.Severity.Placeholder"
+                  required
+                  variant="filled"
+                ></p-select>
+              </p-inputgroup>
+            </div>
+          </div>
+          <div *ngIf="!isSeverityValid()" class="error row">
+            <span class="danger">{{ getSeverityValidationMessage() }}</span>
+          </div>
+        </div>
+
+        <div class="form-group row pt-4">
+          <div class="col sm-12 mb-3 mb-sm-0">
+            <div class="row">
+              <label for="pageUrl">{{ FormLabelConstants.Pageurl.Name }}</label>
+            </div>
+            <div class="row">
+              <p-inputgroup>
+                <p-inputgroup-addon>
+                  <i class="pi pi-link"></i>
+                </p-inputgroup-addon>
+
+                <input
+                  id="pageUrl"
+                  type="url"
+                  pInputText
+                  [(ngModel)]="bugReport.pageUrl"
+                  name="pageUrl"
+                  [style]="{ width: '100%', padding: '10px' }"
+                  required
+                  [placeholder]="FormLabelConstants.Pageurl.Placeholder"
+                />
+              </p-inputgroup>
+            </div>
+          </div>
+          <div *ngIf="!isPageUrlValid()" class="error row">
+            <span class="danger">{{ getPageUrlValidationMessage() }}</span>
+          </div>
+        </div>
+
+        <div class="mt-auto">
+          <hr class="mb-4 mx-4 border-t border-0 border-surface" />
+          <p-button
+            type="submit"
+            [label]="FormLabelConstants.SubmitButton"
+            [disabled]="!isFormValid()"
+            class="submit-btn"
+            icon="pi pi-check"
+            variant="outlined"
+          >
+          </p-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</p-drawer>

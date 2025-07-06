@@ -65,6 +65,20 @@ namespace NotesTracker.Shared.Constants
 
 		#endregion
 
+		#region NOTESTRACKER
+
+		/// <summary>
+		/// The get about us data api route.
+		/// </summary>
+		public const string GetAboutUsData_ApiRoute = "GetAboutUsData";
+
+		/// <summary>
+		/// Add new bug report API route.
+		/// </summary>
+		public const string AddNewBugReport_ApiRoute = "AddNewBugReport";
+
+		#endregion
+
 		#region EXTERNAL APIS
 
 		/// <summary>

@@ -7,124 +7,163 @@
 
 namespace NotesTracker.Shared.Constants
 {
-    /// <summary>
-    /// The Configuration Constants Class.
-    /// </summary>
-    public static class ConfigurationConstants
-    {
-        /// <summary>
+	/// <summary>
+	/// The Configuration Constants Class.
+	/// </summary>
+	public static class ConfigurationConstants
+	{
+		#region Swagger Constants
+
+		/// <summary>
+		/// The notes tracker application name
+		/// </summary>
+		public const string NotesTrackerApiName = "Notes.Tracker.API";
+
+		/// <summary>
+		/// The API version
+		/// </summary>
+		public const string ApiVersion = "v1";
+
+		/// <summary>
+		/// The swagger endpoint
+		/// </summary>
+		public const string SwaggerEndpoint = "/swagger/v1/swagger.json";
+
+		/// <summary>
+		/// The swagger UI prefix
+		/// </summary>
+		public const string SwaggerUiPrefix = "swaggerui";
+
+		#endregion
+
+		/// <summary>
 		/// The local sql connection string constant.
 		/// </summary>
 		public const string LocalSqlConnectionStringConstant = "LocalSqlServerConnection";
 
-        /// <summary>
-        /// The SQL connection string constant
-        /// </summary>
-        public const string SqlConnectionStringConstant = "SqlConnectionString";
+		/// <summary>
+		/// The SQL connection string constant
+		/// </summary>
+		public const string SqlConnectionStringConstant = "SqlConnectionString";
 
-        /// <summary>
-        /// The local appsettings file constant.
-        /// </summary>
-        public const string LocalAppsettingsFileConstant = "appsettings.development.json";
+		/// <summary>
+		/// The mongo db connection string constant.
+		/// </summary>
+		public const string MongoDbConnectionStringConstant = "MongoDbConnectionString";
 
-        /// <summary>
-        /// The user id header constant.
-        /// </summary>
-        public const string UserIdHeaderConstant = "X-User-Id";
+		/// <summary>
+		/// The local appsettings file constant.
+		/// </summary>
+		public const string LocalAppsettingsFileConstant = "appsettings.development.json";
 
-        /// <summary>
-        /// The audience constant.
-        /// </summary>
-        public const string AudienceConstant = "Auth0:Audience";
+		/// <summary>
+		/// The user id header constant.
+		/// </summary>
+		public const string UserIdHeaderConstant = "X-User-Id";
 
-        /// <summary>
-        /// The domain constant.
-        /// Alternatively, https://{DomainConstant} would be the auth0 management api route.
-        /// </summary>
-        public const string DomainConstant = "Auth0:Domain";
+		/// <summary>
+		/// The audience constant.
+		/// </summary>
+		public const string AudienceConstant = "Auth0:Audience";
 
-        /// <summary>
-        /// The user name claim constant.
-        /// </summary>
-        public const string UserNameClaimConstant = "username";
+		/// <summary>
+		/// The auth0 client identifier constant
+		/// </summary>
+		public const string Auth0ClientIdConstant = "Auth0:ClientId";
 
-        /// <summary>
-        /// The app configuration endpoint key constant.
-        /// </summary>
-        public const string AppConfigurationEndpointKeyConstant = "AppConfigurationEndpoint";
+		/// <summary>
+		/// The domain constant.
+		/// Alternatively, https://{DomainConstant} would be the auth0 management api route.
+		/// </summary>
+		public const string DomainConstant = "Auth0:Domain";
 
-        /// <summary>
-        /// The managed identity client id constant.
-        /// </summary>
-        public const string ManagedIdentityClientIdConstant = "ManagedIdentityClientId";
+		/// <summary>
+		/// The user name claim constant.
+		/// </summary>
+		public const string UserNameClaimConstant = "username";
 
-        /// <summary>
-        /// The base configuration app config key constant.
-        /// </summary>
-        public const string BaseConfigurationAppConfigKeyConstant = "BaseConfiguration";
+		/// <summary>
+		/// The app configuration endpoint key constant.
+		/// </summary>
+		public const string AppConfigurationEndpointKeyConstant = "AppConfigurationEndpoint";
 
-        /// <summary>
-        /// The notes a p i app config key constant.
-        /// </summary>
-        public const string NotesAPIAppConfigKeyConstant = "NotesAPI";
+		/// <summary>
+		/// The managed identity client id constant.
+		/// </summary>
+		public const string ManagedIdentityClientIdConstant = "ManagedIdentityClientId";
 
-        /// <summary>
-        /// The auth0 token url.
-        /// </summary>
-        public const string Auth0TokenUrl = "Auth0:TokenUrl";
+		/// <summary>
+		/// The base configuration app config key constant.
+		/// </summary>
+		public const string BaseConfigurationAppConfigKeyConstant = "BaseConfiguration";
 
-        #region Notes Function
+		/// <summary>
+		/// The notes a p i app config key constant.
+		/// </summary>
+		public const string NotesAPIAppConfigKeyConstant = "NotesAPI";
 
-        /// <summary>
-        /// The notes function app config key constant.
-        /// </summary>
-        public const string NotesFunctionAppConfigKeyConstant = "NotesFunction";
+		/// <summary>
+		/// The auth0 token url.
+		/// </summary>
+		public const string Auth0TokenUrl = "Auth0:TokenUrl";
 
-        /// <summary>
-        /// The auth0 management api client id constant.
-        /// </summary>
-        public const string Auth0ManagementApiClientIdConstant = "Auth0:ManagementAPI:ClientId";
+		/// <summary>
+		/// The mongo database name constant
+		/// </summary>
+		public const string MongoDatabaseNameConstant = "MongoDatabaseName";
 
-        /// <summary>
-        /// The auth0 management api client secret constant.
-        /// </summary>
-        public const string Auth0ManagementApiClientSecretConstant = "Auth0:ManagementAPI:ClientSecret";
+		#region Notes Function
 
-        /// <summary>
-        /// The client credentials grant.
-        /// </summary>
-        public const string ClientCredentialsGrant = "client_credentials";
+		/// <summary>
+		/// The notes function app config key constant.
+		/// </summary>
+		public const string NotesFunctionAppConfigKeyConstant = "NotesFunction";
 
-        /// <summary>
-        /// The application json constant.
-        /// </summary>
-        public const string ApplicationJsonConstant = "application/json";
+		/// <summary>
+		/// The auth0 management api client id constant.
+		/// </summary>
+		public const string Auth0ManagementApiClientIdConstant = "Auth0:ManagementAPI:ClientId";
 
-        /// <summary>
-        /// The bearer constant.
-        /// </summary>
-        public const string BearerConstant = "Bearer";
+		/// <summary>
+		/// The auth0 management api client secret constant.
+		/// </summary>
+		public const string Auth0ManagementApiClientSecretConstant = "Auth0:ManagementAPI:ClientSecret";
 
-        /// <summary>
-        /// The access token constant.
-        /// </summary>
-        public const string AccessTokenConstant = "access_token";
+		/// <summary>
+		/// The client credentials grant.
+		/// </summary>
+		public const string ClientCredentialsGrant = "client_credentials";
 
-        /// <summary>
-        /// The auth0 management api audience constant.
-        /// </summary>
-        public const string Auth0ManagementApiAudienceConstant = "Auth0:ManagementAPI:Audience";
+		/// <summary>
+		/// The application json constant.
+		/// </summary>
+		public const string ApplicationJsonConstant = "application/json";
 
-        /// <summary>
-        /// The auth0 client constant.
-        /// </summary>
-        public const string Auth0TokenClientConstant = "Auth0TokenClient";
+		/// <summary>
+		/// The bearer constant.
+		/// </summary>
+		public const string BearerConstant = "Bearer";
 
-        /// <summary>
-        /// The auth0 management client constant.
-        /// </summary>
-        public const string Auth0ManagementHttpClientConstant = "Auth0ManagementHttpClient";
+		/// <summary>
+		/// The access token constant.
+		/// </summary>
+		public const string AccessTokenConstant = "access_token";
 
-        #endregion
-    }
+		/// <summary>
+		/// The auth0 management api audience constant.
+		/// </summary>
+		public const string Auth0ManagementApiAudienceConstant = "Auth0:ManagementAPI:Audience";
+
+		/// <summary>
+		/// The auth0 client constant.
+		/// </summary>
+		public const string Auth0TokenClientConstant = "Auth0TokenClient";
+
+		/// <summary>
+		/// The auth0 management client constant.
+		/// </summary>
+		public const string Auth0ManagementHttpClientConstant = "Auth0ManagementHttpClient";
+
+		#endregion
+	}
 }

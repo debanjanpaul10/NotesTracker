@@ -21,7 +21,7 @@ namespace NotesTracker.Shared.DTO
         /// The email.
         /// </value>
         [JsonPropertyName("email")]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the username.
@@ -30,7 +30,7 @@ namespace NotesTracker.Shared.DTO
         /// The username.
         /// </value>
         [JsonPropertyName("username")]
-        public string UserName { get; set; }
+        public string UserName { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the identities.
@@ -39,7 +39,7 @@ namespace NotesTracker.Shared.DTO
         /// The identities.
         /// </value>
         [JsonPropertyName("identities")]
-        public List<IdentityDto> Identities { get; set; }
+        public List<IdentityDto> Identities { get; set; } = [];
     }
 }
 

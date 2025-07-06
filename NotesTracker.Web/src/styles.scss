@@ -1,6 +1,8 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use "@angular/material" as mat;
+@use "bootstrap/scss/bootstrap";
+@use "primeicons/primeicons.css";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -9,7 +11,6 @@
 @include mat.core();
 
 /* Importing Bootstrap SCSS file. */
-@import "bootstrap/scss/bootstrap";
 
 /* SCSS variables */
 
@@ -20,18 +21,18 @@ $dark-background-color: #333333;
 $dark-text-color: #bbbbbb;
 
 // Define the dark theme palette
-$dark-primary: mat.define-palette(mat.$blue-grey-palette);
-$dark-accent: mat.define-palette(mat.$indigo-palette, A200, A100, A400);
-$dark-warn: mat.define-palette(mat.$red-palette);
+$dark-primary: mat.m2-define-palette(mat.$m2-blue-grey-palette);
+$dark-accent: mat.m2-define-palette(mat.$m2-indigo-palette, A200, A100, A400);
+$dark-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
-$dark-theme: mat.define-dark-theme(
+$dark-theme: mat.m2-define-dark-theme(
   (
     color: (
       primary: $dark-primary,
       accent: $dark-accent,
       warn: $dark-warn,
     ),
-    typography: mat.define-typography-config(),
+    typography: mat.m2-define-typography-config(),
     density: 0,
   )
 );

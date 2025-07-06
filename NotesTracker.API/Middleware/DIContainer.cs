@@ -14,6 +14,7 @@ namespace NotesTracker.API.Middleware
 	using NotesTracker.Data.Contracts;
 	using NotesTracker.Data.Services;
 	using NotesTracker.Shared.Helpers;
+	using MongoDB.Driver;
 	using static NotesTracker.Shared.Constants.ConfigurationConstants;
 
 	/// <summary>
@@ -49,6 +50,25 @@ namespace NotesTracker.API.Middleware
 		}
 
 		/// <summary>
+		/// Configures the mongo database server.
+		/// </summary>
+		/// <param name="builder">The builder.</param>
+		public static void ConfigureMongoDbServer(this WebApplicationBuilder builder)
+		{
+			var mongoDbConnectionString = builder.Configuration[MongoDbConnectionStringConstant];
+			if (!string.IsNullOrEmpty(mongoDbConnectionString))
+			{
+				var settings = MongoClientSettings.FromConnectionString(connectionString: mongoDbConnectionString);
+				settings.SslSettings = new SslSettings()
+				{
+					EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12
+				};
+
+				builder.Services.AddSingleton<IMongoClient>(new MongoClient(settings));
+			}
+		}
+
+		/// <summary>
 		/// Configures the business dependencies.
 		/// </summary>
 		/// <param name="services">The services.</param>
@@ -57,6 +77,8 @@ namespace NotesTracker.API.Middleware
 			services.AddScoped<IHttpClientHelper, HttpClientHelper>();
 			services.AddScoped<INotesService, NotesService>();
 			services.AddScoped<IUsersService, UsersService>();
+			services.AddScoped<INotesTrackerService, NotesTrackerService>();
+			services.AddScoped<ICacheService, CacheService>();
 		}
 
 		/// <summary>
@@ -67,6 +89,7 @@ namespace NotesTracker.API.Middleware
 		{
 			services.AddScoped<INotesDataService, NotesDataService>();
 			services.AddScoped<IUsersDataService, UsersDataService>();
+			services.AddScoped<INotesTrackerDataService, NotesTrackerDataService>();
 		}
 	}
 }

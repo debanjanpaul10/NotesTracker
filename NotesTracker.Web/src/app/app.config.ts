@@ -1,53 +1,41 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { withInterceptors, provideHttpClient } from '@angular/common/http';
 import { provideAuth0 } from '@auth0/auth0-angular';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { ToastrModule } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 import { routes } from './app.routes';
-import { AuthInterceptor } from './services/auth.interceptor';
-import { Auth0Credentials, LocalHostBaseUrl } from './helpers/config.constants';
-
-/**
- * Determines the redirect uri for auth0 authentication.
- * @returns The redirect base URI.
- */
-function determineRedirectUri (): string
-{
-  const currentHost = window.location.origin;
-
-  if ( currentHost.includes( LocalHostBaseUrl ) )
-  {
-    return Auth0Credentials.RedirectBaseUris[ 0 ];
-  } else
-  {
-    return Auth0Credentials.RedirectBaseUris[ 1 ];
-  }
-}
+import { AuthInterceptor } from '@core/interceptors/auth.interceptor';
+import { environment } from '@environments/environment';
 
 /**
  * The application configurations.
  */
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter( routes ),
+    provideRouter(routes),
     provideAnimationsAsync(),
-    provideHttpClient( withInterceptors( [ AuthInterceptor ] ) ),
-    importProvidersFrom(
-      ToastrModule.forRoot( {
-        timeOut: 5000,
-        positionClass: 'toast-bottom-right',
-        preventDuplicates: true,
-      } )
-    ),
-    provideAuth0( {
-      domain: Auth0Credentials.Domain,
-      clientId: Auth0Credentials.ClientId,
+    provideHttpClient(withInterceptors([AuthInterceptor])),
+    MessageService,
+    provideAuth0({
+      domain: environment.Auth0Credentials.Domain,
+      clientId: environment.Auth0Credentials.ClientId,
       authorizationParams: {
-        audience: Auth0Credentials.Audience,
-        redirect_uri: determineRedirectUri(),
+        audience: environment.Auth0Credentials.Audience,
+        redirect_uri: environment.baseUrl,
       },
-    } ),
+    }),
+    providePrimeNG({
+      ripple: true,
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: '.my-app-dark',
+        },
+      },
+    }),
   ],
 };

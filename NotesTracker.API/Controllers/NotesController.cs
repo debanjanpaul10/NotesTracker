@@ -25,16 +25,6 @@ namespace NotesTracker.API.Controllers
     public class NotesController(INotesService notesService, ILogger<NotesController> logger, IHttpContextAccessor httpContextAccessor) : BaseController(httpContextAccessor)
     {
         /// <summary>
-        /// The notes service
-        /// </summary>
-        private readonly INotesService _notesService = notesService;
-
-        /// <summary>
-        /// The logger
-        /// </summary>
-        private readonly ILogger<NotesController> _logger = logger;
-
-        /// <summary>
         /// Gets all notes asynchronous.
         /// </summary>
         /// <returns>The response dto.</returns>
@@ -44,7 +34,7 @@ namespace NotesTracker.API.Controllers
         {
             try
             {
-                var notes = await this._notesService.GetAllNotesAsync(this.UserName);
+                var notes = await notesService.GetAllNotesAsync(this.UserName);
                 if (notes is not null)
                 {
                     return this.PrepareSuccessResponse(notes);
@@ -54,7 +44,7 @@ namespace NotesTracker.API.Controllers
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(GetAllNotesAsync), DateTime.UtcNow, ex.Message));
+                logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(GetAllNotesAsync), DateTime.UtcNow, ex.Message));
                 return this.HandleBadRequestResponse(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -70,7 +60,7 @@ namespace NotesTracker.API.Controllers
         {
             try
             {
-                var note = await this._notesService.GetNoteAsync(noteId, this.UserName);
+                var note = await notesService.GetNoteAsync(noteId, this.UserName);
                 if (note is not null)
                 {
                     return this.PrepareSuccessResponse(note);
@@ -79,7 +69,7 @@ namespace NotesTracker.API.Controllers
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(GetNoteByIdAsync), DateTime.UtcNow, ex.Message));
+                logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(GetNoteByIdAsync), DateTime.UtcNow, ex.Message));
                 return this.HandleBadRequestResponse(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -95,12 +85,12 @@ namespace NotesTracker.API.Controllers
         {
             try
             {
-                var noteData = await this._notesService.AddNewNoteAsync(newNote);
+                var noteData = await notesService.AddNewNoteAsync(newNote);
                 return this.PrepareSuccessResponse(noteData);
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(AddNewNoteAsync), DateTime.UtcNow, ex.Message));
+                logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(AddNewNoteAsync), DateTime.UtcNow, ex.Message));
                 return this.HandleBadRequestResponse(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -116,7 +106,7 @@ namespace NotesTracker.API.Controllers
         {
             try
             {
-                var updatedNote = await this._notesService.UpdateNoteAsync(updateNoteDTO);
+                var updatedNote = await notesService.UpdateNoteAsync(updateNoteDTO);
                 if (updatedNote is not null)
                 {
                     return this.PrepareSuccessResponse(updatedNote);
@@ -125,7 +115,7 @@ namespace NotesTracker.API.Controllers
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(UpdateNoteAsync), DateTime.UtcNow, ex.Message));
+                logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(UpdateNoteAsync), DateTime.UtcNow, ex.Message));
                 return this.HandleBadRequestResponse(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -141,12 +131,12 @@ namespace NotesTracker.API.Controllers
         {
             try
             {
-                var deletedNote = await this._notesService.DeleteNoteAsync(noteId, this.UserName);
+                var deletedNote = await notesService.DeleteNoteAsync(noteId, this.UserName);
                 return this.PrepareSuccessResponse(deletedNote);
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(DeleteNoteAsync), DateTime.UtcNow, ex.Message));
+                logger.LogError(ex, string.Format(CultureInfo.CurrentCulture, ExceptionConstants.MethodFailedWithMessageConstant, nameof(DeleteNoteAsync), DateTime.UtcNow, ex.Message));
                 return this.HandleBadRequestResponse(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }

@@ -21,6 +21,10 @@
   <ItemGroup>
     <None Include="NotesTracker.Database.sqlproj.user" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tables\" />
+    <Folder Include="PostDeploymentScripts\" />
+  </ItemGroup>
   <Target Name="BeforeBuild">
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
   </Target>

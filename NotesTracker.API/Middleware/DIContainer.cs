@@ -58,27 +58,13 @@ namespace NotesTracker.API.Middleware
 			var mongoDbConnectionString = builder.Configuration[MongoDbConnectionStringConstant];
 			if (!string.IsNullOrEmpty(mongoDbConnectionString))
 			{
-				var settings = MongoClientSettings.FromConnectionString(connectionString: mongoDbConnectionString);
-				
-				// Configure SSL/TLS settings
-				settings.SslSettings = new SslSettings()
+				var mongoConnectionString = builder.Configuration[MongoDbConnectionStringConstant];
+				if (!string.IsNullOrEmpty(mongoConnectionString))
 				{
-					EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls13,
-					CheckCertificateRevocation = false
-				};
-
-				// Configure connection settings
-				settings.ServerSelectionTimeout = TimeSpan.FromSeconds(30);
-				settings.ConnectTimeout = TimeSpan.FromSeconds(30);
-				settings.SocketTimeout = TimeSpan.FromSeconds(30);
-				settings.MaxConnectionIdleTime = TimeSpan.FromMinutes(10);
-				settings.MaxConnectionLifeTime = TimeSpan.FromMinutes(30);
-
-				// Configure retry settings
-				settings.RetryWrites = true;
-				settings.RetryReads = true;
-
-				builder.Services.AddSingleton<IMongoClient>(new MongoClient(settings));
+					var settings = MongoClientSettings.FromConnectionString(mongoConnectionString);
+					settings.SslSettings = new SslSettings() { EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12 };
+					builder.Services.AddSingleton<IMongoClient>(new MongoClient(settings));
+				}
 			}
 		}
 
